@@ -28,7 +28,7 @@ class Transformer
 
                 $translation = $translation
                     ->groupBy('locale')
-                    ->map(function ($item) {
+                    ->map(function (Collection $item) {
                         return $item->first();
                     });
 

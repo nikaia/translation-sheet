@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 
 class Util
 {
-    public static function var_export54($var, $indent = '')
+    public static function varExport($var, $indent = '')
     {
         switch (gettype($var)) {
             case 'string':
@@ -16,8 +16,8 @@ class Util
                 $r = [];
                 foreach ($var as $key => $value) {
                     $r[] = "$indent    "
-                        .($indexed ? '' : self::var_export54($key).' => ')
-                        .self::var_export54($value, "$indent    ");
+                        .($indexed ? '' : self::varExport($key).' => ')
+                        .self::varExport($value, "$indent    ");
                 }
 
                 return "[\n".implode(",\n", $r)."\n".$indent.']';

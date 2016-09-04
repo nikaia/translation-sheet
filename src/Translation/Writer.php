@@ -58,7 +58,7 @@ class Writer
     {
         $this->output->writeln('  '.$file);
 
-        $content = "<?php\n\nreturn ".Util::var_export54($items).";\n";
+        $content = "<?php\n\nreturn ".Util::varExport($items).";\n";
 
         if (!$this->files->isDirectory($dir = $this->files->dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);
@@ -77,7 +77,7 @@ class Writer
             });
 
         // flatten(1) does not seem to work for every case.
-        // @todo refactor
+        // !!! refactor !!!
         $result = [];
         foreach ($items as $subitems) {
             $result = array_merge($result, $subitems);
