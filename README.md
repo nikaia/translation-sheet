@@ -1,5 +1,5 @@
 
-# Laravel Translation Sheet
+# Laravel Translation Sheet  (wip)
 
 Translation your Laravel languages files using a Google Spreadsheet.
 
@@ -30,9 +30,10 @@ Translation your Laravel languages files using a Google Spreadsheet.
 
 ## Installation
 
+> a vendor:publish --provider="Nikaia\TranslationSheet\ServiceProvider"
+
 
 ## Usage
-
 
 ### Configure Google Api
 - head to https://console.developers.google.com/
@@ -80,10 +81,3 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 
 ```
-
-
-
-
-
-a vendor:publish --provider="Nikaia\TranslationSheet\ServiceProvider"
-Copied File [/vendor/nikaia/translation-sheet/config/config.php] To [/config/translation_sheet]
