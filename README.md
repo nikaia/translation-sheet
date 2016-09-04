@@ -40,7 +40,7 @@ Translation your Laravel languages files using a Google Spreadsheet.
 
 - Configuration can be done via environments variables, but if you prefer you can override the configuration by publishing the package config file using :
     
-    ``` bash
+    ```bash
     $ php artisan vendor:publish --provider="Nikaia\TranslationSheet\ServiceProvider"
     ```
     
@@ -63,7 +63,7 @@ Translation your Laravel languages files using a Google Spreadsheet.
     - Save the credentials to 'resources/google/service-account.json' folder. (You can choose another name/folder if you want in your application folder)
     - Make sure to write down the service account email, you will need it later for the package configuration.               
 
- ### Spreadsheet
+### Spreadsheet
  - Create a blank/new spreadsheet here [https://docs.google.com/spreadsheets/](https://docs.google.com/spreadsheets/) .
  - Share it with the service account email with `Can edit` permission.
  
@@ -86,13 +86,13 @@ In your .env file or in your published config file (`config/translation_sheet.ph
     TS_LOCALES=fr,en,es
   
   
- ## Usage
+## Usage
   
  1/ Setup the spreadsheet 
   
 This need to be done only once.
   
-``` bash
+```bash
 $ php artisan translation_sheet:setup
 ```  
   
@@ -100,20 +100,20 @@ $ php artisan translation_sheet:setup
  
 To avoid some conflicts, we will first run this command to rewrite the locale languages files.
 
-``` bash
+```bash
 $ php artisan translation_sheet:prepare
 ```  
   
 3/ Publish translation to sheet
 
-``` bash
+```bash
 $ php artisan translation_sheet:push
 ```  
   
 4/ Share the spreadsheet with clients or project managers for translations.
   
 5/ Once done, You can lock the translations on the spreadsheet (to avoid conflicts)  
-``` bash
+```bash
 $ php artisan translation_sheet:lock
 ```  
 
@@ -121,12 +121,12 @@ $ php artisan translation_sheet:lock
 
 This will pull the translations from the spreadsheet, and write it the language files in your applications.
 You can use git diff here to make sure eveything is ok (Conflicts, errors etc ...)
-``` bash
+```bash
 $ php artisan translation_sheet:pull
 ```  
 
 6/ Unlock the translations on the spreadsheet
-``` bash
+```bash
 $ php artisan translation_sheet:unlock
 ```  
     
