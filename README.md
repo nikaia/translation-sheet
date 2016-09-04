@@ -3,10 +3,6 @@
 
 Translation your Laravel languages files using a Google Spreadsheet.
 
-<p align="center">
-    <img src="https://s18.postimg.org/9q7czq50p/translation_sheet.jpg" alt="Laravel Translation Sheet">
-</p>
-
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:vendor_name/:package_name)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -15,6 +11,10 @@ Translation your Laravel languages files using a Google Spreadsheet.
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/:sensio_labs_id.svg?style=flat-square)](https://insight.sensiolabs.com/projects/:sensio_labs_id)
 [![Quality Score](https://img.shields.io/scrutinizer/g/:vendor_name/:package_name.svg?style=flat-square)](https://scrutinizer-ci.com/g/:vendor_name/:package_name)
 
+
+<p align="center">
+    <img src="https://s18.postimg.org/9q7czq50p/translation_sheet.jpg" alt="Laravel Translation Sheet">
+</p>
 
 ## Contents
 
