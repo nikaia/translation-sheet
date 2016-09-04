@@ -76,8 +76,7 @@ class Writer
                 return $this->buildTranslationsForFile($fileTranslations);
             });
 
-        // flatten(1) does not seem to work for every case.
-        // !!! refactor !!!
+        // flatten does not seem to work for every case. !!! refactor !!!
         $result = [];
         foreach ($items as $subitems) {
             $result = array_merge($result, $subitems);

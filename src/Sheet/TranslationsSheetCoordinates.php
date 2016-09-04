@@ -112,7 +112,7 @@ class TranslationsSheetCoordinates
     {
         return [
             'sheetId' => $this->sheetId,
-            'startRowIndex' => 2,
+            'startRowIndex' => $firstRow,
             'endRowIndex' => $endRow,
             'startColumnIndex' => 0,
             'endColumnIndex' => $this->getColumnsCount(),

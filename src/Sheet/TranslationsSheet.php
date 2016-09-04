@@ -113,6 +113,7 @@ class TranslationsSheet extends AbstractSheet
 
     public function unlockTranslations()
     {
+        $requests = [];
         $range = $this->coordinates()->translationsRange(1, $this->spreadsheet->api()->getSheetRowCount($this->getId()));
 
         $protectedRanges = $this->spreadsheet->api()->getSheetProtectedRanges($this->getId(), 'TRANSLATIONS');
@@ -129,7 +130,7 @@ class TranslationsSheet extends AbstractSheet
     {
         $protectedRanges = $this->spreadsheet->api()->getSheetProtectedRanges($this->getId(), 'TRANSLATIONS');
 
-        return ! empty($protectedRanges) && count($protectedRanges) > 0;
+        return !empty($protectedRanges) && count($protectedRanges) > 0;
     }
 
     public function removeAllProtectedRanges()
@@ -141,7 +142,7 @@ class TranslationsSheet extends AbstractSheet
             $requests[] = $this->spreadsheet->api()->deleteProtectedRange($protectedRange->protectedRangeId);
         }
 
-        if (! empty($requests)) {
+        if (!empty($requests)) {
             $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
         }
     }
