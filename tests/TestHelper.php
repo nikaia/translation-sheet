@@ -23,34 +23,34 @@ class TestHelper
 
     public function langPath($path = '')
     {
-        return $this->tempPath() . '/lang' . (empty($path) ? '' : '/' . $path);
+        return $this->tempPath().'/lang'.(empty($path) ? '' : '/'.$path);
     }
 
     public function fixturesPath($path)
     {
-        return __DIR__ . '/fixtures' . (empty($path) ? '' : '/' . $path);
+        return __DIR__.'/fixtures'.(empty($path) ? '' : '/'.$path);
     }
 
     public function tempPath()
     {
-        return __DIR__ . '/temp';
+        return __DIR__.'/temp';
     }
 
     public function deleteLangFiles()
     {
-        exec('rm -rf ' . $this->langPath('/*'));
+        exec('rm -rf '.$this->langPath('/*'));
     }
 
     public function createLangFiles($locale, $group, $translations)
     {
         $directory = $this->langPath($locale);
-        if (!$this->files->isDirectory($directory)) {
+        if (! $this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true, true);
         }
 
-        $content = "<?php \n return " . var_export($translations, true) . ';';
+        $content = "<?php \n return ".var_export($translations, true).';';
 
-        $this->files->put($directory . '/' . $group . '.php', $content);
+        $this->files->put($directory.'/'.$group.'.php', $content);
     }
 
     public function createPackageLangFiles($locale, $group, $translations)
@@ -121,7 +121,7 @@ class TestHelper
      *
      * @return mixed Method return.
      */
-    public function invokeMethod(&$object, $methodName, array $parameters = array())
+    public function invokeMethod(&$object, $methodName, array $parameters = [])
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
@@ -129,5 +129,4 @@ class TestHelper
 
         return $method->invokeArgs($object, $parameters);
     }
-
 }

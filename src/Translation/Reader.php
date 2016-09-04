@@ -114,7 +114,7 @@ class Reader
      */
     private function loadTranslationsInDirectory($directory, $locale, $namespace)
     {
-        if (!$this->requestedLocale($locale)) {
+        if (! $this->requestedLocale($locale)) {
             return;
         }
 
@@ -152,7 +152,7 @@ class Reader
             $entity->group = $group;
             $entity->key = $key;
             $entity->full_key = $this->fullKey($namespace, $group, $key);
-            $entity->value = (string)$value;
+            $entity->value = (string) $value;
             $entity->source_file = $this->sourceFile($file);
 
             $this->translations->push($entity);
@@ -171,8 +171,8 @@ class Reader
     {
         return
             ($namespace ? "$namespace::" : '')
-            . $group . '.'
-            . $key;
+            .$group.'.'
+            .$key;
     }
 
     /**
@@ -187,14 +187,14 @@ class Reader
     }
 
     /**
-     * Return relative path related to base_path()
+     * Return relative path related to base_path().
      *
      * @param $path
      * @return string
      */
     private function toRelative($path)
     {
-        $relative = str_replace($this->app->make('path.lang') . DIRECTORY_SEPARATOR, '', $path);
+        $relative = str_replace($this->app->make('path.lang').DIRECTORY_SEPARATOR, '', $path);
         $relative = str_replace('\\', '/', $relative);
 
         return $relative;

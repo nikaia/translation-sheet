@@ -37,15 +37,15 @@ class Transformer
                 $localesValues = [];
                 foreach ($this->locales as $locale) {
                     $item = $translation->get($locale);
-                    $value = !is_null($item) && isset($item->value) ? $item->value : '';
+                    $value = ! is_null($item) && isset($item->value) ? $item->value : '';
                     $localesValues [$locale] = $value;
                 }
 
                 $row = array_merge($row, $localesValues);
 
                 $row = array_merge($row, [
-                    'namespace' => !is_null($firstLocale->namespace) ? $firstLocale->namespace : '',
-                    'group' => !is_null($firstLocale->group) ? $firstLocale->group : '',
+                    'namespace' => ! is_null($firstLocale->namespace) ? $firstLocale->namespace : '',
+                    'group' => ! is_null($firstLocale->group) ? $firstLocale->group : '',
                     'key' => $firstLocale->key,
                     'source_file' => str_replace($firstLocale->locale.'/', '{locale}/', $firstLocale->source_file),
                 ]);
@@ -61,7 +61,7 @@ class Transformer
     private function ensureWeHaveAllLocales(Collection $translation)
     {
         foreach ($this->locales as $locale) {
-            if (!$translation->get($locale)) {
+            if (! $translation->get($locale)) {
                 $translation->put($locale, new Item);
             }
         }

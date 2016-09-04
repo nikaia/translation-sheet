@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nikaia\TranslationSheet\Test\Unit;
-
 
 use Nikaia\TranslationSheet\Client\Api;
 use Nikaia\TranslationSheet\Sheet\Styles;
@@ -15,7 +13,7 @@ use Mockery;
 class TranslationsSheetTest extends TestCase
 {
     /** @test */
-    function it_returns_title_and_id()
+    public function it_returns_title_and_id()
     {
         $sheet = new TranslationsSheet(Mockery::mock(Spreadsheet::class));
         $this->assertEquals($sheet->getId(), 0);
@@ -23,7 +21,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_returns_coordinates()
+    public function it_returns_coordinates()
     {
         $sheet = new TranslationsSheet($this->helper->spreadsheet());
         $this->assertInstanceOf(TranslationsSheetCoordinates::class, $sheet->emptyCoordinates());
@@ -31,9 +29,8 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_setup_sheet_correctly()
+    public function it_setup_sheet_correctly()
     {
-
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('sheetStyles')->once()->andReturn(new Styles);
         $spreadsheet->shouldReceive('setSheetPropertiesRequest')->once();
@@ -45,7 +42,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_write_translations_correctly()
+    public function it_write_translations_correctly()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('writeCells')->once();
@@ -59,7 +56,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_read_translations()
+    public function it_read_translations()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('readCells')->once();
@@ -72,7 +69,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_style_document()
+    public function it_style_document()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('frozenColumnRequest')->once();
@@ -95,10 +92,10 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_prepare_for_write()
+    public function it_prepare_for_write()
     {
         $api = Mockery::mock(Api::class);
-        $api->shouldReceive('getSheetProtectedRanges')->once()->andReturn([(object)['protectedRangeId' => 111], (object)['protectedRangeId' => 222]]);
+        $api->shouldReceive('getSheetProtectedRanges')->once()->andReturn([(object) ['protectedRangeId' => 111], (object) ['protectedRangeId' => 222]]);
         $api->shouldReceive('deleteProtectedRange')->times(2);
         $api->shouldReceive('addBatchRequests')->once()->andReturn($api);
         $api->shouldReceive('sendBatchRequests')->once();
@@ -110,7 +107,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_lock_translations()
+    public function it_lock_translations()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('getSheetRowCount')->once();
@@ -128,11 +125,11 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_unlock_translations()
+    public function it_unlock_translations()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('getSheetRowCount')->once();
-        $api->shouldReceive('getSheetProtectedRanges')->once()->andReturn([(object)['protectedRangeId' => 111], (object)['protectedRangeId' => 222]]);
+        $api->shouldReceive('getSheetProtectedRanges')->once()->andReturn([(object) ['protectedRangeId' => 111], (object) ['protectedRangeId' => 222]]);
         $api->shouldReceive('deleteProtectedRange')->times(2);
         $api->shouldReceive('styleArea')->once();
         $api->shouldReceive('addBatchRequests')->once()->andReturn($api);
@@ -147,7 +144,7 @@ class TranslationsSheetTest extends TestCase
     }
 
     /** @test */
-    function it_return_lock_status()
+    public function it_return_lock_status()
     {
         $api = Mockery::mock(Api::class);
         $api->shouldReceive('getSheetProtectedRanges')->once();
@@ -157,7 +154,4 @@ class TranslationsSheetTest extends TestCase
 
         (new TranslationsSheet($spreadsheet))->isTranslationsLocked();
     }
-
-
-
 }

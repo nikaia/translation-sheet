@@ -21,5 +21,4 @@ trait Output
 
         return $this;
     }
-
 }

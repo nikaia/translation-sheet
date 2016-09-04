@@ -164,7 +164,7 @@ class Api
             ],
         ];
 
-        if (!is_null($tabColor)) {
+        if (! is_null($tabColor)) {
             $properties['tabColor'] = $this->fractalColors($tabColor);
         }
 
@@ -241,8 +241,6 @@ class Api
                 return $sheet;
             }
         }
-
-        return;
     }
 
     public function getSheets()
