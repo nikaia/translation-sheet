@@ -26,6 +26,7 @@ class PusherTest extends TestCase
         $translationSheet->shouldReceive('getSpreadsheet')->once()->andReturn($this->helper->spreadsheet());
         $translationSheet->shouldReceive('writeTranslations')->once();
         $translationSheet->shouldReceive('prepareForWrite')->once();
+        $translationSheet->shouldReceive('updateHeaderRow')->once();
         $translationSheet->shouldReceive('styleDocument')->once();
 
         $pusher = new Pusher($reader, $translationSheet, $transformer);

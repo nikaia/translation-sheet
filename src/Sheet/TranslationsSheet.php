@@ -146,4 +146,12 @@ class TranslationsSheet extends AbstractSheet
             $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
         }
     }
+
+    public function updateHeaderRow()
+    {
+        $this->api()->writeCells(
+            $this->emptyCoordinates()->headerShortRange(),
+            [$this->spreadsheet->getHeader()]
+        );
+    }
 }

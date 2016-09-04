@@ -37,6 +37,9 @@ class Pusher
         $this->output->writeln('<comment>Preparing spreasheet for new write operation</comment>');
         $this->translationsSheet->prepareForWrite();
 
+        $this->output->writeln('<comment>Updating header</comment>');
+        $this->translationsSheet->updateHeaderRow();
+
         $this->output->writeln('<comment>Writing translations in the spreadsheet</comment>');
         $this->translationsSheet->writeTranslations($translations->toArray());
 
