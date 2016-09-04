@@ -1,6 +1,11 @@
 
-# Laravel Translation via Google Spreadsheet
+# Laravel Translation Sheet
 
+Translation your Laravel languages files using a Google Spreadsheet.
+
+<p align="center">
+    <img src="https://s18.postimg.org/9q7czq50p/translation_sheet.jpg" alt="Laravel Translation Sheet">
+</p>
 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:vendor_name/:package_name)
@@ -9,13 +14,7 @@
 [![StyleCI](https://styleci.io/repos/:style_ci_id/shield)](https://styleci.io/repos/:style_ci_id)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/:sensio_labs_id.svg?style=flat-square)](https://insight.sensiolabs.com/projects/:sensio_labs_id)
 [![Quality Score](https://img.shields.io/scrutinizer/g/:vendor_name/:package_name.svg?style=flat-square)](https://scrutinizer-ci.com/g/:vendor_name/:package_name)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/:vendor_name/:package_name/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/:vendor_name/:package_name/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:vendor_name/:package_name)
 
-
-
-**Note:** Replace ```:channel_namespace``` ```:service_name``` ```:author_name``` ```:author_username``` ```:author_website``` ```:author_email``` ```:package_name``` ```:package_description``` ```:style_ci_id``` ```:sensio_labs_id``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md), [composer.json](composer.json) and other files, then delete this line.
-**Tip:** Use "Find in Path/Files" in your code editor to find these keywords within the package directory and replace all occurences with your specified term.
 
 ## Contents
 
@@ -34,6 +33,7 @@
 
 ## Usage
 
+
 ### Configure Google Api
 - head to https://console.developers.google.com/
 - create a new project 
@@ -50,9 +50,6 @@
     - Save the credentials to 'resources/google/service-account.json' folder. (You can choose another name/folder if you want in your application folder)
     - Make sure to write down the service account email, you will need it later for the package configuration.               
     
-    
-    
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
@@ -65,7 +62,7 @@ $ composer test
 
 ## Security
 
-If you discover any security related issues, please email :author_email instead of using the issue tracker.
+If you discover any security related issues, please email nboourguig@gmail.com instead of using the issue tracker.
 
 ## Contributing
 
@@ -73,7 +70,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Nassif Bourguig](https://github.com/nbourguig)
 - [All Contributors](../../contributors)
 
 ## License
