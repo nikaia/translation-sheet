@@ -1,0 +1,6 @@
+/vendor
+build
+composer.phar
+composer.lock
+.idea
+service-account.json

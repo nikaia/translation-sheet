@@ -1,0 +1,40 @@
+{
+    "name": "nikaia/translation-sheet",
+    "description": "Laravel Translation via Google Spreadsheet",
+    "homepage": "https://github.com/nikaia/translation-sheet",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nassif Bourguig",
+            "email": "nbourguig@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "5.2.* || 5.3.*",
+        "illuminate/console": "5.2.* || 5.3.*",
+        "illuminate/filesystem": "5.2.* || 5.3.*",
+        "google/apiclient": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "^0.9.5",
+        "orchestra/testbench": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nikaia\\TranslationSheet\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nikaia\\TranslationSheet\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

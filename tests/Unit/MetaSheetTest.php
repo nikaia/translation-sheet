@@ -1,0 +1,34 @@
+<?php
+
+namespace Nikaia\TranslationSheet\Test\Unit;
+
+use GuzzleHttp\Subscriber\Mock;
+use Nikaia\TranslationSheet\Sheet\MetaSheet;
+use Nikaia\TranslationSheet\Sheet\Styles;
+use Nikaia\TranslationSheet\Spreadsheet;
+use Nikaia\TranslationSheet\Test\TestCase;
+use Mockery;
+
+class MetaSheetTest extends TestCase
+{
+    /** @test */
+    function it_returns_title_and_id()
+    {
+        $metaSheet = new MetaSheet(Mockery::mock(Spreadsheet::class));
+        $this->assertEquals($metaSheet->getId(), 1);
+        $this->assertEquals($metaSheet->getTitle(), 'Meta');
+    }
+
+    /** @test */
+    function it_setup_sheet_correctly(){
+
+        $spreadsheet = Mockery::mock(Spreadsheet::class);
+        $spreadsheet->shouldReceive('sheetStyles')->once()->andReturn(new Styles);
+        $spreadsheet->shouldReceive('addSheetRequest')->once();
+        $spreadsheet->shouldReceive('api')->times(2)->andReturn($spreadsheet);
+        $spreadsheet->shouldReceive('addBatchRequests')->once()->andReturn($spreadsheet);
+        $spreadsheet->shouldReceive('sendBatchRequests')->once();
+
+        (new MetaSheet($spreadsheet))->setup();
+    }
+}
