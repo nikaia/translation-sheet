@@ -7,7 +7,7 @@ use Nikaia\TranslationSheet\TranslationSheetServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    /** @var  TestHelper */
+    /** @var TestHelper */
     protected $helper;
 
     protected $consoleOutput;
@@ -29,7 +29,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         $this->helper = new TestHelper($this->app);
 
-       $this->helper->deleteLangFiles();
+        $this->helper->deleteLangFiles();
     }
 
     public function tearDown()

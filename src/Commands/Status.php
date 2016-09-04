@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Nikaia\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;

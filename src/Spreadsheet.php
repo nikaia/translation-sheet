@@ -18,7 +18,7 @@ class Spreadsheet
     /** @var array */
     protected $translations;
 
-    /** @var  Api */
+    /** @var Api */
     protected $api;
 
     public function __construct($id, $locales, $api = null)

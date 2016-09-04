@@ -11,9 +11,8 @@ use Nikaia\TranslationSheet\Translation\Writer;
 
 class PullerTest extends TestCase
 {
-
     /** @test */
-    function it_pulls_the_translations()
+    public function it_pulls_the_translations()
     {
         $translationSheet = Mockery::mock(TranslationsSheet::class);
         $translationSheet->shouldReceive('getSpreadsheet')->once()->andReturn($this->helper->spreadsheet());
@@ -28,5 +27,4 @@ class PullerTest extends TestCase
         $puller = new Puller($translationSheet, $writer);
         $puller->pull();
     }
-
 }

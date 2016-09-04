@@ -12,7 +12,7 @@ use Mockery;
 class MetaSheetTest extends TestCase
 {
     /** @test */
-    function it_returns_title_and_id()
+    public function it_returns_title_and_id()
     {
         $metaSheet = new MetaSheet(Mockery::mock(Spreadsheet::class));
         $this->assertEquals($metaSheet->getId(), 1);
@@ -20,8 +20,8 @@ class MetaSheetTest extends TestCase
     }
 
     /** @test */
-    function it_setup_sheet_correctly(){
-
+    public function it_setup_sheet_correctly()
+    {
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('sheetStyles')->once()->andReturn(new Styles);
         $spreadsheet->shouldReceive('addSheetRequest')->once();

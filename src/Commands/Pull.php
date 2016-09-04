@@ -16,4 +16,3 @@ class Pull extends Command
         $puller->withOutput($this->output)->pull();
     }
 }
-

@@ -25,7 +25,7 @@ class WriterTest extends TestCase
 
     private function assertFileExistsAndEqual($file, $expected)
     {
-        $filepath = $this->app['path.lang'] . '/' . $file;
+        $filepath = $this->app['path.lang'].'/'.$file;
 
         $this->assertFileExists($this->langPath.'/'.$filepath);
         $this->assertEquals($this->fileTranslations($filepath), $expected);

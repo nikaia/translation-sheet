@@ -45,4 +45,3 @@ return [
     'locales' => env('TS_LOCALES', ['en']),
 
 ];
-

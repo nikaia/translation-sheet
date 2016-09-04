@@ -7,9 +7,8 @@ use Nikaia\TranslationSheet\Translation\Item;
 
 class ItemTest extends TestCase
 {
-
     /** @test */
-    function it_create_items_from_array()
+    public function it_create_items_from_array()
     {
         $item = Item::fromArray([
             'namespace' => 'package',

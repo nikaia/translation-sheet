@@ -16,4 +16,3 @@ class Push extends Command
         $pusher->withOutput($this->output)->push();
     }
 }
-

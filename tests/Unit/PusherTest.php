@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 class PusherTest extends TestCase
 {
     /** @test */
-    function it_pushes_translations()
+    public function it_pushes_translations()
     {
         $transformer = Mockery::mock(Transformer::class);
         $transformer->shouldReceive('setLocales')->once()->andReturn($transformer);
@@ -31,5 +31,4 @@ class PusherTest extends TestCase
         $pusher = new Pusher($reader, $translationSheet, $transformer);
         $pusher->push();
     }
-
 }

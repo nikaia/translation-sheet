@@ -15,7 +15,7 @@ class Item
 
     public static function fromArray($values)
     {
-        $item = new Item;
+        $item = new self;
 
         $item->namespace = $values['namespace'];
         $item->locale = $values['locale'];

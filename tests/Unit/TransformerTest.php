@@ -7,18 +7,16 @@ use Nikaia\TranslationSheet\Translation\Transformer;
 
 class TransformerTest extends TestCase
 {
-
     /** @test */
-    function it_transforms_read_translations_correctly()
+    public function it_transforms_read_translations_correctly()
     {
         $translations = $this->helper->readTranslations();
 
         $transformed = (new Transformer)->setLocales(['en', 'fr'])->transform($translations);
 
         $this->assertEquals($transformed->toArray(), [
-            ["app.title", "Awesome", "Super", "", "app", "title", "{locale}/app.php"],
-            ["package::backend.version", "", "1.0", "package", "backend", "version", "vendor/package/{locale}/backend.php"]
+            ['app.title', 'Awesome', 'Super', '', 'app', 'title', '{locale}/app.php'],
+            ['package::backend.version', '', '1.0', 'package', 'backend', 'version', 'vendor/package/{locale}/backend.php'],
         ]);
     }
-
 }

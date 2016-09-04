@@ -11,7 +11,7 @@ use Mockery;
 class SetupTest extends TestCase
 {
     /** @test */
-    function it_setup_the_spreadsheet()
+    public function it_setup_the_spreadsheet()
     {
         $translationSheet = Mockery::mock(TranslationsSheet::class);
         $translationSheet->shouldReceive('setup')->once();
