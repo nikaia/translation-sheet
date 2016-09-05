@@ -60,7 +60,7 @@ class Writer
 
         $content = "<?php\n\nreturn ".Util::varExport($items).";\n";
 
-        if (! $this->files->isDirectory($dir = $this->files->dirname($file))) {
+        if (! $this->files->isDirectory($dir = dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);
         }
 
