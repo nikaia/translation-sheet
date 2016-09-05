@@ -47,6 +47,9 @@ Translation your Laravel languages files using a Google Spreadsheet.
     ```bash
     $ php artisan vendor:publish --provider="Nikaia\TranslationSheet\ServiceProvider"
     ```
+
+### Requirements
+Laravel 5.1 | 5.2 | 5.3     
     
 ## Configuration
 
@@ -143,6 +146,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ``` bash
 $ composer test
 ```
+
+_N.B : You need a valid service-account.json file to run tests._
 
 ## Security
 
