@@ -32,11 +32,15 @@ Translation your Laravel languages files using a Google Spreadsheet.
 
 - Install package
 
-    composer require nikaia/translation-sheet
+    ```bash
+    $ composer require nikaia/translation-sheet
+    ```
     
 - Add service provider to your 'config/app.php'    
 
+    ```php
     Nikaia\TranslationSheet\TranslationSheetServiceProvider::class,
+    ```
 
 - Configuration can be done via environments variables, but if you prefer you can override the configuration by publishing the package config file using :
     
