@@ -23,7 +23,7 @@ return [
     | Google service account credentials file path
     |--------------------------------------------------------------------------
     */
-    'serviceAccountCredentialsFile' => env('TS_SERVICE_ACCOUNT_CREDENTIALS_FILE', resource_path('google/service-account-crendentials.json')),
+    'serviceAccountCredentialsFile' => env('TS_SERVICE_ACCOUNT_CREDENTIALS_FILE', base_path('resources/google/service-account-crendentials.json')),
 
     /*
     |--------------------------------------------------------------------------
