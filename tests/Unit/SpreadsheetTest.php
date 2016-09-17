@@ -126,6 +126,6 @@ class SpreadsheetTest extends TestCase
     /** @test */
     public function it_returns_spreadsheet_url()
     {
-        $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/' . $this->s->getId());
+        $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/'.$this->s->getId());
     }
 }
