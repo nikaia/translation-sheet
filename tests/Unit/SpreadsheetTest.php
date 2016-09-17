@@ -122,4 +122,10 @@ class SpreadsheetTest extends TestCase
         $s = new Spreadsheet('ID', ['en', 'fr'], $api);
         $s->api();
     }
+
+    /** @test */
+    public function it_returns_spreadsheet_url()
+    {
+        $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/' . $this->s->getId());
+    }
 }

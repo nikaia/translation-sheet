@@ -137,6 +137,12 @@ $ php artisan translation_sheet:pull
 $ php artisan translation_sheet:unlock
 ```  
     
+Open the spreadsheet in the browser
+```bash
+$ php artisan translation_sheet:open
+```  
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

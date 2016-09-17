@@ -5,6 +5,7 @@ namespace Nikaia\TranslationSheet;
 use Illuminate\Support\ServiceProvider;
 use Nikaia\TranslationSheet\Client\Client;
 use Nikaia\TranslationSheet\Commands\Lock;
+use Nikaia\TranslationSheet\Commands\Open;
 use Nikaia\TranslationSheet\Commands\Prepare;
 use Nikaia\TranslationSheet\Commands\Pull;
 use Nikaia\TranslationSheet\Commands\Push;
@@ -64,6 +65,7 @@ class TranslationSheetServiceProvider extends ServiceProvider
             Lock::class,
             Unlock::class,
             Status::class,
+            Open::class
         ]);
     }
 
