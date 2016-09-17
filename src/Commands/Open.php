@@ -15,9 +15,9 @@ class Open extends Command
     {
         $url = $spreadsheet->getUrl();
 
-        $this->comment('Opening spreadsheet ' . $url);
+        $this->comment('Opening spreadsheet '.$url);
 
-        shell_exec($this->openCmd() . ' ' . $url);
+        shell_exec($this->openCmd().' '.$url);
     }
 
     protected function openCmd()

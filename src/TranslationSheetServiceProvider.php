@@ -65,7 +65,7 @@ class TranslationSheetServiceProvider extends ServiceProvider
             Lock::class,
             Unlock::class,
             Status::class,
-            Open::class
+            Open::class,
         ]);
     }
 

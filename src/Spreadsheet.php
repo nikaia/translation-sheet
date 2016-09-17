@@ -59,7 +59,7 @@ class Spreadsheet
 
     public function getUrl()
     {
-        return 'https://docs.google.com/spreadsheets/d/' . $this->id;
+        return 'https://docs.google.com/spreadsheets/d/'.$this->id;
     }
 
     public function getLocales()
