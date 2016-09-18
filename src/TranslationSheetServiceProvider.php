@@ -36,12 +36,10 @@ class TranslationSheetServiceProvider extends ServiceProvider
     private function registerGoogleApiClient()
     {
         $this->app->singleton(Client::class, function () {
-            $client = new Client;
-            $client->setAuthConfigFile($this->app['config']['translation_sheet.serviceAccountCredentialsFile']);
-            $client->setApplicationName($this->app['config']['translation_sheet.googleApplicationName']);
-            $client->setScopes(\Google_Service_Sheets::SPREADSHEETS);
-
-            return $client;
+            return Client::create(
+                $this->app['config']['translation_sheet.serviceAccountCredentialsFile'],
+                $this->app['config']['translation_sheet.googleApplicationName']
+            );
         });
     }
 
