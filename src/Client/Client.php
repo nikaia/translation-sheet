@@ -32,7 +32,7 @@ class Client extends \Google_Client
      */
     private static function checkAuthConfigFile($authConfigFile)
     {
-        if (!file_exists($authConfigFile)) {
+        if (! file_exists($authConfigFile)) {
             throw new \Exception('You must specify a valid google service authentication file. Given file ['.$authConfigFile.'] does not exists');
         }
     }
