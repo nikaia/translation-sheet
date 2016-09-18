@@ -1,5 +1,5 @@
 
-# Laravel Translation Sheet  (wip)
+# Laravel Translation Sheet
 
 Translation your Laravel languages files using a Google Spreadsheet.
 
