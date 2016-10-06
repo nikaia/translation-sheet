@@ -1,7 +1,7 @@
 
 # Laravel Translation Sheet
 
-Translation your Laravel languages files using a Google Spreadsheet.
+Translating Laravel languages files using a Google Spreadsheet.
 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nikaia/translation-sheet.svg?style=flat-square)](https://packagist.org/packages/nikaia/translation-sheet)
