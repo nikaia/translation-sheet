@@ -17,14 +17,20 @@ matrix:
       env: ILLUMINATE_VERSION=5.2.*
     - php: 5.6
       env: ILLUMINATE_VERSION=5.3.*
+    - php: 5.6
+      env: ILLUMINATE_VERSION=5.4.*
     - php: 7.0
       env: ILLUMINATE_VERSION=5.2.*
     - php: 7.0
       env: ILLUMINATE_VERSION=5.3.*
+    - php: 7.0
+      env: ILLUMINATE_VERSION=5.4.*
     - php: 7.1
       env: ILLUMINATE_VERSION=5.2.*
     - php: 7.1
       env: ILLUMINATE_VERSION=5.3.*
+    - php: 7.1
+      env: ILLUMINATE_VERSION=5.4.*
 
 before_install:
     - openssl aes-256-cbc -K $encrypted_5affb966e7f5_key -iv $encrypted_5affb966e7f5_iv -in tests/fixtures/service-account.json.enc -out tests/fixtures/service-account.json -d
