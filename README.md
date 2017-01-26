@@ -49,7 +49,7 @@ Translating Laravel languages files using a Google Spreadsheet.
     ```
 
 ### Requirements
-Laravel 5.1 | 5.2 | 5.3     
+Laravel 5.1 | 5.2 | 5.3 | 5.4    
     
 ## Configuration
 
