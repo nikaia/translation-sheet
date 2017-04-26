@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         verbose="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="true">
+    <testsuites>
+        <testsuite name="Laravel Translation Sheet Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="tap" target="build/report.tap"/>
+        <log type="junit" target="build/report.junit.xml"/>
+        <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-text" target="build/coverage.txt"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+    <php>
+        <env name="APP_KEY" value="3fifSECXIvnK5r28GVIWUAxmbBSjAjkO"/>
+
+        <env name="TS_SPREADSHEET_ID" value=""/>
+        <env name="TS_SERVICE_ACCOUNT_CREDENTIALS_FILE" value="tests/fixtures/service-account.json"/>
+        <env name="TS_SERVICE_ACCOUNT_EMAIL" value=""/>
+        <env name="TS_LOCALES" value="en,fr"/>
+
+    </php>
+</phpunit>
