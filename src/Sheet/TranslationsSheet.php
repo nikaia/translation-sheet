@@ -75,10 +75,6 @@ class TranslationsSheet extends AbstractSheet
             $this->spreadsheet->api()->fixedColumnWidthRequest($this->getId(), $this->coordinates()->groupColumnIndex(), $this->coordinates()->groupColumnIndex() + 1, 80),
             $this->spreadsheet->api()->fixedColumnWidthRequest($this->getId(), $this->coordinates()->keyColumnIndex(), $this->coordinates()->keyColumnIndex() + 1, 240),
             $this->spreadsheet->api()->fixedColumnWidthRequest($this->getId(), $this->coordinates()->sourceFileColumnIndex(), $this->coordinates()->sourceFileColumnIndex() + 1, 360),
-
-            // Delete extra columns and rows
-            $this->spreadsheet->api()->deleteRowsFrom($this->getId(), $this->coordinates()->getRowsCount()),
-            $this->spreadsheet->api()->deleteColumnsFrom($this->getId(), $this->coordinates()->getColumnsCount()),
         ];
 
         // Fixed locales translations column width
@@ -90,6 +86,17 @@ class TranslationsSheet extends AbstractSheet
 
         // Send requests
         $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
+
+        // Delete extra columns and rows if any
+        try {
+            $this->spreadsheet->api()->addBatchRequests([
+                $this->spreadsheet->api()->deleteRowsFrom($this->getId(), $this->coordinates()->getRowsCount()),
+                $this->spreadsheet->api()->deleteColumnsFrom($this->getId(), $this->coordinates()->getColumnsCount()),
+            ])->sendBatchRequests();
+        } catch (\Google_Service_Exception $e) {
+            // If there is no extra columns or rows Google api will raise an exception :
+            // ... Invalid requests[xxx].deleteDimension: Cannot delete a column that doesn't exist ...
+        }
     }
 
     public function prepareForWrite()
@@ -130,7 +137,7 @@ class TranslationsSheet extends AbstractSheet
     {
         $protectedRanges = $this->spreadsheet->api()->getSheetProtectedRanges($this->getId(), 'TRANSLATIONS');
 
-        return ! empty($protectedRanges) && count($protectedRanges) > 0;
+        return !empty($protectedRanges) && count($protectedRanges) > 0;
     }
 
     public function removeAllProtectedRanges()
@@ -142,7 +149,7 @@ class TranslationsSheet extends AbstractSheet
             $requests[] = $this->spreadsheet->api()->deleteProtectedRange($protectedRange->protectedRangeId);
         }
 
-        if (! empty($requests)) {
+        if (!empty($requests)) {
             $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
         }
     }
