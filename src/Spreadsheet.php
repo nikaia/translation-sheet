@@ -3,6 +3,7 @@
 namespace Nikaia\TranslationSheet;
 
 use Illuminate\Support\Str;
+use Nikaia\TranslationSheet\Util;
 use Nikaia\TranslationSheet\Client\Api;
 use Nikaia\TranslationSheet\Sheet\Styles;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
@@ -83,6 +84,10 @@ class Spreadsheet
     public function getCamelizedHeader()
     {
         return array_map(function ($item) {
+            if (in_array($item, Util::asArray($this->getLocales()))) {
+                return $item;
+            }
+
             return Str::camel($item);
         }, $this->getHeader());
     }
