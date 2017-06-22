@@ -1,4 +1,4 @@
-
+related
 # Laravel Translation Sheet
 
 Translating Laravel languages files using a Google Spreadsheet.
@@ -45,7 +45,7 @@ Translating Laravel languages files using a Google Spreadsheet.
 - Configuration can be done via environments variables, but if you prefer you can override the configuration by publishing the package config file using :
     
     ```bash
-    $ php artisan vendor:publish --provider="Nikaia\TranslationSheet\ServiceProvider"
+    $ php artisan vendor:publish --provider="Nikaia\TranslationSheet\TranslationSheetServiceProvider"
     ```
 
 ### Requirements
