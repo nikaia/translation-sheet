@@ -3,6 +3,7 @@
 namespace Nikaia\TranslationSheet;
 
 use Illuminate\Support\ServiceProvider;
+use Nikaia\TranslationSheet\Util;
 use Nikaia\TranslationSheet\Client\Client;
 use Nikaia\TranslationSheet\Commands\Lock;
 use Nikaia\TranslationSheet\Commands\Open;
@@ -48,7 +49,7 @@ class TranslationSheetServiceProvider extends ServiceProvider
         $this->app->singleton(Spreadsheet::class, function () {
             return new Spreadsheet(
                 $this->app['config']['translation_sheet.spreadsheetId'],
-                $this->asArray($this->app['config']['translation_sheet.locales'])
+                Util::asArray($this->app['config']['translation_sheet.locales'])
             );
         });
     }
@@ -65,16 +66,5 @@ class TranslationSheetServiceProvider extends ServiceProvider
             Status::class,
             Open::class,
         ]);
-    }
-
-    private function asArray($value)
-    {
-        if (is_array($value)) {
-            return $value;
-        }
-
-        return array_filter(array_map(function ($item) {
-            return trim($item);
-        }, explode(',', $value)));
     }
 }

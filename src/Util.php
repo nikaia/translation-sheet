@@ -36,4 +36,15 @@ class Util
             return array_combine($keys, $values);
         });
     }
+
+    public static function asArray($value)
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        return array_filter(array_map(function ($item) {
+            return trim($item);
+        }, explode(',', $value)));
+    }
 }
