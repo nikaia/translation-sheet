@@ -79,14 +79,14 @@ class TranslationsSheetTest extends TestCase
         $api->shouldReceive('protectRangeRequest')->times(3);
         $api->shouldReceive('deleteRowsFrom')->once();
         $api->shouldReceive('deleteColumnsFrom')->once();
-        $api->shouldReceive('addBatchRequests')->once()->andReturn($api);
-        $api->shouldReceive('sendBatchRequests')->once();
+        $api->shouldReceive('addBatchRequests')->twice()->andReturn($api);
+        $api->shouldReceive('sendBatchRequests')->twice();
 
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('translationsSheetCoordinates')->andReturn(TranslationsSheetCoordinates::emptySheet(1, 1, 1));
         $spreadsheet->shouldReceive('sheetStyles')->andReturn(new Styles);
         $spreadsheet->shouldReceive('getLocales')->once()->andReturn(['fr', 'en']);
-        $spreadsheet->shouldReceive('api')->times(19)->andReturn($api);
+        $spreadsheet->shouldReceive('api')->times(20)->andReturn($api);
 
         (new TranslationsSheet($spreadsheet))->styleDocument();
     }
