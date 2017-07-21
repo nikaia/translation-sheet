@@ -228,7 +228,7 @@ class Api
     {
         $sheet = $this->getSheet($sheetId);
 
-        return $sheet['modelData']['properties']['gridProperties']['rowCount'];
+        return $sheet['properties']['gridProperties']['rowCount'];
     }
 
     public function getSheet($sheetId)
@@ -236,7 +236,7 @@ class Api
         $sheets = $this->getSheets();
 
         foreach ($sheets as $sheet) {
-            if ($sheet['modelData']['properties']['sheetId'] === $sheetId) {
+            if ($sheet['properties']['sheetId'] === $sheetId) {
                 return $sheet;
             }
         }
