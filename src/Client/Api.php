@@ -204,13 +204,12 @@ class Api
     {
         $sheets = new \Google_Service_Sheets($this->client);
 
-        $request = new Google_Service_Sheets_BatchUpdateValuesRequest([
-            'valueInputOption' => 'RAW',
-            'data' => [
-                'range' => $shortRange,
-                'majorDimension' => 'ROWS',
-                'values' => $values,
-            ],
+        $request = new Google_Service_Sheets_BatchUpdateValuesRequest();
+        $request->setValueInputOption('RAW');
+        $request->setData([
+            'range' => $shortRange,
+            'majorDimension' => 'ROWS',
+            'values' => $values,
         ]);
 
         $sheets->spreadsheets_values->batchUpdate($this->spreadsheetId, $request);
