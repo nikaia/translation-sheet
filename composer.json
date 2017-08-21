@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "illuminate/support": "5.*",
-        "illuminate/console": "5.*",
-        "illuminate/filesystem": "5.*",
+        "illuminate/support": "^5.1",
+        "illuminate/console": "^5.1",
+        "illuminate/filesystem": "^5.1",
         "google/apiclient": "^2.1"
     },
     "require-dev": {
