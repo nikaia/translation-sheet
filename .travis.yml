@@ -6,14 +6,18 @@ php:
   - 7.1
 
 env:
-  - ILLUMINATE_VERSION=5.1.*
+  - ILLUMINATE_VERSION=5.3.*
 
 matrix:
   include:
     - php: 7.1
+      env: ILLUMINATE_VERSION=5.5.*
+    - php: 7.1
       env: ILLUMINATE_VERSION=5.4.*
     - php: 7.1
       env: ILLUMINATE_VERSION=5.3.*
+    - php: 7.0
+      env: ILLUMINATE_VERSION=5.5.*
     - php: 7.0
       env: ILLUMINATE_VERSION=5.4.*
     - php: 7.0
@@ -29,9 +33,7 @@ before_install:
     - composer require "illuminate/support:${ILLUMINATE_VERSION}" --no-update -v
     - composer require "illuminate/console:${ILLUMINATE_VERSION}" --no-update -v
     - composer require "illuminate/filesystem:${ILLUMINATE_VERSION}" --no-update -v
-    - if [ "$ILLUMINATE_VERSION" == "5.1.*" ]; then composer require  "orchestra/testbench:^3.1" --dev --no-update -v; fi
-    - if [ "$ILLUMINATE_VERSION" == "5.2.*" ]; then composer require  "orchestra/testbench:^3.2" --dev --no-update -v; fi
-    - if [ "$ILLUMINATE_VERSION" == "5.3.*" ]; then composer require  "orchestra/testbench:^3.2" --dev --no-update -v; fi
+    - composer require "orchestra/testbench:~3.0" --no-update -v
 
 install:
   - travis_retry composer self-update
