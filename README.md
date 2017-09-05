@@ -157,7 +157,7 @@ _N.B : You need a valid configuration service-account.json file to run tests._
 
 ### Travis
 
-To test your fork using travis, we need the a valid service-account.json. The file is ignored in the repository to avoid exposing credentials.
+To test your fork using travis, you need the a valid service-account.json. The file is ignored in the repository to avoid exposing credentials.
 You need to encode your credential file (tests/fixtures/service-account.json) using [travis utilities](https://docs.travis-ci.com/user/encrypting-files/).
  
  ```bash
