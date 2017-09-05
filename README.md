@@ -153,7 +153,28 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 $ composer test
 ```
 
-_N.B : You need a valid service-account.json file to run tests._
+_N.B : You need a valid configuration service-account.json file to run tests._
+
+### Travis
+
+To test your fork using travis, we need the a valid service-account.json. The file is ignored in the repository to avoid exposing credentials.
+You need to encode your credential file (tests/fixtures/service-account.json) using [travis utilities](https://docs.travis-ci.com/user/encrypting-files/).
+ 
+ ```bash
+ # Save credential file to tests/fixtures/service-account.json
+ $ cd tests/fixtures
+ $ travis encrypt-file service-account.json
+ ```
+ 
+Commit the `.enc` result file. 
+ 
+PS. Travis will decrypt the file just before running the tests. See the `travis.yml` file.
+
+```yaml
+before_install:
+    - openssl aes-256-cbc -K $encrypted_5affb966e7f5_key -iv $encrypted_5affb966e7f5_iv -in tests/fixtures/service-account.json.enc -out tests/fixtures/service-account.json -d
+```
+
 
 ## Security
 
