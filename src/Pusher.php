@@ -34,7 +34,7 @@ class Pusher
         $this->output->writeln('<comment>Scanning languages files</comment>');
         $translations = $this->getScannedAndTransformedTranslations();
 
-        $this->output->writeln('<comment>Preparing spreasheet for new write operation</comment>');
+        $this->output->writeln('<comment>Preparing spreadsheet for new write operation</comment>');
         $this->translationsSheet->prepareForWrite();
 
         $this->output->writeln('<comment>Updating header</comment>');
