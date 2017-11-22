@@ -60,7 +60,7 @@ class TranslationsSheetCoordinates
 
     public function headerShortRange()
     {
-        $alphabet = range('A', 'Z');
+        $alphabet = $this->returnRanges();
 
         return $this->sheetTitle.'!A1:'.$alphabet[$this->getColumnsCount() - 1].'1';
     }
@@ -100,7 +100,7 @@ class TranslationsSheetCoordinates
 
     public function dataShortRange($firstRow = 2, $noLastRow = false)
     {
-        $alphabet = range('A', 'Z');
+        $alphabet = $this->returnRanges();
         $firstColumn = 'A';
         $lastColumn = $alphabet[$this->getColumnsCount() - 1];
         $lastRow = $this->getRowsCount();
@@ -163,5 +163,15 @@ class TranslationsSheetCoordinates
     public function sourceFileColumnIndex()
     {
         return $this->getLocalesCount() + 4;
+    }
+
+    public function returnRanges()
+    {
+        // Adding support for a bigger columns range fx. AA-ZZ columns
+        for ($x = 'A'; $x !== 'ZZ'; $x++) {
+            $ranges[] = $x;
+        }
+
+        return $ranges;
     }
 }
