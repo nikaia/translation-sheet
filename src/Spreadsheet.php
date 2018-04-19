@@ -14,10 +14,10 @@ class Spreadsheet
     protected $id;
 
     /** @var array */
-    protected $locales;
+    protected $locales = [];
 
     /** @var array */
-    protected $translations;
+    protected $translations = [];
 
     /** @var Api */
     protected $api;
