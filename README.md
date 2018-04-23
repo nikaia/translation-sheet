@@ -36,11 +36,13 @@ Translating Laravel languages files using a Google Spreadsheet.
     $ composer require nikaia/translation-sheet
     ```
     
-- Add service provider to your 'config/app.php'    
+- If Laravel version <= 5.4,  Add service provider to your 'config/app.php'. For version >= 5.5, package will be auto-discoverd by Laravel.
 
     ```php
     Nikaia\TranslationSheet\TranslationSheetServiceProvider::class,
     ```
+
+
 
 - Configuration can be done via environments variables, but if you prefer you can override the configuration by publishing the package config file using :
     

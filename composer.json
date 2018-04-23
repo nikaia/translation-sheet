@@ -38,5 +38,12 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+          "providers": [
+            "Nikaia\\TranslationSheet\\TranslationSheetServiceProvider"
+          ]
+        }
+    },
     "prefer-stable": true
 }
