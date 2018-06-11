@@ -2,8 +2,8 @@
 
 namespace Nikaia\TranslationSheet\Test;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Illuminate\Filesystem\Filesystem;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Translation\Item;
 

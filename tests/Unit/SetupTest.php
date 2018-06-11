@@ -2,11 +2,11 @@
 
 namespace Nikaia\TranslationSheet\Test\Unit;
 
+use Mockery;
 use Nikaia\TranslationSheet\Setup;
+use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Sheet\MetaSheet;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Mockery;
 
 class SetupTest extends TestCase
 {

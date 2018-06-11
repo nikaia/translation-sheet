@@ -2,12 +2,12 @@
 
 namespace Nikaia\TranslationSheet\Test\Unit;
 
-use GuzzleHttp\Subscriber\Mock;
-use Nikaia\TranslationSheet\Sheet\MetaSheet;
-use Nikaia\TranslationSheet\Sheet\Styles;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\TestCase;
 use Mockery;
+use GuzzleHttp\Subscriber\Mock;
+use Nikaia\TranslationSheet\Spreadsheet;
+use Nikaia\TranslationSheet\Sheet\Styles;
+use Nikaia\TranslationSheet\Test\TestCase;
+use Nikaia\TranslationSheet\Sheet\MetaSheet;
 
 class MetaSheetTest extends TestCase
 {
