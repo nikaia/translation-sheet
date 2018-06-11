@@ -137,7 +137,7 @@ class TranslationsSheet extends AbstractSheet
     {
         $protectedRanges = $this->spreadsheet->api()->getSheetProtectedRanges($this->getId(), 'TRANSLATIONS');
 
-        return !empty($protectedRanges) && count($protectedRanges) > 0;
+        return ! empty($protectedRanges) && count($protectedRanges) > 0;
     }
 
     public function removeAllProtectedRanges()
@@ -149,7 +149,7 @@ class TranslationsSheet extends AbstractSheet
             $requests[] = $this->spreadsheet->api()->deleteProtectedRange($protectedRange->protectedRangeId);
         }
 
-        if (!empty($requests)) {
+        if (! empty($requests)) {
             $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
         }
     }

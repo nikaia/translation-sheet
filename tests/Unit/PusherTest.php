@@ -2,13 +2,13 @@
 
 namespace Nikaia\TranslationSheet\Test\Unit;
 
-use Nikaia\TranslationSheet\Pusher;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Test\TestCase;
 use Mockery;
-use Nikaia\TranslationSheet\Translation\Reader;
-use Nikaia\TranslationSheet\Translation\Transformer;
 use Illuminate\Support\Collection;
+use Nikaia\TranslationSheet\Pusher;
+use Nikaia\TranslationSheet\Test\TestCase;
+use Nikaia\TranslationSheet\Translation\Reader;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\Translation\Transformer;
 
 class PusherTest extends TestCase
 {

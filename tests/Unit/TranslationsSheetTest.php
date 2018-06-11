@@ -2,13 +2,13 @@
 
 namespace Nikaia\TranslationSheet\Test\Unit;
 
+use Mockery;
 use Nikaia\TranslationSheet\Client\Api;
+use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Sheet\Styles;
+use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Mockery;
 
 class TranslationsSheetTest extends TestCase
 {

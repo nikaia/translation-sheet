@@ -3,16 +3,15 @@
 namespace Nikaia\TranslationSheet;
 
 use Illuminate\Support\ServiceProvider;
-use Nikaia\TranslationSheet\Util;
 use Nikaia\TranslationSheet\Client\Client;
 use Nikaia\TranslationSheet\Commands\Lock;
 use Nikaia\TranslationSheet\Commands\Open;
-use Nikaia\TranslationSheet\Commands\Prepare;
 use Nikaia\TranslationSheet\Commands\Pull;
 use Nikaia\TranslationSheet\Commands\Push;
 use Nikaia\TranslationSheet\Commands\Setup;
 use Nikaia\TranslationSheet\Commands\Status;
 use Nikaia\TranslationSheet\Commands\Unlock;
+use Nikaia\TranslationSheet\Commands\Prepare;
 
 class TranslationSheetServiceProvider extends ServiceProvider
 {

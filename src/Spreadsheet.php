@@ -3,7 +3,6 @@
 namespace Nikaia\TranslationSheet;
 
 use Illuminate\Support\Str;
-use Nikaia\TranslationSheet\Util;
 use Nikaia\TranslationSheet\Client\Api;
 use Nikaia\TranslationSheet\Sheet\Styles;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
