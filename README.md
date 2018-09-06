@@ -13,7 +13,7 @@ Translating Laravel languages files using a Google Spreadsheet.
 
 
 <p align="center">
-    <img src="https://s18.postimg.org/9q7czq50p/translation_sheet.jpg" alt="Laravel Translation Sheet">
+    <img src="docs/banner.jpg" alt="Laravel Translation Sheet">
 </p>
 
 ## Contents
@@ -191,6 +191,3 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 - [Nassif Bourguig](https://github.com/nbourguig)
 - [All Contributors](../../contributors)
 
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
