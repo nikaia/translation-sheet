@@ -60,9 +60,7 @@ class TranslationsSheetCoordinates
 
     public function headerShortRange()
     {
-        $alphabet = range('A', 'Z');
-
-        return $this->sheetTitle.'!A1:'.$alphabet[$this->getColumnsCount() - 1].'1';
+        return $this->sheetTitle.'!A1:'.self::stringFromColumnIndex($this->getColumnsCount()).'1';
     }
 
     public function headerRange()
@@ -100,9 +98,8 @@ class TranslationsSheetCoordinates
 
     public function dataShortRange($firstRow = 2, $noLastRow = false)
     {
-        $alphabet = range('A', 'Z');
         $firstColumn = 'A';
-        $lastColumn = $alphabet[$this->getColumnsCount() - 1];
+        $lastColumn = self::stringFromColumnIndex($this->getColumnsCount());
         $lastRow = $this->getRowsCount();
 
         return $this->sheetTitle.'!'.$firstColumn.$firstRow.':'.$lastColumn.($noLastRow ? '' : $lastRow);
@@ -163,5 +160,32 @@ class TranslationsSheetCoordinates
     public function sourceFileColumnIndex()
     {
         return $this->getLocalesCount() + 4;
+    }
+
+    /**
+     * String from column index.
+     *
+     * @see https://github.com/PHPOffice/PhpSpreadsheet/blob/master/src/PhpSpreadsheet/Cell/Coordinate.php Source of implementation.
+     *
+     * @license https://raw.githubusercontent.com/PHPOffice/PhpSpreadsheet/master/LICENSE LGPL (GNU LESSER GENERAL PUBLIC LICENSE)
+     *
+     * @param int $columnIndex Column index (A = 1)
+     *
+     * @return string
+     */
+    public static function stringFromColumnIndex($columnIndex)
+    {
+        static $indexCache = [];
+        if (!isset($indexCache[$columnIndex])) {
+            $indexValue = $columnIndex;
+            $base26 = null;
+            do {
+                $characterValue = ($indexValue % 26) ?: 26;
+                $indexValue = ($indexValue - $characterValue) / 26;
+                $base26 = chr($characterValue + 64) . ($base26 ?: '');
+            } while ($indexValue > 0);
+            $indexCache[$columnIndex] = $base26;
+        }
+        return $indexCache[$columnIndex];
     }
 }
