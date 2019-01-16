@@ -97,7 +97,7 @@ class Writer
                 // For instance, we have `app.title` that is the same for each locale,
                 // We dont want to translate it to every locale, and prefer letting
                 // Laravel default back to the default locale.
-                if (!isset($translation[$locale]) || strlen($translation[$locale]) == 0) {
+                if (!isset($translation[$locale])) {
                     continue;
                 }
 
