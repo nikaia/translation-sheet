@@ -1,0 +1,14 @@
+{
+  "name": "nikaia-translation-sheet",
+  "version": "1.2.8",
+  "private": true,
+  "scripts": {
+    "release-patch-dryrun": "standard-version --release-as patch --no-verify --dry-run",
+    "release-patch": "standard-version --release-as patch --no-verify",
+    "release-minor": "standard-version --release-as minor --no-verify",
+    "release-major": "standard-version --release-as major --no-verify"
+  },
+  "dependencies": {
+    "standard-version": "^4.4.0"
+  }
+}
