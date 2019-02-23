@@ -46,4 +46,18 @@ class ReaderTest extends TestCase
         $this->assertEquals($item->key, 'version');
         $this->assertEquals($item->value, '1.0');
     }
+
+    /** @test : https://github.com/nikaia/translation-sheet/pull/31 */
+    public function it_scans_all_directories_even_after_encountring_vendor()
+    {
+        $this->helper->createLangFiles('en', 'app', ['title' => 'Awesome']);
+        $this->helper->createLangFiles('fr', 'app', ['title' => 'Super']);
+        $this->helper->createPackageLangFiles('fr', 'backend', ['version' => '1.0']);
+        $this->helper->createLangFiles('zh-CN', 'app', ['title' => 'Super zh-CN']);
+
+        $translations = $this->app[Reader::class]->scan();
+
+        $this->assertInstanceOf(Collection::class, $translations);
+        $this->assertEquals($translations->count(), 4);
+    }
 }
