@@ -2,13 +2,13 @@
 
 namespace Nikaia\TranslationSheet\Translation;
 
-use Illuminate\Support\Arr;
-use Nikaia\TranslationSheet\Util;
-use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
-use Nikaia\TranslationSheet\Spreadsheet;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Nikaia\TranslationSheet\Commands\Output;
+use Nikaia\TranslationSheet\Spreadsheet;
+use Nikaia\TranslationSheet\Util;
 
 class Writer
 {
@@ -97,7 +97,7 @@ class Writer
                 // For instance, we have `app.title` that is the same for each locale,
                 // We dont want to translate it to every locale, and prefer letting
                 // Laravel default back to the default locale.
-                if (!isset($translation[$locale])) {
+                if (! isset($translation[$locale])) {
                     continue;
                 }
 

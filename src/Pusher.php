@@ -3,8 +3,8 @@
 namespace Nikaia\TranslationSheet;
 
 use Nikaia\TranslationSheet\Commands\Output;
-use Nikaia\TranslationSheet\Translation\Reader;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\Translation\Reader;
 use Nikaia\TranslationSheet\Translation\Transformer;
 
 class Pusher

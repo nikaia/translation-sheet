@@ -3,10 +3,10 @@
 namespace Nikaia\TranslationSheet\Client;
 
 use Google_Service_Sheets;
+use Google_Service_Sheets_BatchUpdateSpreadsheetRequest;
+use Google_Service_Sheets_BatchUpdateValuesRequest;
 use Google_Service_Sheets_Request;
 use Illuminate\Support\Collection;
-use Google_Service_Sheets_BatchUpdateValuesRequest;
-use Google_Service_Sheets_BatchUpdateSpreadsheetRequest;
 
 class Api
 {

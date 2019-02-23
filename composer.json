@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
-        "orchestra/testbench": "^3.6"
+        "orchestra/testbench": "^3.7",
+        "friendsofphp/php-cs-fixer": "^2.11"
     },
     "autoload": {
         "psr-4": {

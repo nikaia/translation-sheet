@@ -3,10 +3,10 @@
 namespace Nikaia\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Util;
 use Nikaia\TranslationSheet\Pusher;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Translation\Writer;
+use Nikaia\TranslationSheet\Util;
 
 class Prepare extends Command
 {

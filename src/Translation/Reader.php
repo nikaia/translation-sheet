@@ -2,9 +2,9 @@
 
 namespace Nikaia\TranslationSheet\Translation;
 
-use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 
 class Reader
 {
