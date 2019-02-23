@@ -2,11 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="1.2.9"></a>
-## 1.2.9 (2019-02-23)
-
-
-
 <a name="1.2.8"></a>
 ## 1.2.8 (2019-01-16)
 
@@ -89,12 +84,4 @@ All notable changes to this project will be documented in this file. See [standa
 
 <a name="0.0.1"></a>
 ## 0.0.1 (2016-09-04)
-
-
-
-# Changelog
-
-
-## 1.0.0 - 201X-XX-XX
-
-- initial release
+Initial.
