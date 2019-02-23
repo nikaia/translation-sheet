@@ -83,7 +83,8 @@ class Reader
     {
         foreach ($this->files->directories($path) as $directory) {
             if ($this->isVendorDirectory($directory)) {
-                return $this->scanVendorDirectory($directory);
+                $this->scanVendorDirectory($directory);
+                continue;
             }
 
             $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
