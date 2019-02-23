@@ -84,10 +84,10 @@ class Reader
         foreach ($this->files->directories($path) as $directory) {
             if ($this->isVendorDirectory($directory)) {
                 $this->scanVendorDirectory($directory);
-                continue;
             }
-
-            $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
+            else {
+                $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
+            }
         }
     }
 
