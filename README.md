@@ -1,4 +1,3 @@
-related
 # Laravel Translation Sheet
 
 Translating Laravel languages files using a Google Spreadsheet.
