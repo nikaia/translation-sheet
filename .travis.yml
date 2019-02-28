@@ -6,11 +6,10 @@ cache:
 
 matrix:
   include:
-    - php: 7.2
-      env: ILLUMINATE_VERSION=5.7.* TESTBENCH_VERSION=3.7.*
-    - php: 7.3
-      env: ILLUMINATE_VERSION=5.7.* TESTBENCH_VERSION=3.7.*
-
+    - env: ILLUMINATE_VERSION=5.8.* TESTBENCH_VERSION=3.8.*
+      php: 7.2
+    - env: ILLUMINATE_VERSION=5.8.* TESTBENCH_VERSION=3.8.*
+      php: 7.3
 
 before_install:
     - test $TRAVIS_PULL_REQUEST == "false" && openssl aes-256-cbc -K $encrypted_5affb966e7f5_key -iv $encrypted_5affb966e7f5_iv -in tests/fixtures/service-account.json.enc -out tests/fixtures/service-account.json -d
@@ -18,11 +17,10 @@ before_install:
     - composer require "illuminate/console:${ILLUMINATE_VERSION}" --no-update -v
     - composer require "illuminate/filesystem:${ILLUMINATE_VERSION}" --no-update -v
     - composer require "orchestra/testbench:${TESTBENCH_VERSION}" --dev --no-update -v
-    - echo "php version:" && php --version
 
 install:
   - travis_retry composer self-update
-  - travis_retry composer update --no-interaction --prefer-dist
+  - travis_retry composer update --no-interaction --prefer-dist --no-suggest
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
