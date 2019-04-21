@@ -32,7 +32,6 @@
     </logging>
     <php>
         <env name="APP_KEY" value="3fifSECXIvnK5r28GVIWUAxmbBSjAjkO"/>
-        <env name="TS_SPREADSHEET_ID" value="1NZoyjVIGw4G1g7xgHs2TheIpXbNGs3udSgKBp0kL--Y"/>
         <env name="TS_SERVICE_ACCOUNT_CREDENTIALS_FILE" value="tests/fixtures/service-account.json"/>
         <env name="TS_SERVICE_ACCOUNT_EMAIL" value="translation-system@translation-sheet-tests.iam.gserviceaccount.com"/>
         <env name="TS_LOCALES" value="en,fr"/>
