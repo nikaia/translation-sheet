@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/nikaia/translation-sheet/compare/v1.3.0...v1.3.1) (2019-04-21)
+
+
+### Bug Fixes
+
+* Remove usage of deprecated Google client `setAuthConfigFile` method. ([7799f6f](https://github.com/nikaia/translation-sheet/commit/7799f6f)), closes [#40](https://github.com/nikaia/translation-sheet/issues/40)
+
+
+### Features
+
+* add a way to exclude some translations via the exclude config option. ([89313fe](https://github.com/nikaia/translation-sheet/commit/89313fe)), closes [#29](https://github.com/nikaia/translation-sheet/issues/29)
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/nikaia/translation-sheet/compare/v1.2.9...v1.3.0) (2019-02-28)
 
