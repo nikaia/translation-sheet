@@ -11,10 +11,11 @@
         }
     ],
     "require": {
-        "illuminate/support": "5.8.*",
+        "codedungeon/phpunit-result-printer": "^0.26.2",
+        "google/apiclient": "^2.1",
         "illuminate/console": "5.8.*",
         "illuminate/filesystem": "5.8.*",
-        "google/apiclient": "^2.1"
+        "illuminate/support": "5.8.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.11",

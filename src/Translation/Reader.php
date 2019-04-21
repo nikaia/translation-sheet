@@ -5,6 +5,7 @@ namespace Nikaia\TranslationSheet\Translation;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 
 class Reader
 {
@@ -136,7 +137,7 @@ class Reader
      */
     private function loadTranslations($locale, $group, $namespace, $file)
     {
-        $translations = array_dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
+        $translations = Arr::dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
 
         foreach ($translations as $key => $value) {
 
