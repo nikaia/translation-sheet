@@ -4,3 +4,4 @@ composer.phar
 composer.lock
 service-account.json
 .phpunit.result.cache
+tests/fixtures/basepaths/00-simple/resources/lang/vendor/foo/en/messages.php
