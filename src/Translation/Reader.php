@@ -130,7 +130,6 @@ class Reader
             $info = pathinfo($file);
             $sub_folder = explode($this->path."/".$locale."/", $directory)[1] ?? false;
             $group = $sub_folder ? $sub_folder."/".$info['filename'] : $info['filename'];
-            $group = $info['filename'];
             $this->loadTranslations($locale, $group, $namespace, $file);
         }
         
