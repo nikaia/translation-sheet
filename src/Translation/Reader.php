@@ -76,7 +76,7 @@ class Reader
         $this->translations = new Collection;
 
         // App directory
-        $this->scanDirectory($this->app->make('path.lang'));
+        $this->scanDirectory($this->path);
 
         return $this->translations;
     }
