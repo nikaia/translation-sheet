@@ -31,6 +31,11 @@ class Reader
      * Returns all if no locale specified.
      */
     private $locale;
+    
+    /**
+     * @var Path
+     */
+    private $path;
 
     /**
      * Reader.
@@ -42,6 +47,7 @@ class Reader
     {
         $this->app = $app;
         $this->files = $files;
+        $this->path = $this->app->make('path.lang');
     }
 
     /**
@@ -122,8 +128,14 @@ class Reader
 
         foreach ($this->files->files($directory) as $file) {
             $info = pathinfo($file);
+            $sub_folder = explode($this->path."/".$locale."/", $directory)[1] ?? false;
+            $group = $sub_folder ? $sub_folder."/".$info['filename'] : $info['filename'];
             $group = $info['filename'];
             $this->loadTranslations($locale, $group, $namespace, $file);
+        }
+        
+        foreach($this->files->directories($directory) as $sub_directory){
+            $this->loadTranslationsInDirectory($sub_directory, $locale, $namespace);
         }
     }
 
