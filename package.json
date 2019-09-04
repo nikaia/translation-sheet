@@ -9,6 +9,6 @@
     "release-major": "standard-version --release-as major --no-verify"
   },
   "dependencies": {
-    "standard-version": "^4.4.0"
+    "standard-version": "^7.0.0"
   }
 }
