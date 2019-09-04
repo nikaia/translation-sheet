@@ -40,13 +40,14 @@
     "minimum-stability": "dev",
     "extra": {
         "laravel": {
-          "providers": [
-            "Nikaia\\TranslationSheet\\TranslationSheetServiceProvider"
-          ]
+            "providers": [
+                "Nikaia\\TranslationSheet\\TranslationSheetServiceProvider"
+            ]
         },
         "branch-alias": {
             "dev-master": "1.3-dev"
         }
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "1.3.2"
 }
