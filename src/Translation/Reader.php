@@ -76,7 +76,7 @@ class Reader
         $this->translations = new Collection;
 
         // App directory
-        $this->scanDirectory($this->app->make('path.lang'));
+        $this->scanDirectory($this->path);
 
         return $this->translations;
     }
@@ -130,7 +130,6 @@ class Reader
             $info = pathinfo($file);
             $sub_folder = explode($this->path."/".$locale."/", $directory)[1] ?? false;
             $group = $sub_folder ? $sub_folder."/".$info['filename'] : $info['filename'];
-            $group = $info['filename'];
             $this->loadTranslations($locale, $group, $namespace, $file);
         }
         
