@@ -110,9 +110,7 @@ class Writer
         $files = [];
         $locales = $this->spreadsheet->getLocales();
 
-        $locales = array_filter($locales, static function($locale) {
-            return ! in_array($locale, config('translation_sheet.exclude_from_pull'));
-        });
+        $locales = $this->excludeLocaleFromWriting($locales);
 
         foreach ($locales as $locale) {
             foreach ($fileTranslations as $translation) {
@@ -141,6 +139,7 @@ class Writer
     {
         $files = [];
         $locales = $this->spreadsheet->getLocales();
+        $locales = $this->excludeLocaleFromWriting($locales);
 
         foreach ($locales as $locale) {
             foreach ($fileTranslations as $translation) {
@@ -164,5 +163,12 @@ class Writer
         }
 
         return $files;
+    }
+
+    private function excludeLocaleFromWriting($locales)
+    {
+        return array_filter($locales, static function($locale) {
+            return ! in_array($locale, config('translation_sheet.exclude_from_pull'));
+        });
     }
 }
