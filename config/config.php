@@ -60,4 +60,17 @@ return [
     |   'foo::bar.*',
     */
     'exclude' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Exclude lang files or namespaces
+    |--------------------------------------------------------------------------
+    | List here locales that the package will exclude
+    | just from pulling.
+    |
+    |
+    | Example:
+    |   'en'
+    */
+    'exclude_from_pull' => [],
 ];
