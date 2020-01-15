@@ -90,6 +90,10 @@ class Writer
         $files = [];
         $locales = $this->spreadsheet->getLocales();
 
+        $locales = array_filter($locales, static function($locale) {
+            return ! in_array($locale, config('translation_sheet.exclude_from_pull'));
+        });
+
         foreach ($locales as $locale) {
             foreach ($fileTranslations as $translation) {
 
