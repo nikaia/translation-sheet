@@ -14,7 +14,7 @@ class SpreadsheetTest extends TestCase
     /** @var Spreadsheet */
     private $s;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

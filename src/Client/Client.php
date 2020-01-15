@@ -17,7 +17,7 @@ class Client extends \Google_Client
         self::checkAuthConfigFile($authConfigFile);
 
         $client = new static();
-        $client->setAuthConfigFile($authConfigFile);
+        $client->setAuthConfig($authConfigFile);
         $client->setApplicationName($applicationName);
         $client->setScopes(\Google_Service_Sheets::SPREADSHEETS);
 

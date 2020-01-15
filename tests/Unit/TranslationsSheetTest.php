@@ -34,7 +34,7 @@ class TranslationsSheetTest extends TestCase
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('sheetStyles')->once()->andReturn(new Styles);
         $spreadsheet->shouldReceive('setSheetPropertiesRequest')->once();
-        $spreadsheet->shouldReceive('api')->times(2)->andReturn($spreadsheet);
+        $spreadsheet->shouldReceive('api')->times(3)->andReturn($spreadsheet);
         $spreadsheet->shouldReceive('addBatchRequests')->once()->andReturn($spreadsheet);
         $spreadsheet->shouldReceive('sendBatchRequests')->once();
 
@@ -50,7 +50,7 @@ class TranslationsSheetTest extends TestCase
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('setTranslations')->once();
         $spreadsheet->shouldReceive('translationsSheetCoordinates')->once()->andReturn(TranslationsSheetCoordinates::emptySheet(1, 1, 1));
-        $spreadsheet->shouldReceive('api')->once()->andReturn($api);
+        $spreadsheet->shouldReceive('api')->times(2)->andReturn($api);
 
         (new TranslationsSheet($spreadsheet))->writeTranslations([]);
     }
@@ -63,7 +63,7 @@ class TranslationsSheetTest extends TestCase
 
         $spreadsheet = Mockery::mock(Spreadsheet::class);
         $spreadsheet->shouldReceive('translationsSheetCoordinates')->once()->andReturn(TranslationsSheetCoordinates::emptySheet(1, 1, 1));
-        $spreadsheet->shouldReceive('api')->once()->andReturn($api);
+        $spreadsheet->shouldReceive('api')->times(3)->andReturn($api);
 
         (new TranslationsSheet($spreadsheet))->readTranslations();
     }
@@ -86,7 +86,7 @@ class TranslationsSheetTest extends TestCase
         $spreadsheet->shouldReceive('translationsSheetCoordinates')->andReturn(TranslationsSheetCoordinates::emptySheet(1, 1, 1));
         $spreadsheet->shouldReceive('sheetStyles')->andReturn(new Styles);
         $spreadsheet->shouldReceive('getLocales')->once()->andReturn(['fr', 'en']);
-        $spreadsheet->shouldReceive('api')->times(20)->andReturn($api);
+        $spreadsheet->shouldReceive('api')->times(46)->andReturn($api);
 
         (new TranslationsSheet($spreadsheet))->styleDocument();
     }

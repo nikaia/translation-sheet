@@ -6,7 +6,12 @@ class TranslationsSheet extends AbstractSheet
 {
     public function getId()
     {
-        return 0;
+        try {
+            return $this->api()->firstSheetId();
+        }
+        catch (\Exception $e) {
+            return 0;
+        }
     }
 
     public function getTitle()

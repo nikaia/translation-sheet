@@ -1,4 +1,3 @@
-related
 # Laravel Translation Sheet
 
 Translating Laravel languages files using a Google Spreadsheet.
@@ -141,6 +140,26 @@ $ php artisan translation_sheet:unlock
 Open the spreadsheet in the browser
 ```bash
 $ php artisan translation_sheet:open
+```  
+
+## Excluding translations 
+
+Sometimes you might need to instruct the package to exclude some translations. 
+You can do so by specifying patterns in the `exclude` config option.
+It accepts multiple patterns that target the full translation keys and that the [Str::is](https://laravel.com/docs/5.8/helpers#method-str-is) can understand. 
+
+```php
+[
+    // ...
+    
+    'exclude' => [
+        'validation*',  // This will exclude all the `validation.php` translations.
+        'foo::*',       // This will exclude all the `foo` namespace translations.
+        'foo::bar.*',   // this will exclude the `bar` translations from the `foo` namespace.
+    ],
+    
+    // ...
+]
 ```  
 
 

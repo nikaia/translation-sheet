@@ -5,6 +5,8 @@ namespace Nikaia\TranslationSheet\Translation;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class Reader
 {
@@ -30,17 +32,23 @@ class Reader
      * Returns all if no locale specified.
      */
     private $locale;
+    
+    /**
+     * @var Path
+     */
+    private $path;
 
     /**
      * Reader.
      *
-     * @param Application $app
-     * @param Filesystem $files
+     * @param  Application  $app
+     * @param  Filesystem  $files
      */
     public function __construct(Application $app, Filesystem $files)
     {
         $this->app = $app;
         $this->files = $files;
+        $this->path = $this->app->make('path.lang');
     }
 
     /**
@@ -69,23 +77,74 @@ class Reader
         $this->translations = new Collection;
 
         // App directory
-        $this->scanDirectory($this->app->make('path.lang'));
+        $this->scanDirectory($this->path);
+
+        // Scan for JSON files
+        $this->scanJson();
 
         return $this->translations;
+    }
+
+    protected function scanJsonFiles($directory)
+    {
+        collect($this->files->files($directory))
+            ->filter(function ($fileName) {
+                return Str::endsWith($fileName, ['.json']);
+            })
+            ->each(function (\SplFileInfo $file) {
+                $locale = $file->getBasename('.json');
+
+                $path = str_replace([resource_path('lang'), $file->getFilename()], ['', '{locale}.json'],
+                    $file->getRealPath());
+                $translations = json_decode(file_get_contents($file->getRealPath()), true);
+
+
+                foreach ($translations as $key => $value) {
+
+                    if (is_array($value)) {
+                        dd($key, $value, 'ARRAY');
+                    }
+                    $entity = new Item();
+                    $entity->namespace = '';
+                    $entity->group = '';
+                    $entity->locale = $locale;
+                    $entity->key = $key;
+                    $entity->full_key = $key;
+                    $entity->value = (string) $value;
+                    $entity->source_file = $path;
+
+                    $this->translations->push($entity);
+                }
+            });
+    }
+
+    protected function scanJson()
+    {
+
+        collect($this->files->directories($this->app->make('path.lang')))
+            ->each(function ($directory) {
+                if ($this->isVendorDirectory($directory)) {
+                    collect($this->files->directories($directory))
+                        ->each(function ($directory) {
+                            $this->scanJsonFiles($directory);
+                        });
+                }
+            });
+
+        $this->scanJsonFiles($this->app->make('path.lang'));
     }
 
     /**
      * Scan a directory.
      *
-     * @param string $path to directory to scan
+     * @param  string  $path  to directory to scan
      */
     protected function scanDirectory($path)
     {
         foreach ($this->files->directories($path) as $directory) {
             if ($this->isVendorDirectory($directory)) {
                 $this->scanVendorDirectory($directory);
-            }
-            else {
+            } else {
                 $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
             }
         }
@@ -115,14 +174,19 @@ class Reader
      */
     private function loadTranslationsInDirectory($directory, $locale, $namespace)
     {
-        if (! $this->requestedLocale($locale)) {
+        if (!$this->requestedLocale($locale)) {
             return;
         }
 
         foreach ($this->files->files($directory) as $file) {
             $info = pathinfo($file);
-            $group = $info['filename'];
+            $sub_folder = explode($this->path."/".$locale."/", $directory)[1] ?? false;
+            $group = $sub_folder ? $sub_folder."/".$info['filename'] : $info['filename'];
             $this->loadTranslations($locale, $group, $namespace, $file);
+        }
+        
+        foreach($this->files->directories($directory) as $sub_directory){
+            $this->loadTranslationsInDirectory($sub_directory, $locale, $namespace);
         }
     }
 
@@ -136,7 +200,7 @@ class Reader
      */
     private function loadTranslations($locale, $group, $namespace, $file)
     {
-        $translations = array_dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
+        $translations = Arr::dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
 
         foreach ($translations as $key => $value) {
 
@@ -205,7 +269,7 @@ class Reader
      *  Determine if a found locale is requested for scanning.
      *  If $this->locale is not set, we assume that all the locales were requested.
      *
-     * @param string $locale the locale to check
+     * @param  string  $locale  the locale to check
      * @return bool
      */
     private function requestedLocale($locale)
