@@ -1,6 +1,7 @@
 <?php
 
 namespace Nikaia\TranslationSheet\Test;
+use Throwable;
 
 class Kernel extends \Illuminate\Foundation\Console\Kernel
 {
@@ -18,16 +19,7 @@ class Kernel extends \Illuminate\Foundation\Console\Kernel
      */
     protected $commands = [];
 
-    /**
-     * Report the exception to the exception handler.
-     *
-     * @param  \Exception $e
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    protected function reportException(\Exception $e)
+    protected function reportException(Throwable $e)
     {
         throw $e;
     }
