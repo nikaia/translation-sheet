@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.11",
-        "orchestra/testbench": "^4.0",
+        "orchestra/testbench": "^5.0",
         "codedungeon/phpunit-result-printer": "^0.26.2"
     },
     "autoload": {
