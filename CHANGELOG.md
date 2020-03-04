@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.6](https://github.com/nikaia/translation-sheet/compare/v1.3.5...v1.3.6) (2020-03-04)
+
+
+### Features
+
+* Add Laravel 7 support ([dd4bb1f](https://github.com/nikaia/translation-sheet/commit/dd4bb1f))
+
 ### [1.3.5](https://github.com/nikaia/translation-sheet/compare/v1.3.4...v1.3.5) (2019-10-10)
 
 
