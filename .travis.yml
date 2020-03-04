@@ -10,6 +10,8 @@ matrix:
       php: 7.2
     - env: ILLUMINATE_VERSION=6.0.* TESTBENCH_VERSION=4.0.* TS_SPREADSHEET_ID="1rqvOz7l07T2ouX0g0uHLEC2s4DfLrsDFtIfRSjES98g"
       php: 7.3
+    - env: ILLUMINATE_VERSION=7.0.* TESTBENCH_VERSION=5.0.* TS_SPREADSHEET_ID="1ZCWkdmuxO8N10ufM-Wt3pp07UsVc_z9j9WA06ghc4zQ"
+      php: 7.4
 
 before_install:
     - test $TRAVIS_PULL_REQUEST == "false" && openssl aes-256-cbc -K $encrypted_5affb966e7f5_key -iv $encrypted_5affb966e7f5_iv -in tests/fixtures/service-account.json.enc -out tests/fixtures/service-account.json -d
