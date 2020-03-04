@@ -19,11 +19,6 @@ class Kernel extends \Illuminate\Foundation\Console\Kernel
      */
     protected $commands = [];
 
-    protected function reportException(Throwable $e)
-    {
-        throw $e;
-    }
-
     public function getArtisan()
     {
         return $this->app['artisan'];
