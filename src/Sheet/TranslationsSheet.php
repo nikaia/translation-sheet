@@ -41,6 +41,8 @@ class TranslationsSheet extends AbstractSheet
 
     public function writeTranslations($translations)
     {
+        $translations = array_values($translations);
+        
         $this->spreadsheet->setTranslations($translations);
 
         $this->spreadsheet->api()
