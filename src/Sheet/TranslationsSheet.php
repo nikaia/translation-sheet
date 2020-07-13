@@ -4,19 +4,31 @@ namespace Nikaia\TranslationSheet\Sheet;
 
 class TranslationsSheet extends AbstractSheet
 {
+    private $title;
+
+    private $defaultDeleted = false;
+
     public function getId()
     {
         try {
-            return $this->api()->firstSheetId();
-        }
-        catch (\Exception $e) {
-            return 0;
+            return $this->api()->getSheetId($this->getTitle());
+        } catch (\Exception $e) {
+            $id = $this->api()->createBlankSheet($this->getTitle(), $this->defaultDeleted);
+            $this->defaultDeleted = true;
+            return $id;
         }
     }
 
     public function getTitle()
     {
-        return 'Translations';
+        return $this->title;
+    }
+
+    public function setTitle($title = 'Translations')
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function coordinates()

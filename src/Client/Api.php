@@ -260,6 +260,44 @@ class Api
         return data_get(collect($this->getSheets())->first(), 'properties.sheetId');
     }
 
+    public function getSheetId($title)
+    {
+        $index = null;
+        $sheets = $this->getSheets();
+        foreach ($sheets as $key => $sheet) {
+            if (strtolower($sheet['properties']['title']) === strtolower($title)) {
+                $index = $key;
+                break;
+            }
+        }
+
+        return $sheets[$index]['properties']['sheetId'];
+    }
+
+    public function createBlankSheet($title, $defaultDeleted)
+    {
+        $this->addBatchRequests([$this->addBlankSheet($title)])->sendBatchRequests();
+        $this->deleteDefaultSheet($title, $defaultDeleted);
+
+        return $this->getSheetId($title);
+    }
+
+    public function deleteDefaultSheet($title, $defaultDeleted)
+    {
+        $sheets = $this->getSheets();
+        if (!$defaultDeleted && count($sheets) === 2) {
+            $index = null;
+            foreach ($sheets as $key => $sheet) {
+                if (strtolower($sheet['properties']['title']) !== strtolower($title)) {
+                    $index = $key;
+                    break;
+                }
+            }
+            $this->addBatchRequests($this->deleteSheetRequest($sheets[$index]['properties']['sheetId']))
+                ->sendBatchRequests();
+        }
+    }
+
     public function getSheetProtectedRanges($sheetId, $description = null)
     {
         $sheet = $this->getSheet($sheetId);

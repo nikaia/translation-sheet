@@ -61,16 +61,17 @@ class Reader
      * Scan modules, app and overridden packages lang
      * and return all defined translations.
      *
+     * @param string $path
      * @return Collection
      * @return array
      */
-    public function scan()
+    public function scan($path = null)
     {
         // Reset
         $this->translations = new Collection;
 
         // App directory
-        $this->scanDirectory($this->app->make('path.lang'));
+        $this->scanDirectory(!empty($path) ? $path : $this->app->make('path.lang'));
 
         return $this->translations;
     }
@@ -85,8 +86,7 @@ class Reader
         foreach ($this->files->directories($path) as $directory) {
             if ($this->isVendorDirectory($directory)) {
                 $this->scanVendorDirectory($directory);
-            }
-            else {
+            } else {
                 $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
             }
         }
@@ -137,10 +137,11 @@ class Reader
      */
     private function loadTranslations($locale, $group, $namespace, $file)
     {
-        $translations = Arr::dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
+        $translations = pathinfo($file, PATHINFO_EXTENSION) === 'json'
+            ? Arr::dot(json_decode(file_get_contents($file), true))
+            : Arr::dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
 
         foreach ($translations as $key => $value) {
-
             // Avoid break in this case :
             // Case of 'car.messages = []', the key 'messages' is specified in the translation
             // file but no items defined inside.

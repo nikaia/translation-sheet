@@ -33,11 +33,22 @@ class Pusher
 
     public function push()
     {
-        $this->output->writeln('<comment>Scanning languages files</comment>');
-        $translations = $this->getScannedAndTransformedTranslations();
+        $this->pushTab(config('translation_sheet.default_tab_name', 'Translations'));
+
+        foreach (config('translation_sheet.additional_tabs') as $tab) {
+            $this->pushTab($tab['name'], $tab['path']);
+        }
+    }
+
+    public function pushTab($title, $path = null)
+    {
+        $this->output->writeln('<comment>Scanning '. $title .' languages files</comment>');
+        $translations = $this->getScannedAndTransformedTranslations($path);
 
         $this->output->writeln('<comment>Preparing spreadsheet for new write operation</comment>');
-        $this->translationsSheet->prepareForWrite();
+        $this->translationsSheet
+            ->setTitle($title)
+            ->prepareForWrite();
 
         $this->output->writeln('<comment>Updating header</comment>');
         $this->translationsSheet->updateHeaderRow();
@@ -48,17 +59,17 @@ class Pusher
         $this->output->writeln('<comment>Styling document</comment>');
         $this->translationsSheet->styleDocument();
 
-        $this->output->writeln('<info>Done</info>.');
+        $this->output->writeln('<info>Done '. $title .'</info>.');
     }
 
-    public function getScannedAndTransformedTranslations()
+    public function getScannedAndTransformedTranslations($path = null)
     {
         $excludePatterns = config('translation_sheet.exclude');
 
         return $this->transformer
             ->setLocales($this->translationsSheet->getSpreadsheet()->getLocales())
-            ->transform($this->reader->scan())
-            ->when(is_array($excludePatterns) && !empty($excludePatterns), function (Collection $collection) use ($excludePatterns) {
+            ->transform($this->reader->scan($path))
+            ->when(is_array($excludePatterns) && !empty($excludePatterns), static function (Collection $collection) use ($excludePatterns) {
                 return $collection->reject(function ($item) use ($excludePatterns) {
                     return Str::is($excludePatterns, $item[0] /* full key */);
                 });

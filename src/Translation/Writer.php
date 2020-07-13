@@ -26,6 +26,10 @@ class Writer
     /** @var Application */
     protected $app;
 
+    protected $format = null;
+
+    protected $outputPath = null;
+
     public function __construct(Spreadsheet $spreadsheet, Filesystem $files, Application $app)
     {
         $this->spreadsheet = $spreadsheet;
@@ -42,15 +46,36 @@ class Writer
         return $this;
     }
 
+    public function setFormat($format)
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function setOutputPath($path)
+    {
+        $this->outputPath = $path;
+
+        return $this;
+    }
+
     public function write()
     {
         $this
             ->groupTranslationsByFile()
             ->map(function ($items, $sourceFile) {
-                $this->writeFile(
-                    $this->app->make('path.lang').'/'.$sourceFile,
-                    $items
-                );
+                if ($this->format === 'json') {
+                    $this->writeJsonFile(
+                        $sourceFile,
+                        $items
+                    );
+                } else {
+                    $this->writeFile(
+                        $this->app->make('path.lang').'/'.$sourceFile,
+                        $items
+                    );
+                }
             });
     }
 
@@ -65,6 +90,17 @@ class Writer
         }
 
         $this->files->put($file, $content);
+    }
+
+    protected function writeJsonFile($file, $items)
+    {
+        $this->output->writeln('  '.$file);
+
+        if (! $this->files->isDirectory($dir = dirname($file))) {
+            $this->files->makeDirectory($dir, 0755, true);
+        }
+
+        $this->files->put($file, json_encode($items, JSON_PRETTY_PRINT));
     }
 
     protected function groupTranslationsByFile()

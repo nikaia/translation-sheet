@@ -27,7 +27,16 @@ class Setup
     public function run()
     {
         $this->output->writeln('<comment>Setting up Translations sheet</comment>');
-        $this->translationsSheet->setup();
+        $this->translationsSheet
+            ->setTitle(config('translation_sheet.default_tab_name', 'Translations'))
+            ->setup();
+
+        foreach (config('translation_sheet.additional_tabs') as $tab) {
+            $this->output->writeln('<comment>Setting up '. $tab['name'] .' sheet</comment>');
+            $this->translationsSheet
+                ->setTitle($tab['name'])
+                ->setup();
+        }
 
         $this->output->writeln('<comment>Adding Meta sheet</comment>');
         $this->metaSheet->setup();

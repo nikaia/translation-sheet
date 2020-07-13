@@ -26,21 +26,35 @@ class Puller
 
     public function pull()
     {
-        $this->output->writeln('<comment>Pulling translation from Spreadsheet</comment>');
-        $translations = $this->getTranslations();
+        $this->pullTab(config('translation_sheet.default_tab_name', 'Translations'));
+
+        foreach (config('translation_sheet.additional_tabs') as $tab) {
+            $this->pullTab($tab['name'], $tab['output_format'], $tab['path']);
+        }
+
+        $this->output->writeln('<info>Done.</info>');
+    }
+
+    public function pullTab($title, $outputFormat = null, $path = null)
+    {
+        $this->output->writeln('<comment>Pulling '. $title .' translations from Spreadsheet</comment>');
+        $translations = $this->getTranslations($title);
 
         $this->output->writeln('<comment>Writing languages files :</comment>');
         $this->writer
             ->withOutput($this->output)
             ->setTranslations($translations)
+            ->setFormat($outputFormat)
+            ->setOutputPath($path)
             ->write();
-
-        $this->output->writeln('<info>Done.</info>');
     }
 
-    public function getTranslations()
+    public function getTranslations($title = null)
     {
         $header = $this->translationsSheet->getSpreadsheet()->getCamelizedHeader();
+        if ($title) {
+            $this->translationsSheet->setTitle($title);
+        }
 
         $translations = $this->translationsSheet->readTranslations();
 
