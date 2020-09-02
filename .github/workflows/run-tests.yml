@@ -46,7 +46,8 @@ jobs:
                 run : |
                     gpg --quiet --batch --yes --decrypt --passphrase="$GOOGLE_SERVICES_SECRET" \
                     --output $HOME/tests/fixtures/service-account.json.gpg $HOME/tests/fixtures/service-account.json.gpg
-                $GOOGLE_SERVICES_SECRET: ${{ secrets.$GOOGLE_SERVICES_SECRET }}
+                env:
+                    $GOOGLE_SERVICES_SECRET: ${{ secrets.$GOOGLE_SERVICES_SECRET }}
 
             -   name: Execute tests
                 run: vendor/bin/phpunit
