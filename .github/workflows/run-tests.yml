@@ -20,6 +20,11 @@ jobs:
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v1
+                run: |
+                    gpg --quiet --batch --yes --decrypt --passphrase="$GOOGLE_SERVICES_SECRET" \
+                    --output $HOME/tests/fixtures/service-account.json $HOME/tests/fixtures/service-account.json.gpg
+                env:
+                    GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_SECRET }}
 
             -   name: Cache dependencies
                 uses: actions/cache@v1
@@ -38,13 +43,6 @@ jobs:
                 run: |
                     composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                     composer update --prefer-dist --no-interaction --no-suggest
-
-            -   name: Decrypt services-account.json
-                run : |
-                    gpg --quiet --batch --yes --decrypt --passphrase="$GOOGLE_SERVICES_SECRET" \
-                    --output $HOME/tests/fixtures/service-account.json $HOME/tests/fixtures/service-account.json.gpg
-                env:
-                    GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_SECRET }}
 
             -   name: Execute tests
                 run: vendor/bin/phpunit
