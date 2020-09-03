@@ -2,8 +2,8 @@
 
 namespace Nikaia\TranslationSheet;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Nikaia\TranslationSheet\Commands\Output;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Reader;
@@ -43,7 +43,7 @@ class Pusher
         $this->translationsSheet->updateHeaderRow();
 
         $this->output->writeln('<comment>Writing translations in the spreadsheet</comment>');
-        $this->translationsSheet->writeTranslations($translations->toArray());
+        $this->translationsSheet->writeTranslations($translations->all());
 
         $this->output->writeln('<comment>Styling document</comment>');
         $this->translationsSheet->styleDocument();
@@ -58,10 +58,10 @@ class Pusher
         return $this->transformer
             ->setLocales($this->translationsSheet->getSpreadsheet()->getLocales())
             ->transform($this->reader->scan())
-            ->when(is_array($excludePatterns) && !empty($excludePatterns), function (Collection $collection) use ($excludePatterns) {
+            ->when(is_array($excludePatterns) && ! empty($excludePatterns), function (Collection $collection) use ($excludePatterns) {
                 return $collection->reject(function ($item) use ($excludePatterns) {
                     return Str::is($excludePatterns, $item[0] /* full key */);
-                });
+                })->values();
             });
     }
 }
