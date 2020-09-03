@@ -4,8 +4,8 @@ namespace Nikaia\TranslationSheet\Translation;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class Reader
 {
@@ -85,10 +85,13 @@ class Reader
         foreach ($this->files->directories($path) as $directory) {
             if ($this->isVendorDirectory($directory)) {
                 $this->scanVendorDirectory($directory);
-            }
-            else {
+            } else {
                 $this->loadTranslationsInDirectory($directory, $this->getLocaleFromDirectory($directory), null);
             }
+        }
+
+        foreach ($this->files->files($path) as $file) {
+            $this->loadTranslations($file->getBasename('.json'), '*', '*', $file);
         }
     }
 

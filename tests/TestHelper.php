@@ -2,8 +2,8 @@
 
 namespace Nikaia\TranslationSheet\Test;
 
-use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Translation\Item;
 
@@ -58,6 +58,13 @@ class TestHelper
         $this->app['translator']->addNamespace('package', $this->langPath('/vendor/package'));
 
         $this->createLangFiles("vendor/package/$locale", $group, $translations);
+    }
+
+    public function createJsonLangFiles($locale, $translation)
+    {
+        $json = $this->langPath($locale).'.json';
+
+        $this->files->replace($json, json_encode($translation));
     }
 
     public function pulledTranslations()

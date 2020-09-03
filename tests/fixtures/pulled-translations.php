@@ -28,4 +28,12 @@ return [
         'key' => 'title',
         'sourceFile' => 'vendor/package/{locale}/frontend.php',
     ],
+    [
+        'fullKey' => '*::*.Whoops!',
+        'fr' => 'Oups !',
+        'namespace' => '*',
+        'group' => '*',
+        'key' => 'Whoops!',
+        'sourceFile' => '{locale}.json',
+    ],
 ];
