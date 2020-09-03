@@ -1,12 +1,14 @@
 <?php
 
+namespace Nikaia\TranslationSheet\Test\Feature;
+
 use Nikaia\TranslationSheet\Commands\Prepare;
 use Nikaia\TranslationSheet\Commands\Push;
 use Nikaia\TranslationSheet\Commands\Setup;
 use Nikaia\TranslationSheet\Pusher;
 use Nikaia\TranslationSheet\Test\FeatureTestCase;
 
-class ExcludeFilterTest extends FeatureTestCase
+class ExcludePatternsTest extends FeatureTestCase
 {
     protected function getEnvironmentSetUp($app)
     {
