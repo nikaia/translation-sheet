@@ -62,7 +62,7 @@ class Writer
     {
         $this->output->writeln('  '.$file);
 
-        $content = "<?php\n\nreturn ".Util::varExport($items).";\n";
+        $content = sprintf('<?php%s%sreturn %s;%s', PHP_EOL, PHP_EOL, Util::varExport($items), PHP_EOL);
 
         if (! $this->files->isDirectory($dir = dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);
@@ -79,7 +79,7 @@ class Writer
             $this->files->makeDirectory($dir, 0755, true);
         }
 
-        $this->files->put($file, json_encode($items, JSON_PRETTY_PRINT));
+        $this->files->put($file, json_encode($items, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL);
     }
 
     protected function groupTranslationsByFile()
