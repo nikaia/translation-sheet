@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/nikaia/translation-sheet/compare/v1.3.7...v1.4.0) (2020-09-07)
+
+
+### Features
+
+* Add translation_sheet:publish command. ([e5ed9dd](https://github.com/nikaia/translation-sheet/commit/e5ed9ddbe1bf49c368e81813c5602fc8f0dfe0e6))
+* Add Laravel 8 support ([df2fe4f](https://github.com/nikaia/translation-sheet/commit/df2fe4fd9505de7bffbe77cae48f75867810ce7c))
+* Remove meta sheet (not used) ([a1480b4](https://github.com/nikaia/translation-sheet/commit/a1480b40db541b20393d5bd23d7e6e2a77113392)), closes [#56](https://github.com/nikaia/translation-sheet/issues/56)
+* Remove meta sheet (not used) ([373a541](https://github.com/nikaia/translation-sheet/commit/373a5413a792a46e21f1eee1624d9fdaaccc0ef4))
+
+
+### Bug Fixes
+
+* issue with translation array with key strings ("0", "1", ...) ([fe0f7d1](https://github.com/nikaia/translation-sheet/commit/fe0f7d15c22d56612de3f8f5daf55c1afc04ea54)), closes [#49](https://github.com/nikaia/translation-sheet/issues/49)
+* issue with translations indexed with string keys when excluding files. ([d959544](https://github.com/nikaia/translation-sheet/commit/d9595443f29c295f03e61e50ccd5a31d4adb12fe))
+* **excludes:** sends indexed array when excluding files to google api ([5aa1437](https://github.com/nikaia/translation-sheet/commit/5aa143733ad60e803096efb65384c9a38c7f4965))
+
 ### [1.3.7](https://github.com/nikaia/translation-sheet/compare/v1.3.6...v1.3.7) (2020-03-04)
 
 ### [1.3.6](https://github.com/nikaia/translation-sheet/compare/v1.3.5...v1.3.6) (2020-03-04)
