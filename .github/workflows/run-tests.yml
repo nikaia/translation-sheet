@@ -50,6 +50,6 @@ jobs:
             -   name: Run Unit Tests
                 run: vendor/bin/phpunit --testsuite Unit
 
-            -   if: matrix.laravel == '8.x*'
+            -   if: matrix.laravel == '8.*'
                 name: Run Feature Tests
                 run: vendor/bin/phpunit --testsuite Feature
