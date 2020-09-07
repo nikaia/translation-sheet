@@ -10,11 +10,12 @@ jobs:
             matrix:
                 os: [ubuntu-latest]
                 php: [7.4]
-                laravel: [7.*]
+                laravel: [7.*, 8.*]
                 include:
                     -   laravel: 7.*
                         testbench: 5.*
-
+                    -   laravel: 8.*
+                        testbench: 6.*
         name: PHP ${{ matrix.php }} - LARAVEL ${{ matrix.laravel }}
 
         steps:
@@ -43,8 +44,12 @@ jobs:
 
             -   name: Install dependencies
                 run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                    composer require "illuminate/console:${{ matrix.laravel }}" "illuminate/filesystem:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                     composer update --prefer-dist --no-interaction --no-suggest
 
-            -   name: Execute tests
-                run: vendor/bin/phpunit
+            -   name: Run Unit Tests
+                run: vendor/bin/phpunit --testsuite Unit
+
+            -   if: matrix.laravel == '8.*'
+                name: Run Feature Tests
+                run: vendor/bin/phpunit --testsuite Feature
