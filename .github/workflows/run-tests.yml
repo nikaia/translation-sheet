@@ -47,5 +47,9 @@ jobs:
                     composer require "illuminate/console:${{ matrix.laravel }}" "illuminate/filesystem:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                     composer update --prefer-dist --no-interaction --no-suggest
 
-            -   name: Execute tests
-                run: vendor/bin/phpunit
+            -   name: Run Unit Tests
+                run: vendor/bin/phpunit --testsuite Unit
+
+            -   if: matrix.laravel == '8.x*'
+                name: Run Feature Tests
+                run: vendor/bin/phpunit --testsuite Feature
