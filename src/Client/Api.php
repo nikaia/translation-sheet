@@ -19,6 +19,9 @@ class Api
     /** @var string */
     protected $spreadsheetId;
 
+    /** @var array */
+    private $sheets = [];
+
     /**
      * SheetService constructor.
      *
@@ -248,11 +251,21 @@ class Api
         }
     }
 
-    public function getSheets()
+    public function getSheets($title = null)
     {
-        $service = new \Google_Service_Sheets($this->client);
+        // cache it to avoid (Google API error 'quota limit exceeded')
+        // 100 requests per 100 seconds per user
+        if ($title && array_key_exists($title, $this->sheets) && count($this->sheets[$title]) > 1) {
+            return $this->sheets[$title];
+        }
 
-        return $service->spreadsheets->get($this->spreadsheetId)->getSheets();
+        $service = new \Google_Service_Sheets($this->client);
+        $sheets = $service->spreadsheets->get($this->spreadsheetId)->getSheets();
+        if ($title) {
+            $this->sheets[$title] = $sheets;
+        }
+
+        return $sheets;
     }
 
     public function firstSheetId()
@@ -263,7 +276,7 @@ class Api
     public function getSheetId($title)
     {
         $index = null;
-        $sheets = $this->getSheets();
+        $sheets = $this->getSheets($title);
         foreach ($sheets as $key => $sheet) {
             if (strtolower($sheet['properties']['title']) === strtolower($title)) {
                 $index = $key;

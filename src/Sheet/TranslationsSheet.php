@@ -53,6 +53,8 @@ class TranslationsSheet extends AbstractSheet
 
     public function writeTranslations($translations)
     {
+        $translations = array_values($translations);
+
         $this->spreadsheet->setTranslations($translations);
 
         $this->spreadsheet->api()
@@ -107,8 +109,8 @@ class TranslationsSheet extends AbstractSheet
         // Delete extra columns and rows if any
         try {
             $this->spreadsheet->api()->addBatchRequests([
-                $this->spreadsheet->api()->deleteRowsFrom($this->getId(), $this->coordinates()->getRowsCount()),
-                $this->spreadsheet->api()->deleteColumnsFrom($this->getId(), $this->coordinates()->getColumnsCount()),
+                $this->spreadsheet->api()->deleteRowsFrom($this->getId(), $this->spreadsheet->getTranslationsCount()),
+                $this->spreadsheet->api()->deleteColumnsFrom($this->getId(), $this->spreadsheet->getHeaderColumnsCount() - 1),
             ])->sendBatchRequests();
         } catch (\Google_Service_Exception $e) {
             // If there is no extra columns or rows Google api will raise an exception :
