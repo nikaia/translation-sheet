@@ -1,5 +1,7 @@
 <?php
 
+namespace Nikaia\TranslationSheet\Test\Feature;
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Translation\Translator;
 use Nikaia\TranslationSheet\Commands\Setup;
