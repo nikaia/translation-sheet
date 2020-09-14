@@ -75,7 +75,7 @@ Laravel >= 5.1
  - Share it with the service account email with `Can edit` permission.
  
  
- 
+
 ### Required configuration
 
 In your .env file or in your published config file (`config/translation_sheet.php`)
@@ -175,25 +175,19 @@ $ composer test
 
 _N.B : You need a valid configuration service-account.json file to run tests._
 
-### Travis
+### Github action
 
-To test your fork using travis, you need a valid `service-account.json`. The file is ignored in the repository to avoid exposing credentials.
-You need to encode your credentials file `tests/fixtures/service-account.json using [travis utilities](https://docs.travis-ci.com/user/encrypting-files/).
- 
- ```bash
- # Save credential file to tests/fixtures/service-account.json
- $ cd tests/fixtures
- $ travis encrypt-file service-account.json
- ```
- 
-Commit the `.enc` result file. 
- 
-PS. Travis will decrypt the file just before running the tests. See the `travis.yml` file.
+To test your fork using github action, you need a valid `service-account.json`. The file is ignored in the repository to avoid exposing credentials.
+You need to encode your credentials file `tests/fixtures/service-account.json using `gpg`
 
-```yaml
-before_install:
-    - openssl aes-256-cbc -K $encrypted_5affb966e7f5_key -iv $encrypted_5affb966e7f5_iv -in tests/fixtures/service-account.json.enc -out tests/fixtures/service-account.json -d
+```bash
+# Save credential file to tests/fixtures/service-account.json
+$ gpg -c tests/fixtures/service-account.json  tests/fixtures/service-account.json.gpg
 ```
+ 
+Commit the `.gpg` encoded file. 
+ 
+PS. Github action will decrypt the file just before running the tests. See the `run-tests.yml` file.
 
 
 ## Security
