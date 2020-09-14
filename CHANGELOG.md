@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/nikaia/translation-sheet/compare/v1.4.0...v1.4.1) (2020-09-14)
+
+
+### Features
+
+* Add json support ([b9ae229](https://github.com/nikaia/translation-sheet/commit/b9ae229731a47f82db44e858c2155f05f1db60c6))
+* **json:** add json support ([06430bd](https://github.com/nikaia/translation-sheet/commit/06430bddc85b4987517cb7e382a8e5ef6dd0af6b)), closes [nikaia/translation-sheet#34](https://github.com/nikaia/translation-sheet/issues/34)
+* **writer:** json format unescaped unicode ([c38547c](https://github.com/nikaia/translation-sheet/commit/c38547c8d9e6cec4db3e49f3555bb451fd18bbfe))
+
 ## [1.4.0](https://github.com/nikaia/translation-sheet/compare/v1.3.7...v1.4.0) (2020-09-07)
 
 

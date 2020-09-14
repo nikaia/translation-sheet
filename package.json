@@ -1,6 +1,6 @@
 {
     "name": "nikaia-translation-sheet",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "private": true,
     "scripts": {
         "release-patch-dryrun": "standard-version --release-as patch --no-verify --dry-run",
