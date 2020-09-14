@@ -3,6 +3,7 @@
 namespace Nikaia\TranslationSheet\Translation;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Transformer
 {
@@ -20,7 +21,7 @@ class Transformer
         return $translations
             ->sortBy('locale')
             ->groupBy('full_key')
-            ->map(function ($translation) {
+            ->map(function (Collection $translation) {
                 $firstLocale = $translation->first();
 
                 $row = [];
@@ -47,7 +48,7 @@ class Transformer
                     'namespace' => ! is_null($firstLocale->namespace) ? $firstLocale->namespace : '',
                     'group' => ! is_null($firstLocale->group) ? $firstLocale->group : '',
                     'key' => $firstLocale->key,
-                    'source_file' => str_replace($firstLocale->locale.'/', '{locale}/', $firstLocale->source_file),
+                    'source_file' => $this->formatSourceFile($firstLocale),
                 ]);
 
                 return array_values($row);
@@ -67,5 +68,14 @@ class Transformer
         }
 
         return $translation;
+    }
+
+    private function formatSourceFile($firstLocale)
+    {
+        if (Str::endsWith($firstLocale->source_file, ['.json'])) {
+            return '{locale}.json';
+        }
+
+        return str_replace($firstLocale->locale . '/', '{locale}/', $firstLocale->source_file);
     }
 }

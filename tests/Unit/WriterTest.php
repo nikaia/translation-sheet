@@ -7,8 +7,6 @@ use Nikaia\TranslationSheet\Translation\Writer;
 
 class WriterTest extends TestCase
 {
-    private $langPath;
-
     /** @test */
     public function it_writes_correctly_translations()
     {
@@ -19,16 +17,25 @@ class WriterTest extends TestCase
 
         $this->assertFileExistsAndEqual('en/app.php', ['submit' => 'Submit', 'back' => 'Back']);
         $this->assertFileExistsAndEqual('fr/app.php', ['submit' => 'Envoyer', 'back' => 'Retour']);
-        $this->assertFileExistsAndEqual('/vendor/package/en/frontend.php', ['title' => 'Awesome package']);
-        $this->assertFileExistsAndEqual('/vendor/package/fr/frontend.php', ['title' => 'Une extension magique']);
+        $this->assertFileExistsAndEqual('vendor/package/en/frontend.php', ['title' => 'Awesome package']);
+        $this->assertFileExistsAndEqual('vendor/package/fr/frontend.php', ['title' => 'Une extension magique']);
+        $this->assertJsonFileExistsAndEqual('fr.json', ['Whoops!' => 'Oups !']);
     }
 
     private function assertFileExistsAndEqual($file, $expected)
     {
-        $filepath = $this->app['path.lang'].'/'.$file;
+        $filepath = $this->helper->langPath($file);
 
-        $this->assertFileExists($this->langPath.'/'.$filepath);
+        $this->assertFileExists($filepath);
         $this->assertEquals($this->fileTranslations($filepath), $expected);
+    }
+
+    private function assertJsonFileExistsAndEqual($file, $expected)
+    {
+        $filepath = $this->helper->langPath($file);
+
+        $this->assertFileExists($filepath);
+        $this->assertEquals(json_decode($this->app['files']->get($filepath), true), $expected);
     }
 
     private function fileTranslations($file)
