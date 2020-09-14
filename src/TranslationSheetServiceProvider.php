@@ -7,6 +7,7 @@ use Nikaia\TranslationSheet\Client\Client;
 use Nikaia\TranslationSheet\Commands\Lock;
 use Nikaia\TranslationSheet\Commands\Open;
 use Nikaia\TranslationSheet\Commands\Prepare;
+use Nikaia\TranslationSheet\Commands\Publish;
 use Nikaia\TranslationSheet\Commands\Pull;
 use Nikaia\TranslationSheet\Commands\Push;
 use Nikaia\TranslationSheet\Commands\Setup;
@@ -64,6 +65,7 @@ class TranslationSheetServiceProvider extends ServiceProvider
             Unlock::class,
             Status::class,
             Open::class,
+            Publish::class,
         ]);
     }
 }
