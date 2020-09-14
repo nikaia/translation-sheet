@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/nikaia/translation-sheet/compare/v1.4.3...v1.4.4) (2020-09-14)
+
+
+### Bug Fixes
+
+* laravel 7 support ([623e04b](https://github.com/nikaia/translation-sheet/commit/623e04bad7cf018dea49260816e873417dd4eaf8)), closes [nikaia/translation-sheet#60](https://github.com/nikaia/translation-sheet/issues/60)
+
 ### [1.4.3](https://github.com/nikaia/translation-sheet/compare/v1.4.2...v1.4.3) (2020-09-14)
 
 
