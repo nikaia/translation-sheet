@@ -29,7 +29,7 @@ Translating Laravel languages files using a Google Spreadsheet.
 - Install package
 
     ```bash
-    $ composer require nikaia/translation-sheet
+    $ composer require nikaia/translation-sheet --dev
     ```
     
 - If Laravel version <= 5.4,  Add service provider to your 'config/app.php'. For version >= 5.5, package will be auto-discoverd by Laravel.
