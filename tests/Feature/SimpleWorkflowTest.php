@@ -3,11 +3,10 @@
 namespace Nikaia\TranslationSheet\Test\Feature;
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Translation\Translator;
-use Nikaia\TranslationSheet\Commands\Setup;
 use Nikaia\TranslationSheet\Commands\Prepare;
-use Nikaia\TranslationSheet\Commands\Push;
 use Nikaia\TranslationSheet\Commands\Pull;
+use Nikaia\TranslationSheet\Commands\Push;
+use Nikaia\TranslationSheet\Commands\Setup;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\FeatureTestCase;
 use Nikaia\TranslationSheet\Util;
@@ -26,8 +25,8 @@ class SimpleWorkflowTest extends FeatureTestCase
     {
         // Reset translation file
         $this->writeFooMessagesFile([
-            "next" => "Next",
-            "previous" => "Previous"
+            'next' => 'Next',
+            'previous' => 'Previous',
         ]);
         $this->assertEquals('Next', $this->readFooMessagesFile()['next']);
 
@@ -48,8 +47,8 @@ class SimpleWorkflowTest extends FeatureTestCase
 
     private function simulateEditingFooMessagesNext()
     {
-        /** @var Spreadsheet $spreadsheet */
-        resolve(Spreadsheet::class)->api()->writeCells('Translations!B2', [['Next (edited)']]);
+        /* @var Spreadsheet $spreadsheet */
+        resolve(Spreadsheet::class)->api()->writeCells('Translations!B3', [['Next (edited)']]);
     }
 
     private function fooMessagesFile()
