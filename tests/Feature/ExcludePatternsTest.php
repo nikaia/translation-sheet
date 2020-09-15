@@ -18,7 +18,7 @@ class ExcludePatternsTest extends FeatureTestCase
     }
 
     /** @test */
-    public function it_exludes_correctly_the_specified_patterns()
+    public function it_excludes_correctly_the_specified_patterns()
     {
         /** @var Pusher $pusher */
         $pusher = resolve(Pusher::class);
@@ -36,7 +36,7 @@ class ExcludePatternsTest extends FeatureTestCase
     }
 
     /** @test */
-    public function it_exludes_correctly_the_specified_patterns_for_push()
+    public function it_excludes_correctly_the_specified_patterns_for_push()
     {
         /** @var Pusher $pusher */
         $pusher = resolve(Pusher::class);
