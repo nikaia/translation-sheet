@@ -17,7 +17,7 @@ class Push extends Command
     {
         $spreadsheet->sheets()->each(function (TranslationsSheet $translationsSheet) use ($pusher) {
             $pusher
-                ->setTranslationSheet($translationsSheet)
+                ->setTranslationsSheet($translationsSheet)
                 ->withOutput($this->output)
                 ->push();
         });

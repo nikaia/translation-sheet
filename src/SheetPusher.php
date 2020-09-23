@@ -30,7 +30,7 @@ class SheetPusher
         $this->nullOutput();
     }
 
-    public function setTranslationSheet(TranslationsSheet $translationsSheet)
+    public function setTranslationsSheet(TranslationsSheet $translationsSheet)
     {
         $this->translationSheet = $translationsSheet;
 

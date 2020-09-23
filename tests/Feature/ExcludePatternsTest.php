@@ -22,8 +22,10 @@ class ExcludePatternsTest extends FeatureTestCase
     /** @test */
     public function it_excludes_correctly_the_specified_patterns()
     {
+        $this->helper->noExtraTranslationSheet();
+
         /** @var SheetPusher $pusher */
-        $pusher = resolve(SheetPusher::class)->setTranslationSheet(
+        $pusher = resolve(SheetPusher::class)->setTranslationsSheet(
             Spreadsheet::primaryTranslationSheet()
         );
 
@@ -42,8 +44,10 @@ class ExcludePatternsTest extends FeatureTestCase
     /** @test */
     public function it_excludes_correctly_the_specified_patterns_for_push()
     {
+        $this->helper->noExtraTranslationSheet();
+
         /** @var SheetPusher $pusher */
-        $pusher = resolve(SheetPusher::class)->setTranslationSheet(
+        $pusher = resolve(SheetPusher::class)->setTranslationsSheet(
             Spreadsheet::primaryTranslationSheet()
         );
         config()->set('translation_sheet.exclude', [

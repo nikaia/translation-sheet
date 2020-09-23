@@ -18,9 +18,11 @@ class PusherTest extends TestCase
         $transformer = Mockery::mock(Transformer::class);
         $transformer->shouldReceive('setLocales')->once()->andReturn($transformer);
         $transformer->shouldReceive('transform')->once()->andReturn(new Collection);
+        $transformer->shouldReceive('setTranslationsSheet')->once()->andReturn($transformer);
 
         $reader = Mockery::mock(Reader::class);
         $reader->shouldReceive('scan')->once()->andReturn(new Collection);
+        $reader->shouldReceive('setTranslationsSheet')->once()->andReturn($reader);
 
         $translationSheet = Mockery::mock(TranslationsSheet::class);
         $translationSheet->shouldReceive('getSpreadsheet')->once()->andReturn($this->helper->spreadsheet());
@@ -29,7 +31,8 @@ class PusherTest extends TestCase
         $translationSheet->shouldReceive('updateHeaderRow')->once();
         $translationSheet->shouldReceive('styleDocument')->once();
 
-        $pusher = (new SheetPusher($reader, $transformer))->setTranslationSheet($translationSheet);
+
+        $pusher = (new SheetPusher($reader, $transformer))->setTranslationsSheet($translationSheet);
         $pusher->push();
     }
 }

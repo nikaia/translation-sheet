@@ -21,7 +21,7 @@ class Prepare extends Command
 
             $this->output->writeln("<comment>Scanning local languages files for sheet [{$translationsSheet->getTitle()}]</comment>");
 
-            $pusher = $pusher->setTranslationSheet($translationsSheet);
+            $pusher = $pusher->setTranslationsSheet($translationsSheet);
 
             $translations = Util::keyValues(
                 $pusher->getScannedAndTransformedTranslations(),

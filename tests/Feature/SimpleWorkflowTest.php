@@ -23,8 +23,8 @@ class SimpleWorkflowTest extends FeatureTestCase
     /** @test */
     public function it_executes_simple_workflow_correctly()
     {
-        $this->helper->noExtraTranslationSheet();
         $this->helper->deleteAllLangFiles();
+        $this->helper->noExtraTranslationSheet();
         $this->resetSpreadsheet();
 
         Artisan::call(Setup::class);
@@ -44,8 +44,8 @@ class SimpleWorkflowTest extends FeatureTestCase
     public function it_executes_simple_workflow_correctly_with_one_extra_sheet()
     {
         $this->helper->deleteAllLangFiles();
-        $this->resetSpreadsheet();
         $this->helper->oneExtraTranslationSheet();
+        $this->resetSpreadsheet();
 
         Artisan::call(Setup::class);
         Artisan::call(Prepare::class);
@@ -74,8 +74,8 @@ class SimpleWorkflowTest extends FeatureTestCase
     public function it_executes_simple_workflow_correctly_with_two_extra_sheets()
     {
         $this->helper->deleteAllLangFiles();
-        $this->resetSpreadsheet();
         $this->helper->twoExtraTranslationSheet();
+        $this->resetSpreadsheet();
 
         Artisan::call(Setup::class);
         Artisan::call(Prepare::class);

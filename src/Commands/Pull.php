@@ -17,7 +17,7 @@ class Pull extends Command
     {
         $spreadsheet->sheets()->each(function (TranslationsSheet $translationsSheet) use ($puller) {
             $puller
-                ->setTranslationSheet($translationsSheet)
+                ->setTranslationsSheet($translationsSheet)
                 ->withOutput($this->output)
                 ->pull();
         });

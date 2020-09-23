@@ -128,10 +128,4 @@ class SpreadsheetTest extends TestCase
     {
         $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/' . $this->s->getId());
     }
-
-    /** @test */
-    public function it_returns_sheets()
-    {
-        $this->assertEquals(2, $this->s->sheets()->count());
-    }
 }

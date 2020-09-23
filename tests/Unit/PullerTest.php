@@ -21,9 +21,10 @@ class PullerTest extends TestCase
         $writer = Mockery::mock(Writer::class);
         $writer->shouldReceive('withOutput')->once()->andReturn($writer);
         $writer->shouldReceive('setTranslations')->once()->andReturn($writer);
+        $writer->shouldReceive('setTranslationsSheet')->once()->andReturn($writer);
         $writer->shouldReceive('write');
 
-        $puller = (new SheetPuller($writer))->setTranslationSheet($translationSheet);
+        $puller = (new SheetPuller($writer))->setTranslationsSheet($translationSheet);
         $puller->pull();
     }
 }

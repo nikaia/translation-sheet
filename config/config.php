@@ -82,6 +82,7 @@ return [
     |
     */
     'extra_sheets' => [
+        /*
         [
             // Sheet name
             'name' => 'Web App',
@@ -95,5 +96,6 @@ return [
             // Tab color
             'tabColor' => '#0000FF',
         ]
+        */
     ],
 ];
