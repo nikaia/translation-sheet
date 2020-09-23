@@ -90,9 +90,6 @@ return [
             // Relative path to the resources/lang folder, where the translations files are stored
             'path' => resource_path('web-app/lang'),
 
-            // Format (php|json)
-            'format' => 'json',
-
             // Tab color
             'tabColor' => '#0000FF',
         ]

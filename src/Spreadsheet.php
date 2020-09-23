@@ -203,7 +203,6 @@ class Spreadsheet
                         return $instance
                             ->markAsExtraSheet()
                             ->setTitle($sheetConfig['name'])
-                            ->setFormat($sheetConfig['format'])
                             ->setPath($sheetConfig['path'])
                             ->setTabColor($sheetConfig['tabColor']);
                     })

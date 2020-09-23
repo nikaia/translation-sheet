@@ -211,7 +211,6 @@ class TestHelper
             [
                 'name' => 'Web App',
                 'path' => $this->customPath('web-app/lang'),
-                'format' => 'json',
                 'tabColor' => '#0000FF'
             ]
         ]);
@@ -246,13 +245,11 @@ class TestHelper
             [
                 'name' => 'Web App',
                 'path' => $this->customPath('web-app/lang'),
-                'format' => 'json',
                 'tabColor' => '#0000FF'
             ],
             [
                 'name' => 'Mobile App',
                 'path' => $this->customPath('mobile-app/lang'),
-                'format' => 'json',
                 'tabColor' => '#00FF00'
             ]
         ]);

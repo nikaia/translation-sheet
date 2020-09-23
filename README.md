@@ -8,9 +8,7 @@ Translating Laravel languages files using a Google Spreadsheet.
 [![Quality Score](https://img.shields.io/scrutinizer/g/nikaia/translation-sheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/nikaia/translation-sheet)
 
 
-<p align="center">
-    <img src="docs/banner.jpg" alt="Laravel Translation Sheet">
-</p>
+![](./docs/banner.jpg)
 
 ## Contents
 
@@ -53,32 +51,31 @@ Laravel >= 5.1
     
 ## Configuration
 
-### Google Api
+### Google Api credentials
 
-- head to https://console.developers.google.com/
-- create a new project 
-- Make sure to activate Sheet Api for the project
-    - Navigate to "Library"
-    - Search "Google Sheets API" > Click on "Google Sheets API"
-    - Click "Enable"
-- Create a Service Account and credentials
+- Create a new project in https://console.developers.google.com/ 
+- Make sure to activate `Sheet Api` for the created project
+    - Navigate to "Library"                                      
+    - Search "Google Sheets API" > Click on "Google Sheets API" and click enable                           
+- Create credentials
     - Navigate to "Credentials"
     - Click "Create credentials" 
-    - choose "Service Account key"
+    - Choose "Service Account key"
     - Choose A "New Service Account" in the "Service account" select
-    - Choose a name. (ie. This is the name that will show up in the Spreadsheet history operations), "Editor" as role and "JSON" for the key type.
-    - Save the credentials to 'resources/google/service-account.json' folder. (You can choose another name/folder if you want in your application folder)
-    - Make sure to write down the service account email, you will need it later for the package configuration.               
+        - Choose a name. (ie. This is the name that will show up in the Spreadsheet history operations), 
+        - Choose "Editor" as the role 
+        - Choose "JSON" for the key type.
+    - Save the credentials to 'resources/google/service-account.json' folder. (You can choose another name/folder and update the package configuration)
+    - Make sure to write down the service account email, you will need to share the spreadsheet with this email (see below).
 
 ### Spreadsheet
  - Create a blank/new spreadsheet here [https://docs.google.com/spreadsheets/](https://docs.google.com/spreadsheets/) .
  - Share it with the service account email with `Can edit` permission.
  
- 
 
-### Required configuration
+### Package configuration
 
-In your .env file or in your published config file (`config/translation_sheet.php`)
+In your .env file or in your published config file (`config/translation_sheet.php`), you need to add the following
        
     # The service account email   
     TS_SERVICE_ACCOUNT_EMAIL=***@***.iam.gserviceaccount.com
@@ -86,7 +83,7 @@ In your .env file or in your published config file (`config/translation_sheet.ph
     # The path to the downloaded service account credentials file
     TS_SERVICE_ACCOUNT_CREDENTIALS_FILE=resources/google/service-account.json
     
-    # The ID of the spreadsheet that we will be using for translation
+    # The ID of the spreadsheet that we will be using for translation (the last portion of the spreadsheet url)
     TS_SPREADSHEET_ID=xxxx
     
     # The locales of the application (separated by comma) 
@@ -95,7 +92,7 @@ In your .env file or in your published config file (`config/translation_sheet.ph
   
 ## Usage
   
- 1/ Setup the spreadsheet 
+1/ Setup the spreadsheet 
   
 This need to be done only once.
   
@@ -161,6 +158,50 @@ It accepts multiple patterns that target the full translation keys and that the 
     // ...
 ]
 ```  
+
+
+## Extra sheets
+
+![Extra sheets](./docs/extra-sheets.png)
+
+Sometimes you may have other files that need translations. 
+They are not related to the laravel application per se and are not stored in the `resources\lang` folder. 
+Maybe you are building a web app (spa), or even a mobile app alongside
+the laravel app, and you need to handle their translations. 
+
+In this specific case, you can configure extra sheets to handle those translations files stored inside a specific path.
+
+- This feature handles only json files.
+- The files must live outside the `resources\lang` directory. For instance `resources\web-app\lang`.
+
+```php
+[
+    // ...
+
+    'extra_sheets' => [
+        [
+            'name' => 'Web App',                        // Spreadsheet sheet (tab) name.
+            'path' => resource_path('web-app/lang'),    // Path where json files are stored. Files can be organized inside sub folders.        
+            'tabColor' => '#0000FF',                    // Color of the spreadsheet tab
+        ],
+        [
+            'name' => 'Mobile App',
+            'path' => resource_path('mobile-app/lang'),        
+            'tabColor' => '#0000FF',
+        ],    
+    ],
+]
+```
+
+> You need to run `translation_sheet:setup` command, if you add this config later on. 
+
+
+
+
+
+
+
+
 
 
 ## Changelog

@@ -6,7 +6,6 @@ class TranslationsSheet extends AbstractSheet
 {
     protected $title = null;
     protected $id = null;
-    protected $format = null;
     protected $path = null;
     protected $tabColor = null;
     protected $primary = true;
@@ -31,13 +30,6 @@ class TranslationsSheet extends AbstractSheet
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function setFormat($format)
-    {
-        $this->format = $format;
 
         return $this;
     }
