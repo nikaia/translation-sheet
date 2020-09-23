@@ -4,6 +4,7 @@ namespace Nikaia\TranslationSheet\Test;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Translation\Item;
 
@@ -23,34 +24,44 @@ class TestHelper
 
     public function langPath($path = '')
     {
-        return $this->tempPath().'/lang'.(empty($path) ? '' : '/'.$path);
+        return $this->tempPath() . '/lang' . (empty($path) ? '' : '/' . $path);
+    }
+
+    public function customPath($path)
+    {
+        return $this->tempPath() . '/' . $path;
     }
 
     public function fixturesPath($path)
     {
-        return __DIR__.'/fixtures'.(empty($path) ? '' : '/'.$path);
+        return __DIR__ . '/fixtures' . (empty($path) ? '' : '/' . $path);
     }
 
     public function tempPath()
     {
-        return __DIR__.'/temp';
+        return __DIR__ . '/temp';
     }
 
     public function deleteLangFiles()
     {
-        exec('rm -rf '.$this->langPath('/*'));
+        exec('rm -rf ' . $this->langPath('/*'));
+    }
+
+    public function deleteCustomPath($path)
+    {
+        exec('rm -rf ' . $this->customPath($path));
     }
 
     public function createLangFiles($locale, $group, $translations)
     {
         $directory = $this->langPath($locale);
-        if (! $this->files->isDirectory($directory)) {
+        if (!$this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true, true);
         }
 
-        $content = "<?php \n return ".var_export($translations, true).';';
+        $content = "<?php \n return " . var_export($translations, true) . ';';
 
-        $this->files->put($directory.'/'.$group.'.php', $content);
+        $this->files->put($directory . '/' . $group . '.php', $content);
     }
 
     public function createPackageLangFiles($locale, $group, $translations)
@@ -62,7 +73,17 @@ class TestHelper
 
     public function createJsonLangFiles($locale, $translation)
     {
-        $json = $this->langPath($locale).'.json';
+        $json = $this->langPath($locale) . '.json';
+
+        $this->files->replace($json, json_encode($translation));
+    }
+
+    public function createCustomJsonLangFile($translation, $customPath, $file)
+    {
+        $directory = $this->customPath($customPath);
+        $this->files->makeDirectory($directory, 0755, true, true);
+
+        $json = "{$directory}/{$file}";
 
         $this->files->replace($json, json_encode($translation));
     }
@@ -70,6 +91,15 @@ class TestHelper
     public function pulledTranslations()
     {
         return new Collection($this->files->getRequire($this->fixturesPath('pulled-translations.php')));
+    }
+
+    public function oneExtraSheetPulledTranslations()
+    {
+        return collect($this->files->getRequire($this->fixturesPath('pulled-extra-sheet-translations.php')))
+            ->map(function ($item) {
+                $item['sourceFile'] = str_replace('CUSTOM_PATH', $this->customPath(''), $item['sourceFile']);
+                return $item;
+            });
     }
 
     public function readTranslations()
@@ -135,5 +165,39 @@ class TestHelper
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
+    }
+
+    public function primaryTranslationSheet()
+    {
+        /** @var TranslationsSheet $instance */
+        $instance = resolve(TranslationsSheet::class);
+
+        return $instance
+            ->setTitle(config('translation_sheet.primary_sheet.name', 'Translations'));
+    }
+
+    public function oneExtraTranslationSheet()
+    {
+        $this->createCustomJsonLangFile(
+            ['title' => 'This is a title.'],
+            'web-app/lang/en/',
+            'messages.json'
+        );
+        $this->createCustomJsonLangFile(
+            ['title' => 'Ceci est un titre.'],
+            'web-app/lang/fr/',
+            'messages.json'
+        );
+
+        config()->set('translation_sheet.extra_sheets', [
+            [
+                'name' => 'web-app',
+                'path' => $this->customPath('web-app/lang'),
+                'format' => 'json',
+                'tabColor' => '#0000FF'
+            ]
+        ]);
+
+        return resolve(Spreadsheet::class)->configuredExtraSheets()->first();
     }
 }

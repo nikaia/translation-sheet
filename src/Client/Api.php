@@ -19,6 +19,9 @@ class Api
     /** @var string */
     protected $spreadsheetId;
 
+    /** @var array */
+    protected $cachedSheets = [];
+
     /**
      * SheetService constructor.
      *
@@ -140,6 +143,33 @@ class Api
         ]);
     }
 
+    public function setSheetTitle($sheetId, $title)
+    {
+        return new Google_Service_Sheets_Request([
+            'updateSheetProperties' => [
+                'properties' => [
+                    'sheetId' => $sheetId,
+                    'title' => $title,
+                ],
+                'fields' => 'title',
+            ],
+        ]);
+    }
+
+    public function setTabColor($sheetId, $tabColor)
+    {
+        return new Google_Service_Sheets_Request([
+            'updateSheetProperties' => [
+                'properties' => [
+                    'sheetId' => $sheetId,
+                    'tabColor' => $this->fractalColors($tabColor),
+                ],
+                'fields' => 'tabColor',
+            ],
+        ]);
+    }
+
+    // @todo: remove if not used any more.
     public function setSheetPropertiesRequest($sheetId, $title, $tabColor)
     {
         return new Google_Service_Sheets_Request([
@@ -246,13 +276,47 @@ class Api
                 return $sheet;
             }
         }
+
+        return null;
+    }
+
+    public function getSheetByTitle($title)
+    {
+        $sheets = $this->getSheets();
+
+        foreach ($sheets as $sheet) {
+            if (strtolower($sheet['properties']['title']) === strtolower($title)) {
+                return $sheet;
+            }
+        }
+
+        return null;
     }
 
     public function getSheets()
     {
-        $service = new \Google_Service_Sheets($this->client);
+        if (empty($this->cachedSheets)) {
+            $this->cachedSheets = (new \Google_Service_Sheets($this->client))
+                ->spreadsheets
+                ->get($this->spreadsheetId)
+                ->getSheets();
+        }
 
-        return $service->spreadsheets->get($this->spreadsheetId)->getSheets();
+        return $this->cachedSheets;
+    }
+
+    public function forgetSheets()
+    {
+        $this->cachedSheets = [];
+
+        return $this;
+    }
+
+    public function freshSheets()
+    {
+        $this->forgetSheets();
+
+        return $this->getSheets();
     }
 
     public function firstSheetId()

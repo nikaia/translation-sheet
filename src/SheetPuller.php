@@ -6,7 +6,7 @@ use Nikaia\TranslationSheet\Commands\Output;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Writer;
 
-class Puller
+class SheetPuller
 {
     use Output;
 
@@ -16,12 +16,18 @@ class Puller
     /** @var Writer */
     protected $writer;
 
-    public function __construct(TranslationsSheet $translationsSheet, Writer $writer)
+    public function __construct(Writer $writer)
     {
-        $this->translationsSheet = $translationsSheet;
         $this->writer = $writer;
 
         $this->nullOutput();
+    }
+
+    public function setTranslationSheet(TranslationsSheet $translationsSheet)
+    {
+        $this->translationsSheet = $translationsSheet;
+
+        return $this;
     }
 
     public function pull()

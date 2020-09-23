@@ -5,7 +5,9 @@ namespace Nikaia\TranslationSheet\Test\Feature;
 use Nikaia\TranslationSheet\Commands\Prepare;
 use Nikaia\TranslationSheet\Commands\Push;
 use Nikaia\TranslationSheet\Commands\Setup;
-use Nikaia\TranslationSheet\Pusher;
+use Nikaia\TranslationSheet\SheetPusher;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\FeatureTestCase;
 
 class ExcludePatternsTest extends FeatureTestCase
@@ -20,8 +22,10 @@ class ExcludePatternsTest extends FeatureTestCase
     /** @test */
     public function it_excludes_correctly_the_specified_patterns()
     {
-        /** @var Pusher $pusher */
-        $pusher = resolve(Pusher::class);
+        /** @var SheetPusher $pusher */
+        $pusher = resolve(SheetPusher::class)->setTranslationSheet(
+            Spreadsheet::primaryTranslationSheet()
+        );
 
         config()->set('translation_sheet.exclude', [
             'foo::*',
@@ -38,8 +42,10 @@ class ExcludePatternsTest extends FeatureTestCase
     /** @test */
     public function it_excludes_correctly_the_specified_patterns_for_push()
     {
-        /** @var Pusher $pusher */
-        $pusher = resolve(Pusher::class);
+        /** @var SheetPusher $pusher */
+        $pusher = resolve(SheetPusher::class)->setTranslationSheet(
+            Spreadsheet::primaryTranslationSheet()
+        );
         config()->set('translation_sheet.exclude', [
             'foo::*',
         ]);
@@ -47,7 +53,11 @@ class ExcludePatternsTest extends FeatureTestCase
 
         $this->resetSpreadsheet();
 
-        foreach ([new Setup(), new Prepare(), new Push()] as $command) {
+        foreach ([
+                     (new Setup),
+                     (new Prepare),
+                     (new Push)
+                 ] as $command) {
             $this->artisan($command->getName())->assertExitCode(0);
         }
     }

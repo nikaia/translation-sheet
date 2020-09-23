@@ -4,7 +4,7 @@ namespace Nikaia\TranslationSheet\Test\Unit;
 
 use Mockery;
 use GuzzleHttp\Subscriber\Mock;
-use Nikaia\TranslationSheet\Puller;
+use Nikaia\TranslationSheet\SheetPuller;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Writer;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
@@ -23,7 +23,7 @@ class PullerTest extends TestCase
         $writer->shouldReceive('setTranslations')->once()->andReturn($writer);
         $writer->shouldReceive('write');
 
-        $puller = new Puller($translationSheet, $writer);
+        $puller = (new SheetPuller($writer))->setTranslationSheet($translationSheet);
         $puller->pull();
     }
 }

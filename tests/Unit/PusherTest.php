@@ -4,7 +4,7 @@ namespace Nikaia\TranslationSheet\Test\Unit;
 
 use Mockery;
 use Illuminate\Support\Collection;
-use Nikaia\TranslationSheet\Pusher;
+use Nikaia\TranslationSheet\SheetPusher;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Reader;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
@@ -29,7 +29,7 @@ class PusherTest extends TestCase
         $translationSheet->shouldReceive('updateHeaderRow')->once();
         $translationSheet->shouldReceive('styleDocument')->once();
 
-        $pusher = new Pusher($reader, $translationSheet, $transformer);
+        $pusher = (new SheetPusher($reader, $transformer))->setTranslationSheet($translationSheet);
         $pusher->push();
     }
 }

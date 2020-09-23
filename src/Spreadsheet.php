@@ -2,9 +2,11 @@
 
 namespace Nikaia\TranslationSheet;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Nikaia\TranslationSheet\Client\Api;
 use Nikaia\TranslationSheet\Sheet\Styles;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
 
 class Spreadsheet
@@ -150,12 +152,13 @@ class Spreadsheet
         // Delete all sheet and keep the last created one
         $this->api()
             ->addBatchRequests(
-                collect($this->api()->getSheets())->slice(0, -1)->map(function ($sheet) {
+                collect($this->api()->freshSheets())->slice(0, -1)->map(function ($sheet) {
                     return $this->api()->deleteSheetRequest($sheet['properties']['sheetId']);
-                })
-                ->toArray()
+                })->toArray()
             )
             ->sendBatchRequests();
+
+        $this->api()->forgetSheets();
     }
 
     /**
@@ -167,4 +170,97 @@ class Spreadsheet
     {
         return $this->api->setSpreadsheetId($this->getId());
     }
+
+    /**
+     * Returns collection of the spreadsheets represented by TranslationSheet objects.
+     *
+     * @return Collection
+     */
+    public function sheets()
+    {
+        $this->api()->forgetSheets()->getSheets();
+
+        return $this->configuredSheets()->map(function (TranslationsSheet $translationsSheet) {
+            if ($sheet = $this->api()->getSheetByTitle($translationsSheet->getTitle())) {
+                $translationsSheet->setId(
+                    data_get($sheet, 'properties.sheetId')
+                );
+            }
+
+            return $translationsSheet;
+        });
+    }
+
+    public function configuredSheets()
+    {
+        return collect([static::primaryTranslationSheet()])
+            ->merge(
+                collect(config('translation_sheet.extra_sheets'))
+                    ->map(function ($sheetConfig) {
+                        /** @var TranslationsSheet $instance */
+                        $instance = resolve(TranslationsSheet::class);
+
+                        return $instance
+                            ->markAsExtraSheet()
+                            ->setTitle($sheetConfig['name'])
+                            ->setFormat($sheetConfig['format'])
+                            ->setPath($sheetConfig['path'])
+                            ->setTabColor($sheetConfig['tabColor']);
+                    })
+            );
+    }
+
+    public function configuredExtraSheets()
+    {
+        // Remove the first one. (aka. the translations required default sheet).
+        return $this->configuredSheets()->slice(1);
+    }
+
+    public function ensureConfiguredSheetsAreCreated()
+    {
+        $googleSheets = collect($this->api()->forgetSheets()->getSheets());
+        $configuredSheets = $this->configuredSheets();
+
+        // Configured sheets are already created
+        if (count($googleSheets) === $configuredSheets->count()) {
+            return;
+        }
+
+        // This case is not supposed to happen. just return.
+        // Or user messed up manually the spreadsheet by creating sheet, maybe?!
+        if (count($googleSheets) > $configuredSheets->count()) {
+            return;
+        }
+
+        // By default, spreadsheet has 1 required sheet. This will match translation-sheet
+        // default translations sheet.
+        $requests = [
+            $this->api()->setSheetTitle(
+                $firstSheetId = data_get(collect($googleSheets)->first(), 'properties.sheetId'),
+                config('translation_sheet.primary_sheet.name', 'Translations')
+            )
+        ];
+
+        // Then, we need to create any extra sheets before we can use them.
+        $this->configuredExtraSheets()->each(function (TranslationsSheet $translationsSheet) use (&$requests) {
+            if ($this->api()->getSheetByTitle($translationsSheet->getTitle())) {
+                return;
+            }
+
+            $requests[] = $this->api()->addBlankSheet($translationsSheet->getTitle());
+        });
+
+        $this->api()->addBatchRequests($requests)->sendBatchRequests();
+    }
+
+    public static function primaryTranslationSheet()
+    {
+        /** @var TranslationsSheet $instance */
+        $instance = resolve(TranslationsSheet::class);
+
+        return $instance
+            ->markAsPrimarySheet()
+            ->setTitle(config('translation_sheet.primary_sheet.name', 'Translations'));
+    }
+
 }

@@ -14,7 +14,7 @@ class SpreadsheetTest extends TestCase
     /** @var Spreadsheet */
     private $s;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -54,43 +54,43 @@ class SpreadsheetTest extends TestCase
     {
         $translations = ['t1', 't2', 't3', 't4'];
         $this->s->setTranslations($translations);
-        $this->assertEquals($this->s->getTranslationsCount(), 4);
+        $this->assertEquals(4, $this->s->getTranslationsCount());
     }
 
     /** @test */
     public function it_return_corrected_header()
     {
         $this->assertEquals(
-            $this->s->getHeader(),
-            ['Full key', 'en', 'fr', 'Namespace', 'Group', 'Key', 'Source file']
+            ['Full key', 'en', 'fr', 'Namespace', 'Group', 'Key', 'Source file'],
+            $this->s->getHeader()
         );
 
         $this->assertEquals(
-            $this->s->setLocales(['en', 'fr', 'ar'])->getHeader(),
-            ['Full key', 'en', 'fr', 'ar', 'Namespace', 'Group', 'Key', 'Source file']
+            ['Full key', 'en', 'fr', 'ar', 'Namespace', 'Group', 'Key', 'Source file'],
+            $this->s->setLocales(['en', 'fr', 'ar'])->getHeader()
         );
     }
 
     /** @test */
     public function it_return_corrected_header_columns_count()
     {
-        $this->assertEquals($this->s->getHeaderColumnsCount(), 7);
-        $this->assertEquals($this->s->setLocales(['en', 'fr', 'ar'])->getHeaderColumnsCount(), 8);
+        $this->assertEquals(7, $this->s->getHeaderColumnsCount());
+        $this->assertEquals(8, $this->s->setLocales(['en', 'fr', 'ar'])->getHeaderColumnsCount());
     }
 
     /** @test */
     public function it_return_corrected_camelized_header()
     {
         $this->assertEquals(
-            $this->s->getCamelizedHeader(),
-            ['fullKey', 'en', 'fr', 'namespace', 'group', 'key', 'sourceFile']
+            ['fullKey', 'en', 'fr', 'namespace', 'group', 'key', 'sourceFile'],
+            $this->s->getCamelizedHeader()
         );
     }
 
     /** @test */
     public function it_returns_correct_header_count()
     {
-        $this->assertEquals($this->s->getHeaderRowsCount(), 1);
+        $this->assertEquals(1, $this->s->getHeaderRowsCount());
     }
 
     /** @test */
@@ -126,6 +126,12 @@ class SpreadsheetTest extends TestCase
     /** @test */
     public function it_returns_spreadsheet_url()
     {
-        $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/'.$this->s->getId());
+        $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/' . $this->s->getId());
+    }
+
+    /** @test */
+    public function it_returns_sheets()
+    {
+        $this->assertEquals(2, $this->s->sheets()->count());
     }
 }

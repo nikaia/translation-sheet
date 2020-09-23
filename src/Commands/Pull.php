@@ -3,7 +3,9 @@
 namespace Nikaia\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Puller;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\SheetPuller;
+use Nikaia\TranslationSheet\Spreadsheet;
 
 class Pull extends Command
 {
@@ -11,8 +13,11 @@ class Pull extends Command
 
     protected $description = 'Pull translations from spreadsheet and override local languages files';
 
-    public function handle(Puller $puller)
+    public function handle(SheetPuller $puller)
     {
-        $puller->withOutput($this->output)->pull();
+        $puller
+            ->setTranslationSheet(Spreadsheet::primaryTranslationSheet())
+            ->withOutput($this->output)
+            ->pull();
     }
 }

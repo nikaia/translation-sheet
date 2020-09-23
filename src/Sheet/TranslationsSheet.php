@@ -4,19 +4,89 @@ namespace Nikaia\TranslationSheet\Sheet;
 
 class TranslationsSheet extends AbstractSheet
 {
+    protected $title = null;
+    protected $id = null;
+    protected $format = null;
+    protected $path = null;
+    protected $tabColor = null;
+    protected $primary = true;
+
     public function getId()
     {
-        try {
-            return $this->api()->firstSheetId();
-        }
-        catch (\Exception $e) {
-            return 0;
-        }
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle()
     {
-        return 'Translations';
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function setFormat($format)
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function getPath()
+    {
+        return $this->path ?? app()->make('path.lang');
+    }
+
+    public function setTabColor($tabColor)
+    {
+        $this->tabColor = $tabColor;
+        return $this;
+    }
+
+    public function getTabColor()
+    {
+        return $this->tabColor ?? $this->styles()->translationSheetTabColor();
+    }
+
+    public function markAsPrimarySheet()
+    {
+        $this->primary = true;
+
+        return $this;
+    }
+
+    public function markAsExtraSheet()
+    {
+        $this->primary = false;
+
+        return $this;
+    }
+
+    public function isPrimarySheet()
+    {
+        return $this->primary;
+    }
+
+    public function isExtraSheet()
+    {
+        return !$this->primary;
     }
 
     public function coordinates()
@@ -34,7 +104,11 @@ class TranslationsSheet extends AbstractSheet
         $this->spreadsheet->api()
             ->addBatchRequests([
                 // Set properties
-                $this->spreadsheet->api()->setSheetPropertiesRequest($this->getId(), $this->getTitle(), $this->styles()->translationSheetTabColor()),
+                $this->spreadsheet->api()->setSheetPropertiesRequest(
+                    $this->getId(),
+                    $this->getTitle(),
+                    $this->styles()->translationSheetTabColor()
+                ),
             ])
             ->sendBatchRequests();
     }
@@ -42,7 +116,7 @@ class TranslationsSheet extends AbstractSheet
     public function writeTranslations($translations)
     {
         $translations = array_values($translations);
-        
+
         $this->spreadsheet->setTranslations($translations);
 
         $this->spreadsheet->api()
@@ -144,7 +218,7 @@ class TranslationsSheet extends AbstractSheet
     {
         $protectedRanges = $this->spreadsheet->api()->getSheetProtectedRanges($this->getId(), 'TRANSLATIONS');
 
-        return ! empty($protectedRanges) && count($protectedRanges) > 0;
+        return !empty($protectedRanges) && count($protectedRanges) > 0;
     }
 
     public function removeAllProtectedRanges()
@@ -156,7 +230,7 @@ class TranslationsSheet extends AbstractSheet
             $requests[] = $this->spreadsheet->api()->deleteProtectedRange($protectedRange->protectedRangeId);
         }
 
-        if (! empty($requests)) {
+        if (!empty($requests)) {
             $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
         }
     }
@@ -168,4 +242,5 @@ class TranslationsSheet extends AbstractSheet
             [$this->spreadsheet->getHeader()]
         );
     }
+
 }
