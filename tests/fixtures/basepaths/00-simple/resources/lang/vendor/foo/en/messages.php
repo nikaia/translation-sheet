@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "next" => "Next",
+    "next" => "Next (edited)",
     "previous" => "Previous"
 ];

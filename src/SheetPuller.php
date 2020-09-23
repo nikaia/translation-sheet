@@ -38,6 +38,7 @@ class SheetPuller
         $this->output->writeln('<comment>Writing languages files :</comment>');
         $this->writer
             ->withOutput($this->output)
+            ->setTranslationsSheet($this->translationsSheet)
             ->setTranslations($translations)
             ->write();
 

@@ -38,22 +38,36 @@ class SimpleWorkflowTest extends FeatureTestCase
         Artisan::call(Prepare::class);
         Artisan::call(Push::class);
 
-        /*
-
-
         // Simulate editing
-        $this->simulateEditingFooMessagesNext();
+        $this->simulateEditingNextOnTranslationsSheet();
+        $this->simulateEditingTitleOnWebAppSheet();
 
         Artisan::call(Pull::class);
 
         $lang = require __DIR__ . '/../fixtures/basepaths/00-simple/resources/lang/vendor/foo/en/messages.php';
-        $this->assertEquals('Next (edited)', $lang['next']);*/
+        $this->assertEquals('Next (edited)', $lang['next']);
+
+        $this->assertEquals(
+            ['title' => 'This is a title. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/en/messages.json')), true)
+        );
+        $this->assertEquals(
+            ['title' => 'Ceci est un titre. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/fr/messages.json')), true)
+        );
     }
 
-    private function simulateEditingFooMessagesNext()
+    private function simulateEditingNextOnTranslationsSheet()
     {
         /* @var Spreadsheet $spreadsheet */
         resolve(Spreadsheet::class)->api()->writeCells('Translations!B3', [['Next (edited)']]);
+    }
+
+    private function simulateEditingTitleOnWebAppSheet()
+    {
+        /* @var Spreadsheet $spreadsheet */
+        resolve(Spreadsheet::class)->api()->writeCells('web-app!B2', [['This is a title. (edited)']]);
+        resolve(Spreadsheet::class)->api()->writeCells('web-app!C2', [['Ceci est un titre. (edited)']]);
     }
 
     private function fooMessagesFile()
