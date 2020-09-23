@@ -216,21 +216,14 @@ class Spreadsheet
         return $this->configuredSheets()->slice(1);
     }
 
+    public function hasConfiguredExtaSheets()
+    {
+        return $this->configuredExtraSheets()->count() > 0;
+    }
+
     public function ensureConfiguredSheetsAreCreated()
     {
         $googleSheets = collect($this->api()->forgetSheets()->getSheets());
-        $configuredSheets = $this->configuredSheets();
-
-        // Configured sheets are already created
-        if (count($googleSheets) === $configuredSheets->count()) {
-            return;
-        }
-
-        // This case is not supposed to happen. just return.
-        // Or user messed up manually the spreadsheet by creating sheet, maybe?!
-        if (count($googleSheets) > $configuredSheets->count()) {
-            return;
-        }
 
         // By default, spreadsheet has 1 required sheet. This will match translation-sheet
         // default translations sheet.

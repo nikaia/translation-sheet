@@ -16,6 +16,7 @@ class Setup extends Command
     {
         $spreadsheet->ensureConfiguredSheetsAreCreated();
 
+
         $spreadsheet->sheets()->each(function (TranslationsSheet $translationsSheet) {
             $this->output->writeln(
                 '<comment>Setting up translations sheet [' . $translationsSheet->getTitle() . ']</comment>'

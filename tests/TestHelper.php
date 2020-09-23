@@ -42,6 +42,7 @@ class TestHelper
         return __DIR__ . '/temp';
     }
 
+
     public function deleteLangFiles()
     {
         exec('rm -rf ' . $this->langPath('/*'));
@@ -50,6 +51,17 @@ class TestHelper
     public function deleteCustomPath($path)
     {
         exec('rm -rf ' . $this->customPath($path));
+    }
+
+    public function deleteWebAppLangFiles()
+    {
+        $this->deleteCustomPath('web-app/lang/');
+    }
+
+    public function deleteAllLangFiles()
+    {
+        $this->deleteLangFiles();
+        $this->deleteWebAppLangFiles();
     }
 
     public function createLangFiles($locale, $group, $translations)
@@ -95,11 +107,12 @@ class TestHelper
 
     public function oneExtraSheetPulledTranslations()
     {
-        return collect($this->files->getRequire($this->fixturesPath('pulled-extra-sheet-translations.php')))
-            ->map(function ($item) {
-                $item['sourceFile'] = str_replace('CUSTOM_PATH', $this->customPath(''), $item['sourceFile']);
-                return $item;
-            });
+        return collect($this->files->getRequire($this->fixturesPath('pulled-webapp-extra-sheet-translations.php')));
+    }
+
+    public function twoExtraSheetPulledTranslations()
+    {
+        return collect($this->files->getRequire($this->fixturesPath('pulled-mobileapp-extra-sheet-translations.php')));
     }
 
     public function readTranslations()
@@ -176,6 +189,11 @@ class TestHelper
             ->setTitle(config('translation_sheet.primary_sheet.name', 'Translations'));
     }
 
+    public function noExtraTranslationSheet()
+    {
+        config()->set('translation_sheet.extra_sheets', []);
+    }
+
     public function oneExtraTranslationSheet()
     {
         $this->createCustomJsonLangFile(
@@ -191,10 +209,51 @@ class TestHelper
 
         config()->set('translation_sheet.extra_sheets', [
             [
-                'name' => 'web-app',
+                'name' => 'Web App',
                 'path' => $this->customPath('web-app/lang'),
                 'format' => 'json',
                 'tabColor' => '#0000FF'
+            ]
+        ]);
+
+        return resolve(Spreadsheet::class)->configuredExtraSheets()->first();
+    }
+
+    public function twoExtraTranslationSheet()
+    {
+        $this->createCustomJsonLangFile(
+            ['title' => 'This is a title.'],
+            'web-app/lang/en/',
+            'messages.json'
+        );
+        $this->createCustomJsonLangFile(
+            ['title' => 'Ceci est un titre.'],
+            'web-app/lang/fr/',
+            'messages.json'
+        );
+        $this->createCustomJsonLangFile(
+            ['confirm' => 'Are you sure?'],
+            'mobile-app/lang/en/',
+            'ui.json'
+        );
+        $this->createCustomJsonLangFile(
+            ['confirm' => 'Êtes-vous sûrs ?'],
+            'mobile-app/lang/fr/',
+            'ui.json'
+        );
+
+        config()->set('translation_sheet.extra_sheets', [
+            [
+                'name' => 'Web App',
+                'path' => $this->customPath('web-app/lang'),
+                'format' => 'json',
+                'tabColor' => '#0000FF'
+            ],
+            [
+                'name' => 'Mobile App',
+                'path' => $this->customPath('mobile-app/lang'),
+                'format' => 'json',
+                'tabColor' => '#00FF00'
             ]
         ]);
 
