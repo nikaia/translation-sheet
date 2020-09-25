@@ -4,6 +4,7 @@ namespace Nikaia\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\Spreadsheet;
 
 class Lock extends Command
 {
@@ -11,12 +12,16 @@ class Lock extends Command
 
     protected $description = 'Lock the spreadsheet translations area, to prevent changes.';
 
-    public function handle(TranslationsSheet $translationsSheet)
+    public function handle(Spreadsheet $spreadsheet)
     {
-        $this->comment('Locking the translations spreadsheet.');
+        $spreadsheet->sheets()->each(function (TranslationsSheet $translationsSheet) {
+            $this->info("Locking translation sheet [<comment>{$translationsSheet->getTitle()}</comment>] :");
 
-        $translationsSheet->lockTranslations();
+            $translationsSheet->lockTranslations();
+            $translationsSheet->api()->reset();
 
-        $this->info('Done.');
+            $this->output->writeln('<info>Done</info>.');
+            $this->output->writeln(PHP_EOL);
+        });
     }
 }
