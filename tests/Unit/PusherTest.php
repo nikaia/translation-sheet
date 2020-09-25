@@ -26,6 +26,7 @@ class PusherTest extends TestCase
 
         $translationSheet = Mockery::mock(TranslationsSheet::class);
         $translationSheet->shouldReceive('getSpreadsheet')->once()->andReturn($this->helper->spreadsheet());
+        $translationSheet->shouldReceive('getTitle')->once();
         $translationSheet->shouldReceive('writeTranslations')->once();
         $translationSheet->shouldReceive('prepareForWrite')->once();
         $translationSheet->shouldReceive('updateHeaderRow')->once();
