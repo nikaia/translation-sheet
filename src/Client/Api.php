@@ -34,6 +34,16 @@ class Api
     }
 
     /**
+     * Empty the requests collection.
+     */
+    public function reset()
+    {
+        $this->requests = new Collection([]);
+
+        return $this;
+    }
+
+    /**
      * Set the service speadsheet ID.
      *
      * @param string $spreadsheetId

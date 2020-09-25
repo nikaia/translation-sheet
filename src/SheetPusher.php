@@ -42,22 +42,26 @@ class SheetPusher
 
     public function push()
     {
-        $this->output->writeln('<comment>Scanning languages files</comment>');
-        $translations = $this->getScannedAndTransformedTranslations();
+        $this->output->writeln("Working on translation sheet [<comment>{$this->translationSheet->getTitle()}</comment>] :");
 
-        $this->output->writeln('<comment>Preparing spreadsheet for new write operation</comment>');
+        $this->output->writeln('    <comment>Scanning languages files</comment>');
+        $translations = $this->getScannedAndTransformedTranslations();
+        
+
+        $this->output->writeln('    <comment>Preparing spreadsheet for new write operation</comment>');
         $this->translationSheet->prepareForWrite();
 
-        $this->output->writeln('<comment>Updating header</comment>');
+        $this->output->writeln('    <comment>Updating header</comment>');
         $this->translationSheet->updateHeaderRow();
 
-        $this->output->writeln('<comment>Writing translations in the spreadsheet</comment>');
+        $this->output->writeln('    <comment>Writing translations in the spreadsheet</comment>');
         $this->translationSheet->writeTranslations($translations->all());
 
-        $this->output->writeln('<comment>Styling document</comment>');
+        $this->output->writeln('    <comment>Styling document</comment>');
         $this->translationSheet->styleDocument();
 
         $this->output->writeln('<info>Done</info>.');
+        $this->output->writeln(PHP_EOL);
     }
 
     public function getScannedAndTransformedTranslations()

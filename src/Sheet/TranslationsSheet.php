@@ -167,7 +167,8 @@ class TranslationsSheet extends AbstractSheet
                 $this->spreadsheet->api()->deleteColumnsFrom($this->getId(), $this->coordinates()->getColumnsCount()),
             ])->sendBatchRequests();
         } catch (\Google_Service_Exception $e) {
-            // If there is no extra columns or rows Google api will raise an exception :
+            // Avoid exception failing the command
+            // ... If there is no extra columns or rows Google api will raise an exception :
             // ... Invalid requests[xxx].deleteDimension: Cannot delete a column that doesn't exist ...
         }
     }
@@ -222,9 +223,11 @@ class TranslationsSheet extends AbstractSheet
             $requests[] = $this->spreadsheet->api()->deleteProtectedRange($protectedRange->protectedRangeId);
         }
 
-        if (!empty($requests)) {
-            $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
+        if (empty($requests)) {
+            return;
         }
+
+        $this->spreadsheet->api()->addBatchRequests($requests)->sendBatchRequests();
     }
 
     public function updateHeaderRow()

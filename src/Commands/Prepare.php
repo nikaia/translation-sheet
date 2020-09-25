@@ -34,6 +34,8 @@ class Prepare extends Command
                 ->setTranslations($translations)
                 ->withOutput($this->output)
                 ->write();
+
+            $translationsSheet->api()->reset();
         });
 
         $this->output->writeln('<info>Done.</info>');
