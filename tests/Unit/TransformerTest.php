@@ -2,6 +2,7 @@
 
 namespace Nikaia\TranslationSheet\Test\Unit;
 
+use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Transformer;
 
@@ -12,7 +13,9 @@ class TransformerTest extends TestCase
     {
         $translations = $this->helper->readTranslations();
 
-        $transformed = (new Transformer)->setLocales(['en', 'fr'])->transform($translations);
+        $transformed = (new Transformer)->setLocales(['en', 'fr'])
+            ->setTranslationsSheet(Spreadsheet::primaryTranslationSheet())
+            ->transform($translations);
 
         $this->assertEquals($transformed->toArray(), [
             ['app.title', 'Awesome', 'Super', '', 'app', 'title', '{locale}/app.php'],

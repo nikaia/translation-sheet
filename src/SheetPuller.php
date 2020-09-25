@@ -6,7 +6,7 @@ use Nikaia\TranslationSheet\Commands\Output;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Writer;
 
-class Puller
+class SheetPuller
 {
     use Output;
 
@@ -16,26 +16,34 @@ class Puller
     /** @var Writer */
     protected $writer;
 
-    public function __construct(TranslationsSheet $translationsSheet, Writer $writer)
+    public function __construct(Writer $writer)
     {
-        $this->translationsSheet = $translationsSheet;
         $this->writer = $writer;
 
         $this->nullOutput();
     }
 
+    public function setTranslationsSheet(TranslationsSheet $translationsSheet)
+    {
+        $this->translationsSheet = $translationsSheet;
+
+        return $this;
+    }
+
     public function pull()
     {
-        $this->output->writeln('<comment>Pulling translation from Spreadsheet</comment>');
+        $this->output->writeln("Pulling translations from sheet [<comment>{$this->translationsSheet->getTitle()}</comment>] :");
         $translations = $this->getTranslations();
 
-        $this->output->writeln('<comment>Writing languages files :</comment>');
+        $this->output->writeln('    <comment>Writing languages files :</comment>');
         $this->writer
             ->withOutput($this->output)
+            ->setTranslationsSheet($this->translationsSheet)
             ->setTranslations($translations)
             ->write();
 
-        $this->output->writeln('<info>Done.</info>');
+        $this->output->writeln('    <info>Done.</info>');
+        $this->output->writeln(PHP_EOL);
     }
 
     public function getTranslations()

@@ -3,6 +3,8 @@
 namespace Nikaia\TranslationSheet\Test\Unit;
 
 use Illuminate\Support\Collection;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Item;
 use Nikaia\TranslationSheet\Translation\Reader;
@@ -23,7 +25,16 @@ class ReaderTest extends TestCase
     {
         $this->helper->createLangFiles('en', 'app', ['title' => 'Awesome']);
 
-        $this->assertEquals(trans('app.title'), 'Awesome');
+        $this->assertEquals('Awesome', trans('app.title'));
+    }
+
+
+    /** @test */
+    public function it_loads_json_languages_from_temp_folder()
+    {
+        $this->helper->createJsonLangFiles('en', ['title' => 'Magnifique']);
+
+        $this->assertEquals('Magnifique', trans('title'));
     }
 
     /** @test */
@@ -33,18 +44,18 @@ class ReaderTest extends TestCase
         $this->helper->createLangFiles('fr', 'app', ['title' => 'Super']);
         $this->helper->createPackageLangFiles('fr', 'backend', ['version' => '1.0']);
 
-        $translations = $this->app[Reader::class]->scan();
+        $translations = $this->readerFor(Spreadsheet::primaryTranslationSheet())->scan();
 
         $this->assertInstanceOf(Collection::class, $translations);
-        $this->assertEquals($translations->count(), 3);
+        $this->assertEquals(3, $translations->count());
 
         $item = $translations->last();
         $this->assertInstanceOf(Item::class, $item);
-        $this->assertEquals($item->namespace, 'package');
-        $this->assertEquals($item->locale, 'fr');
-        $this->assertEquals($item->group, 'backend');
-        $this->assertEquals($item->key, 'version');
-        $this->assertEquals($item->value, '1.0');
+        $this->assertEquals('package', $item->namespace);
+        $this->assertEquals('fr', $item->locale);
+        $this->assertEquals('backend', $item->group);
+        $this->assertEquals('version', $item->key);
+        $this->assertEquals('1.0', $item->value);
     }
 
     /** @test : https://github.com/nikaia/translation-sheet/pull/31 */
@@ -55,10 +66,10 @@ class ReaderTest extends TestCase
         $this->helper->createPackageLangFiles('fr', 'backend', ['version' => '1.0']);
         $this->helper->createLangFiles('zh-CN', 'app', ['title' => 'Super zh-CN']);
 
-        $translations = $this->app[Reader::class]->scan();
+        $translations = $this->readerFor(Spreadsheet::primaryTranslationSheet())->scan();
 
         $this->assertInstanceOf(Collection::class, $translations);
-        $this->assertEquals($translations->count(), 4);
+        $this->assertEquals(4, $translations->count());
     }
 
     /** @test */
@@ -67,22 +78,62 @@ class ReaderTest extends TestCase
         $this->helper->createJsonLangFiles('fr', ['Hello!' => 'Bonjour !']);
         $this->helper->createJsonLangFiles('es', ['Hello!' => '¡Hola!']);
 
-        $translations = $this->app[Reader::class]->scan();
+        $translations = $this->readerFor(Spreadsheet::primaryTranslationSheet())->scan();
 
         $this->assertInstanceOf(Collection::class, $translations);
-        $this->assertEquals($translations->count(), 2);
+        $this->assertEquals(2, $translations->count());
     }
 
     /** @test */
-    public function it_scans_both_json_and_php_files() {
+    public function it_scans_both_json_and_php_files()
+    {
         $this->helper->createJsonLangFiles('fr', ['Hello!' => 'Bonjour !']);
         $this->helper->createJsonLangFiles('es', ['Hello!' => '¡Hola!']);
 
         $this->helper->createLangFiles('fr', 'app', ['title' => 'Super']);
         $this->helper->createLangFiles('es', 'app', ['title' => 'Asombroso']);
 
-        $translations = $this->app[Reader::class]->scan();
+        $translations = $this->readerFor(Spreadsheet::primaryTranslationSheet())->scan();
 
-        $this->assertEquals($translations->count(), 4);
+        $this->assertEquals(4, $translations->count());
+    }
+
+    /** @test */
+    public function it_scans_specific_extra_sheet_lang_files()
+    {
+        $translations = $this->readerFor($this->helper->oneExtraTranslationSheet())->scan();
+        $this->assertEquals(2, $translations->count());
+
+        $this->assertEquals(
+            'Ceci est un titre.',
+            $translations->filter(function (Item $item) {
+                return $item->locale === 'fr';
+            })->first()->value
+        );
+
+        $this->assertEquals(
+            'fr/messages.json',
+            $translations->filter(function (Item $item) {
+                return $item->locale === 'fr';
+            })->first()->source_file
+        );
+
+        $this->assertEquals(
+            'en/messages.json',
+            $translations->filter(function (Item $item) {
+                return $item->locale === 'en';
+            })->first()->source_file
+        );
+    }
+
+    /**
+     * @param TranslationsSheet $translationsSheet
+     * @return Reader
+     */
+    private function readerFor(TranslationsSheet $translationsSheet)
+    {
+        return $this
+            ->app[Reader::class]
+            ->setTranslationsSheet($translationsSheet);
     }
 }

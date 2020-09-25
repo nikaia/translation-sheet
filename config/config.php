@@ -60,4 +60,39 @@ return [
     |   'foo::bar.*',
     */
     'exclude' => [],
+
+    /**
+     * Primary sheet (tab) used for the translations.
+     *
+     */
+    'primary_sheet' => [
+        'name' => 'Translations',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Extra Sheets
+    |--------------------------------------------------------------------------
+    | This config area give you the possibility to other sheets (tabs) to your spreadsheet.
+    | they can be used to translate sperately other sections of your application.
+
+    | ie. if you handle your web app or mobile app translation in laravel app. you can instruct
+    | translations-sheet to add them as sheets.
+    | Files for theses sheets must no live under resources/lang folder. But, resources/web-app-lang for instance.
+    |
+    */
+    'extra_sheets' => [
+        /*
+        [
+            // Sheet name
+            'name' => 'Web App',
+
+            // Relative path to the resources/lang folder, where the translations files are stored
+            'path' => resource_path('web-app/lang'),
+
+            // Tab color
+            'tabColor' => '#0000FF',
+        ]
+        */
+    ],
 ];

@@ -8,9 +8,15 @@ use Nikaia\TranslationSheet\TranslationSheetServiceProvider;
 
 abstract class FeatureTestCase extends \Orchestra\Testbench\TestCase
 {
+    /** @var TestHelper */
+    protected $helper;
+
+
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->helper = new TestHelper($this->app);
     }
 
     protected function getPackageProviders($app)
@@ -40,7 +46,10 @@ abstract class FeatureTestCase extends \Orchestra\Testbench\TestCase
 
     protected function resetSpreadsheet()
     {
-        resolve(Spreadsheet::class)->deleteAllSheets();
+        /** @var Spreadsheet $spreadsheet */
+        $spreadsheet = resolve(Spreadsheet::class);
+
+        $spreadsheet->deleteAllSheets();
     }
 
     protected function setBasePathFromFixtureFolder($app, $folder)

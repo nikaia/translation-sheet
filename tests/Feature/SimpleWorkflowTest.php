@@ -23,13 +23,8 @@ class SimpleWorkflowTest extends FeatureTestCase
     /** @test */
     public function it_executes_simple_workflow_correctly()
     {
-        // Reset translation file
-        $this->writeFooMessagesFile([
-            'next' => 'Next',
-            'previous' => 'Previous',
-        ]);
-        $this->assertEquals('Next', $this->readFooMessagesFile()['next']);
-
+        $this->helper->deleteAllLangFiles();
+        $this->helper->noExtraTranslationSheet();
         $this->resetSpreadsheet();
 
         Artisan::call(Setup::class);
@@ -37,7 +32,7 @@ class SimpleWorkflowTest extends FeatureTestCase
         Artisan::call(Push::class);
 
         // Simulate editing
-        $this->simulateEditingFooMessagesNext();
+        $this->simulateEditingNextOnTranslationsSheet();
 
         Artisan::call(Pull::class);
 
@@ -45,10 +40,93 @@ class SimpleWorkflowTest extends FeatureTestCase
         $this->assertEquals('Next (edited)', $lang['next']);
     }
 
-    private function simulateEditingFooMessagesNext()
+    /** @test */
+    public function it_executes_simple_workflow_correctly_with_one_extra_sheet()
+    {
+        $this->helper->deleteAllLangFiles();
+        $this->helper->oneExtraTranslationSheet();
+        $this->resetSpreadsheet();
+
+        Artisan::call(Setup::class);
+        Artisan::call(Prepare::class);
+        Artisan::call(Push::class);
+
+        // Simulate editing
+        $this->simulateEditingNextOnTranslationsSheet();
+        $this->simulateEditingTitleOnWebAppSheet();
+
+        Artisan::call(Pull::class);
+
+        $lang = require __DIR__ . '/../fixtures/basepaths/00-simple/resources/lang/vendor/foo/en/messages.php';
+        $this->assertEquals('Next (edited)', $lang['next']);
+
+        $this->assertEquals(
+            ['title' => 'This is a title. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/en/messages.json')), true)
+        );
+        $this->assertEquals(
+            ['title' => 'Ceci est un titre. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/fr/messages.json')), true)
+        );
+    }
+
+    /** @test */
+    public function it_executes_simple_workflow_correctly_with_two_extra_sheets()
+    {
+        $this->helper->deleteAllLangFiles();
+        $this->helper->twoExtraTranslationSheet();
+        $this->resetSpreadsheet();
+
+        Artisan::call(Setup::class);
+        Artisan::call(Prepare::class);
+        Artisan::call(Push::class);
+
+        // Simulate editing
+        $this->simulateEditingNextOnTranslationsSheet();
+        $this->simulateEditingTitleOnWebAppSheet();
+        $this->simulateEditingConfirmOnMobileAppSheet();
+
+        Artisan::call(Pull::class);
+
+        $lang = require __DIR__ . '/../fixtures/basepaths/00-simple/resources/lang/vendor/foo/en/messages.php';
+        $this->assertEquals('Next (edited)', $lang['next']);
+
+        $this->assertEquals(
+            ['title' => 'This is a title. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/en/messages.json')), true)
+        );
+        $this->assertEquals(
+            ['title' => 'Ceci est un titre. (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('web-app/lang/fr/messages.json')), true)
+        );
+        $this->assertEquals(
+            ['confirm' => 'Are you sure? (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('mobile-app/lang/en/ui.json')), true)
+        );
+        $this->assertEquals(
+            ['confirm' => 'Êtes-vous sûrs ? (edited)'],
+            json_decode(file_get_contents($this->helper->customPath('mobile-app/lang/fr/ui.json')), true)
+        );
+    }
+
+    private function simulateEditingNextOnTranslationsSheet()
     {
         /* @var Spreadsheet $spreadsheet */
         resolve(Spreadsheet::class)->api()->writeCells('Translations!B3', [['Next (edited)']]);
+    }
+
+    private function simulateEditingTitleOnWebAppSheet()
+    {
+        /* @var Spreadsheet $spreadsheet */
+        resolve(Spreadsheet::class)->api()->writeCells('Web App!B2', [['This is a title. (edited)']]);
+        resolve(Spreadsheet::class)->api()->writeCells('Web App!C2', [['Ceci est un titre. (edited)']]);
+    }
+
+    private function simulateEditingConfirmOnMobileAppSheet()
+    {
+        /* @var Spreadsheet $spreadsheet */
+        resolve(Spreadsheet::class)->api()->writeCells('Mobile App!B2', [['Are you sure? (edited)']]);
+        resolve(Spreadsheet::class)->api()->writeCells('Mobile App!C2', [['Êtes-vous sûrs ? (edited)']]);
     }
 
     private function fooMessagesFile()

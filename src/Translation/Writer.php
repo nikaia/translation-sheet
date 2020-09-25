@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Nikaia\TranslationSheet\Commands\Output;
+use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Util;
 
@@ -26,6 +27,9 @@ class Writer
     /** @var Application */
     protected $app;
 
+    /** @var TranslationsSheet */
+    protected $translationSheet;
+
     public function __construct(Spreadsheet $spreadsheet, Filesystem $files, Application $app)
     {
         $this->spreadsheet = $spreadsheet;
@@ -34,6 +38,20 @@ class Writer
 
         $this->nullOutput();
     }
+
+    /**
+     * Set the translation sheets for reader.
+     *
+     * @param TranslationsSheet $translationSheet
+     * @return Writer
+     */
+    public function setTranslationsSheet(TranslationsSheet $translationSheet)
+    {
+        $this->translationSheet = $translationSheet;
+
+        return $this;
+    }
+
 
     public function setTranslations($translations)
     {
@@ -47,12 +65,17 @@ class Writer
         $this
             ->groupTranslationsByFile()
             ->each(function ($items, $sourceFile) {
-                if ($this->files->extension($sourceFile) == 'json') {
-                    return $this->writeJsonFile($this->app->make('path.lang').'/'.$sourceFile, $items);
+
+                if ($this->files->extension($sourceFile) === 'json') {
+                    $this->writeJsonFile(
+                        $this->translationSheet->getPath() . '/' . $sourceFile,
+                        $items
+                    );
+                    return;
                 }
 
                 $this->writeFile(
-                    $this->app->make('path.lang').'/'.$sourceFile,
+                    $this->translationSheet->getPath() . '/' . $sourceFile,
                     $items
                 );
             });
@@ -60,11 +83,11 @@ class Writer
 
     protected function writeFile($file, $items)
     {
-        $this->output->writeln('  '.$file);
+        $this->output->writeln('    <comment>php</comment> ' . $file);
 
         $content = sprintf('<?php%s%sreturn %s;%s', PHP_EOL, PHP_EOL, Util::varExport($items), PHP_EOL);
 
-        if (! $this->files->isDirectory($dir = dirname($file))) {
+        if (!$this->files->isDirectory($dir = dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);
         }
 
@@ -73,13 +96,12 @@ class Writer
 
     protected function writeJsonFile($file, $items)
     {
-        $this->output->writeln('  JSON: '.$file);
+        $this->output->writeln('    <comment>json</comment> ' . $file);
 
-        if (! $this->files->isDirectory($dir = dirname($file))) {
+        if (!$this->files->isDirectory($dir = dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);
         }
-
-        $this->files->put($file, json_encode($items, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL);
+        $this->files->put($file, json_encode($items, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL);
     }
 
     protected function groupTranslationsByFile()
@@ -137,7 +159,7 @@ class Writer
 
     protected function skipToDefault($translation, $locale)
     {
-        if (! isset($translation[$locale])) {
+        if (!isset($translation[$locale])) {
             return true;
         }
 
@@ -148,4 +170,5 @@ class Writer
     {
         return $sourceFile === '{locale}.json';
     }
+
 }
