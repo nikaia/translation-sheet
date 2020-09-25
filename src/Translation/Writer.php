@@ -83,7 +83,7 @@ class Writer
 
     protected function writeFile($file, $items)
     {
-        $this->output->writeln('  ' . $file);
+        $this->output->writeln('    <comment>php</comment> ' . $file);
 
         $content = sprintf('<?php%s%sreturn %s;%s', PHP_EOL, PHP_EOL, Util::varExport($items), PHP_EOL);
 
@@ -96,7 +96,7 @@ class Writer
 
     protected function writeJsonFile($file, $items)
     {
-        $this->output->writeln('  JSON: ' . $file);
+        $this->output->writeln('    <comment>json</comment> ' . $file);
 
         if (!$this->files->isDirectory($dir = dirname($file))) {
             $this->files->makeDirectory($dir, 0755, true);

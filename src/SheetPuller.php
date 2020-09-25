@@ -32,17 +32,18 @@ class SheetPuller
 
     public function pull()
     {
-        $this->output->writeln('<comment>Pulling translation from Spreadsheet</comment>');
+        $this->output->writeln("Pulling translations from sheet [<comment>{$this->translationsSheet->getTitle()}</comment>] :");
         $translations = $this->getTranslations();
 
-        $this->output->writeln('<comment>Writing languages files :</comment>');
+        $this->output->writeln('    <comment>Writing languages files :</comment>');
         $this->writer
             ->withOutput($this->output)
             ->setTranslationsSheet($this->translationsSheet)
             ->setTranslations($translations)
             ->write();
 
-        $this->output->writeln('<info>Done.</info>');
+        $this->output->writeln('    <info>Done.</info>');
+        $this->output->writeln(PHP_EOL);
     }
 
     public function getTranslations()
