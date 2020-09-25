@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/nikaia/translation-sheet/compare/v1.4.4...v1.4.5) (2020-09-25)
+
+
+### Features
+
+* Add support for Extra sheets ([#62](https://github.com/nikaia/translation-sheet/issues/62)) ([9cd9222](https://github.com/nikaia/translation-sheet/commit/9cd92220461d20adf01383b4d0cf1f706b87519b))
+
 ### [1.4.4](https://github.com/nikaia/translation-sheet/compare/v1.4.3...v1.4.4) (2020-09-14)
 
 
