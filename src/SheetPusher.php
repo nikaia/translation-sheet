@@ -17,7 +17,7 @@ class SheetPusher
     protected $reader;
 
     /** @var TranslationsSheet */
-    protected $translationSheet;
+    protected $translationsSheet;
 
     /** @var Transformer */
     protected $transformer;
@@ -32,7 +32,7 @@ class SheetPusher
 
     public function setTranslationsSheet(TranslationsSheet $translationsSheet)
     {
-        $this->translationSheet = $translationsSheet;
+        $this->translationsSheet = $translationsSheet;
 
         $this->reader->setTranslationsSheet($translationsSheet);
         $this->transformer->setTranslationsSheet($translationsSheet);
@@ -42,23 +42,23 @@ class SheetPusher
 
     public function push()
     {
-        $this->output->writeln("Working on translation sheet [<comment>{$this->translationSheet->getTitle()}</comment>] :");
+        $this->output->writeln("Working on translation sheet [<comment>{$this->translationsSheet->getTitle()}</comment>] :");
 
         $this->output->writeln('    <comment>Scanning languages files</comment>');
         $translations = $this->getScannedAndTransformedTranslations();
         
 
         $this->output->writeln('    <comment>Preparing spreadsheet for new write operation</comment>');
-        $this->translationSheet->prepareForWrite();
+        $this->translationsSheet->prepareForWrite();
 
         $this->output->writeln('    <comment>Updating header</comment>');
-        $this->translationSheet->updateHeaderRow();
+        $this->translationsSheet->updateHeaderRow();
 
         $this->output->writeln('    <comment>Writing translations in the spreadsheet</comment>');
-        $this->translationSheet->writeTranslations($translations->all());
+        $this->translationsSheet->writeTranslations($translations->all());
 
         $this->output->writeln('    <comment>Styling document</comment>');
-        $this->translationSheet->styleDocument();
+        $this->translationsSheet->styleDocument();
 
         $this->output->writeln('<info>Done</info>.');
         $this->output->writeln(PHP_EOL);
@@ -69,7 +69,7 @@ class SheetPusher
         $excludePatterns = config('translation_sheet.exclude');
 
         return $this->transformer
-            ->setLocales($this->translationSheet->getSpreadsheet()->getLocales())
+            ->setLocales($this->translationsSheet->getSpreadsheet()->getLocales())
             ->transform($this->reader->scan())
             ->when(is_array($excludePatterns) && !empty($excludePatterns), function (Collection $collection) use ($excludePatterns) {
                 return $collection->reject(function ($item) use ($excludePatterns) {
