@@ -1,13 +1,10 @@
-related
 # Laravel Translation Sheet
 
 Translating Laravel languages files using a Google Spreadsheet.
 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nikaia/translation-sheet.svg?style=flat-square)](https://packagist.org/packages/nikaia/translation-sheet)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/nikaia/translation-sheet/master.svg?style=flat-square)](https://travis-ci.org/nikaia/translation-sheet)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/62480992-18f7-4544-99b2-9c529e9feb23.svg?style=flat-square)](https://insight.sensiolabs.com/projects/62480992-18f7-4544-99b2-9c529e9feb23)
+[![Build Status](https://github.com/nikaia/translation-sheet/workflows/run-tests/badge.svg)](https://github.com/nikaia/translation-sheet/actions?query=workflow%3Arun-tests)
 [![Quality Score](https://img.shields.io/scrutinizer/g/nikaia/translation-sheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/nikaia/translation-sheet)
 
 
@@ -46,6 +43,8 @@ Translating Laravel languages files using a Google Spreadsheet.
 - Configuration can be done via environments variables, but if you prefer you can override the configuration by publishing the package config file using :
     
     ```bash
+    $ php artisan translation_sheet:publish
+        or
     $ php artisan vendor:publish --provider="Nikaia\TranslationSheet\TranslationSheetServiceProvider"
     ```
 
@@ -141,6 +140,26 @@ $ php artisan translation_sheet:unlock
 Open the spreadsheet in the browser
 ```bash
 $ php artisan translation_sheet:open
+```  
+
+## Excluding translations 
+
+Sometimes you might need to instruct the package to exclude some translations. 
+You can do so by specifying patterns in the `exclude` config option.
+It accepts multiple patterns that target the full translation keys and that the [Str::is](https://laravel.com/docs/5.8/helpers#method-str-is) can understand. 
+
+```php
+[
+    // ...
+    
+    'exclude' => [
+        'validation*',  // This will exclude all the `validation.php` translations.
+        'foo::*',       // This will exclude all the `foo` namespace translations.
+        'foo::bar.*',   // this will exclude the `bar` translations from the `foo` namespace.
+    ],
+    
+    // ...
+]
 ```  
 
 

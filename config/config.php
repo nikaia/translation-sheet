@@ -44,4 +44,33 @@ return [
     */
     'locales' => env('TS_LOCALES', ['en']),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Exclude lang files or namespaces
+    |--------------------------------------------------------------------------
+    | List here files or namespaces that the package will exclude
+    | from all the operations. (prepare, push & pull).
+    |
+    | You can use wild card pattern that can be used with the Str::is()
+    | Laravel helper. (https://laravel.com/docs/5.8/helpers#method-str-is)
+    |
+    | Example:
+    |   'validation*'
+    |   'foo::*',
+    |   'foo::bar.*',
+    */
+    'exclude' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Exclude lang files or namespaces
+    |--------------------------------------------------------------------------
+    | List here locales that the package will exclude
+    | just from pulling.
+    |
+    |
+    | Example:
+    |   'en'
+    */
+    'exclude_from_pull' => [],
 ];

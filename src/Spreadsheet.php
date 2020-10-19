@@ -59,7 +59,7 @@ class Spreadsheet
 
     public function getUrl()
     {
-        return 'https://docs.google.com/spreadsheets/d/'.$this->id;
+        return 'https://docs.google.com/spreadsheets/d/' . $this->id;
     }
 
     public function getLocales()
@@ -136,6 +136,26 @@ class Spreadsheet
     public function sheetStyles()
     {
         return new Styles;
+    }
+
+    public function deleteAllSheets()
+    {
+        // We need to create a black sheet, cause we cannot delete all sheets
+        $this->api()
+            ->addBatchRequests([
+                $this->api()->addBlankSheet()
+            ])
+            ->sendBatchRequests();
+
+        // Delete all sheet and keep the last created one
+        $this->api()
+            ->addBatchRequests(
+                collect($this->api()->getSheets())->slice(0, -1)->map(function ($sheet) {
+                    return $this->api()->deleteSheetRequest($sheet['properties']['sheetId']);
+                })
+                ->toArray()
+            )
+            ->sendBatchRequests();
     }
 
     /**
