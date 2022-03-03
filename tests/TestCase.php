@@ -23,7 +23,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $app->instance('path.lang', (new TestHelper($app))->langPath());
     }
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $this->helper->deleteLangFiles();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
