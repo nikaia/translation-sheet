@@ -2,6 +2,7 @@
 
 namespace Nikaia\TranslationSheet;
 
+use Illuminate\Support\Str;
 use Nikaia\TranslationSheet\Commands\Output;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Writer;
@@ -40,10 +41,26 @@ class Puller
 
     public function getTranslations()
     {
-        $header = $this->translationsSheet->getSpreadsheet()->getCamelizedHeader();
+        $headers = collect($this->translationsSheet->readHeaders());
+
+        // Fallback if there is one added column in translation manager, but not yet defined in config.
+        while (!is_null($headers->last()) && $headers->last() !== 'Source file') {
+            $this->translationsSheet->getSpreadsheet()->setColumnsCount($headers->count() + 1);
+            $headers = collect($this->translationsSheet->readHeaders());
+        }
+
+        $headerMapping = config('translation_sheet.header_mapping');
+
+        $headers = $headers->map(static function($item) use ($headerMapping) {
+            if (! in_array($item, array_keys($headerMapping))) {
+                return Str::contains('_', $item) ? $item : Str::camel($item);
+            }
+
+            return $headerMapping[$item];
+        })->toArray();
 
         $translations = $this->translationsSheet->readTranslations();
 
-        return Util::keyValues($translations, $header);
+        return Util::keyValues($translations, $headers);
     }
 }

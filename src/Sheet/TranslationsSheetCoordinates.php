@@ -105,6 +105,15 @@ class TranslationsSheetCoordinates
         return $this->sheetTitle.'!'.$firstColumn.$firstRow.':'.$lastColumn.($noLastRow ? '' : $lastRow);
     }
 
+    public function dataSpecifiedRange($firstRow = 1, $lastRow = 2)
+    {
+        $firstColumn = 'A';
+
+        $lastColumn = self::stringFromColumnIndex($this->getColumnsCount());
+
+        return $this->sheetTitle.'!'.$firstColumn.$firstRow.':'.$lastColumn.$lastRow;
+    }
+
     public function dataRange($endRow, $firstRow = 2)
     {
         return [

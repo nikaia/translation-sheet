@@ -42,11 +42,16 @@ class TranslationsSheet extends AbstractSheet
     public function writeTranslations($translations)
     {
         $translations = array_values($translations);
-        
+
         $this->spreadsheet->setTranslations($translations);
 
         $this->spreadsheet->api()
             ->writeCells($this->coordinates()->dataShortRange(), $translations);
+    }
+
+    public function readHeaders()
+    {
+        return $this->spreadsheet->api()->readCells($this->getId(), $this->coordinates()->dataSpecifiedRange(1, 1), true)[0];
     }
 
     public function readTranslations()

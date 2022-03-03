@@ -21,6 +21,8 @@ class Spreadsheet
     /** @var Api */
     protected $api;
 
+    protected $columnsCount;
+
     public function __construct($id, $locales, $api = null)
     {
         $this->id = $id;
@@ -57,6 +59,11 @@ class Spreadsheet
         return $this->id;
     }
 
+    public function getTitle()
+    {
+        return 'Translations';
+    }
+
     public function getUrl()
     {
         return 'https://docs.google.com/spreadsheets/d/' . $this->id;
@@ -78,6 +85,20 @@ class Spreadsheet
             array_merge(['Full key'], $this->getLocales()),
             ['Namespace', 'Group', 'Key', 'Source file']
         );
+    }
+
+    public function getColumnsCount()
+    {
+        if (! $this->columnsCount) {
+            $this->columnsCount = $this->getHeaderColumnsCount();
+        }
+
+        return $this->columnsCount;
+    }
+
+    public function setColumnsCount($count)
+    {
+        $this->columnsCount = $count;
     }
 
     public function getCamelizedHeader()
@@ -112,7 +133,7 @@ class Spreadsheet
     public function translationsEmptySheetCoordinates($sheetId, $sheetTitle)
     {
         return TranslationsSheetCoordinates::emptySheet(
-            $this->getHeaderColumnsCount(),
+            $this->getColumnsCount(),
             $this->getLocalesCount(),
             $this->getHeaderColumnsCount()
         )->setSheetId($sheetId)->setSheetTitle($sheetTitle);
@@ -127,7 +148,7 @@ class Spreadsheet
     {
         return TranslationsSheetCoordinates::sheetWithData(
             $this->getTranslationsCount(),
-            $this->getHeaderColumnsCount(),
+            $this->getColumnsCount(),
             $this->getLocalesCount(),
             $this->getHeaderRowsCount()
         )->setSheetId($sheetId)->setSheetTitle($sheetTitle);
