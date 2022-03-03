@@ -41,13 +41,7 @@ class Puller
 
     public function getTranslations()
     {
-        $headers = collect($this->translationsSheet->readHeaders());
-
-        // Fallback if there is one added column in translation manager, but not yet defined in config.
-        while (!is_null($headers->last()) && $headers->last() !== 'Source file') {
-            $this->translationsSheet->getSpreadsheet()->setColumnsCount($headers->count() + 1);
-            $headers = collect($this->translationsSheet->readHeaders());
-        }
+        $headers = $this->translationsSheet->readHeaders();
 
         $headerMapping = config('translation_sheet.header_mapping');
 

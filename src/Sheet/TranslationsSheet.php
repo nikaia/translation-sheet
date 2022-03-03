@@ -51,7 +51,15 @@ class TranslationsSheet extends AbstractSheet
 
     public function readHeaders()
     {
-        return $this->spreadsheet->api()->readCells($this->getId(), $this->coordinates()->dataSpecifiedRange(1, 1), true)[0];
+        $headers = collect($this->spreadsheet->api()->readCells($this->getId(), $this->coordinates()->dataSpecifiedRange(1, 1), true)[0]);
+
+        // Fallback if there is one added column in translation manager, but not yet defined in config.
+        while (!is_null($headers->last()) && $headers->last() !== 'Source file') {
+            $this->spreadsheet->setColumnsCount($headers->count() + 1);
+            $headers = collect($this->spreadsheet->api()->readCells($this->getId(), $this->coordinates()->dataSpecifiedRange(1, 1), true)[0]);
+        }
+
+        return $headers;
     }
 
     public function readTranslations()
@@ -168,9 +176,11 @@ class TranslationsSheet extends AbstractSheet
 
     public function updateHeaderRow()
     {
+        $headers = $this->readHeaders();
+
         $this->api()->writeCells(
             $this->emptyCoordinates()->headerShortRange(),
-            [$this->spreadsheet->getHeader()]
+            [$headers]
         );
     }
 }
