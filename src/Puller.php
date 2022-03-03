@@ -2,6 +2,7 @@
 
 namespace Nikaia\TranslationSheet;
 
+use Illuminate\Support\Str;
 use Nikaia\TranslationSheet\Commands\Output;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Writer;
@@ -40,10 +41,20 @@ class Puller
 
     public function getTranslations()
     {
-        $header = $this->translationsSheet->getSpreadsheet()->getCamelizedHeader();
+        $headers = $this->translationsSheet->readHeaders();
+
+        $headerMapping = config('translation_sheet.header_mapping');
+
+        $headers = $headers->map(static function($item) use ($headerMapping) {
+            if (! in_array($item, array_keys($headerMapping))) {
+                return Str::contains('_', $item) ? $item : Str::camel($item);
+            }
+
+            return $headerMapping[$item];
+        })->toArray();
 
         $translations = $this->translationsSheet->readTranslations();
 
-        return Util::keyValues($translations, $header);
+        return Util::keyValues($translations, $headers);
     }
 }

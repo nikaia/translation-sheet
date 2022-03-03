@@ -221,9 +221,9 @@ class Api
         $sheets->spreadsheets_values->batchUpdate($this->spreadsheetId, $request);
     }
 
-    public function readCells($sheetId, $range)
+    public function readCells($sheetId, $range, $specifiedRange = false)
     {
-        $range .= $this->getSheetRowCount($sheetId);
+        $range .= $specifiedRange ? '' : $this->getSheetRowCount($sheetId);
 
         $sheets = new \Google_Service_Sheets($this->client);
 
