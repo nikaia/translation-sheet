@@ -1,13 +1,13 @@
 <?php
 
-namespace Nikaia\TranslationSheet;
+namespace Nkreliefdev\TranslationSheet;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Nikaia\TranslationSheet\Commands\Output;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Translation\Reader;
-use Nikaia\TranslationSheet\Translation\Transformer;
+use Nkreliefdev\TranslationSheet\Commands\Output;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Translation\Reader;
+use Nkreliefdev\TranslationSheet\Translation\Transformer;
 
 class SheetPusher
 {

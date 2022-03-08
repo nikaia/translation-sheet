@@ -1,15 +1,15 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Feature;
+namespace Nkreliefdev\TranslationSheet\Test\Feature;
 
 use Illuminate\Support\Facades\Artisan;
-use Nikaia\TranslationSheet\Commands\Prepare;
-use Nikaia\TranslationSheet\Commands\Pull;
-use Nikaia\TranslationSheet\Commands\Push;
-use Nikaia\TranslationSheet\Commands\Setup;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\FeatureTestCase;
-use Nikaia\TranslationSheet\Util;
+use Nkreliefdev\TranslationSheet\Commands\Prepare;
+use Nkreliefdev\TranslationSheet\Commands\Pull;
+use Nkreliefdev\TranslationSheet\Commands\Push;
+use Nkreliefdev\TranslationSheet\Commands\Setup;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\FeatureTestCase;
+use Nkreliefdev\TranslationSheet\Util;
 
 class SimpleWorkflowTest extends FeatureTestCase
 {

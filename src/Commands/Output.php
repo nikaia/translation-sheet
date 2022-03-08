@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;

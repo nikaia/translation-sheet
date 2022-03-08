@@ -1,11 +1,11 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\SheetPusher;
-use Nikaia\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\SheetPusher;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
 use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 
 class Push extends Command

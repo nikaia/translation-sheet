@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Translation;
+namespace Nkreliefdev\TranslationSheet\Translation;
 
 class Item
 {

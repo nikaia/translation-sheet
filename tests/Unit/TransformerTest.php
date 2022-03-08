@@ -1,10 +1,10 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Unit;
+namespace Nkreliefdev\TranslationSheet\Test\Unit;
 
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Nikaia\TranslationSheet\Translation\Transformer;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\TestCase;
+use Nkreliefdev\TranslationSheet\Translation\Transformer;
 
 class TransformerTest extends TestCase
 {

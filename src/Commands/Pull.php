@@ -1,11 +1,11 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\SheetPuller;
-use Nikaia\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\SheetPuller;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
 
 class Pull extends Command
 {

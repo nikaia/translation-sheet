@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test;
+namespace Nkreliefdev\TranslationSheet\Test;
 use Throwable;
 
 class Kernel extends \Illuminate\Foundation\Console\Kernel

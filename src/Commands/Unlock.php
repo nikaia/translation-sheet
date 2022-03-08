@@ -1,10 +1,10 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
 
 class Unlock extends Command
 {

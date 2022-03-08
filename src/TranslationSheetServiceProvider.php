@@ -1,18 +1,18 @@
 <?php
 
-namespace Nikaia\TranslationSheet;
+namespace Nkreliefdev\TranslationSheet;
 
 use Illuminate\Support\ServiceProvider;
-use Nikaia\TranslationSheet\Client\Client;
-use Nikaia\TranslationSheet\Commands\Lock;
-use Nikaia\TranslationSheet\Commands\Open;
-use Nikaia\TranslationSheet\Commands\Prepare;
-use Nikaia\TranslationSheet\Commands\Publish;
-use Nikaia\TranslationSheet\Commands\Pull;
-use Nikaia\TranslationSheet\Commands\Push;
-use Nikaia\TranslationSheet\Commands\Setup;
-use Nikaia\TranslationSheet\Commands\Status;
-use Nikaia\TranslationSheet\Commands\Unlock;
+use Nkreliefdev\TranslationSheet\Client\Client;
+use Nkreliefdev\TranslationSheet\Commands\Lock;
+use Nkreliefdev\TranslationSheet\Commands\Open;
+use Nkreliefdev\TranslationSheet\Commands\Prepare;
+use Nkreliefdev\TranslationSheet\Commands\Publish;
+use Nkreliefdev\TranslationSheet\Commands\Pull;
+use Nkreliefdev\TranslationSheet\Commands\Push;
+use Nkreliefdev\TranslationSheet\Commands\Setup;
+use Nkreliefdev\TranslationSheet\Commands\Status;
+use Nkreliefdev\TranslationSheet\Commands\Unlock;
 
 class TranslationSheetServiceProvider extends ServiceProvider
 {

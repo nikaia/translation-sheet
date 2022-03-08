@@ -1,10 +1,10 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test;
+namespace Nkreliefdev\TranslationSheet\Test;
 
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\FixtureClasses\FooServiceProvider;
-use Nikaia\TranslationSheet\TranslationSheetServiceProvider;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\FixtureClasses\FooServiceProvider;
+use Nkreliefdev\TranslationSheet\TranslationSheetServiceProvider;
 
 abstract class FeatureTestCase extends \Orchestra\Testbench\TestCase
 {

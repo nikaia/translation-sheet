@@ -1,10 +1,10 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Translation;
+namespace Nkreliefdev\TranslationSheet\Translation;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
 
 class Transformer
 {

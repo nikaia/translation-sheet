@@ -1,9 +1,9 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test;
+namespace Nkreliefdev\TranslationSheet\Test;
 
 use Illuminate\Console\Application;
-use Nikaia\TranslationSheet\TranslationSheetServiceProvider;
+use Nkreliefdev\TranslationSheet\TranslationSheetServiceProvider;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {

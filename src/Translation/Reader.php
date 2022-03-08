@@ -1,12 +1,12 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Translation;
+namespace Nkreliefdev\TranslationSheet\Translation;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
 
 class Reader
 {

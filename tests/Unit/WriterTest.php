@@ -1,11 +1,11 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Unit;
+namespace Nkreliefdev\TranslationSheet\Test\Unit;
 
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Nikaia\TranslationSheet\Translation\Writer;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\TestCase;
+use Nkreliefdev\TranslationSheet\Translation\Writer;
 
 class WriterTest extends TestCase
 {

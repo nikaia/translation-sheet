@@ -1,14 +1,14 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Feature;
+namespace Nkreliefdev\TranslationSheet\Test\Feature;
 
-use Nikaia\TranslationSheet\Commands\Prepare;
-use Nikaia\TranslationSheet\Commands\Push;
-use Nikaia\TranslationSheet\Commands\Setup;
-use Nikaia\TranslationSheet\SheetPusher;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\FeatureTestCase;
+use Nkreliefdev\TranslationSheet\Commands\Prepare;
+use Nkreliefdev\TranslationSheet\Commands\Push;
+use Nkreliefdev\TranslationSheet\Commands\Setup;
+use Nkreliefdev\TranslationSheet\SheetPusher;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\FeatureTestCase;
 
 class ExcludePatternsTest extends FeatureTestCase
 {

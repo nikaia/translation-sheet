@@ -1,13 +1,13 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\SheetPusher;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Translation\Writer;
-use Nikaia\TranslationSheet\Util;
+use Nkreliefdev\TranslationSheet\SheetPusher;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Translation\Writer;
+use Nkreliefdev\TranslationSheet\Util;
 
 class Prepare extends Command
 {

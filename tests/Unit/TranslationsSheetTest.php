@@ -1,14 +1,14 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Unit;
+namespace Nkreliefdev\TranslationSheet\Test\Unit;
 
 use Mockery;
-use Nikaia\TranslationSheet\Client\Api;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Sheet\Styles;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
+use Nkreliefdev\TranslationSheet\Client\Api;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Sheet\Styles;
+use Nkreliefdev\TranslationSheet\Test\TestCase;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheetCoordinates;
 
 class TranslationsSheetTest extends TestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Nikaia\TranslationSheet;
+namespace Nkreliefdev\TranslationSheet;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Nikaia\TranslationSheet\Client\Api;
-use Nikaia\TranslationSheet\Sheet\Styles;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
+use Nkreliefdev\TranslationSheet\Client\Api;
+use Nkreliefdev\TranslationSheet\Sheet\Styles;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheetCoordinates;
 
 class Spreadsheet
 {

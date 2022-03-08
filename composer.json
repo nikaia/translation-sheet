@@ -1,7 +1,7 @@
 {
-    "name": "nikaia/translation-sheet",
+    "name": "nkreliefdev/translation-sheet",
     "description": "Laravel Translation via Google Spreadsheet",
-    "homepage": "https://github.com/nikaia/translation-sheet",
+    "homepage": "https://github.com/nkreliefdev/translation-sheet",
     "license": "MIT",
     "authors": [
         {
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nikaia\\TranslationSheet\\": "src"
+            "Nkreliefdev\\TranslationSheet\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nikaia\\TranslationSheet\\Test\\": "tests"
+            "Nkreliefdev\\TranslationSheet\\Test\\": "tests"
         }
     },
     "scripts": {
@@ -41,7 +41,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Nikaia\\TranslationSheet\\TranslationSheetServiceProvider"
+                "Nkreliefdev\\TranslationSheet\\TranslationSheetServiceProvider"
             ]
         },
         "branch-alias": {

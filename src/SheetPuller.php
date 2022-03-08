@@ -1,10 +1,10 @@
 <?php
 
-namespace Nikaia\TranslationSheet;
+namespace Nkreliefdev\TranslationSheet;
 
-use Nikaia\TranslationSheet\Commands\Output;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Translation\Writer;
+use Nkreliefdev\TranslationSheet\Commands\Output;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Translation\Writer;
 
 class SheetPuller
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Unit;
+namespace Nkreliefdev\TranslationSheet\Test\Unit;
 
 use Illuminate\Support\Collection;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Test\TestCase;
-use Nikaia\TranslationSheet\Translation\Item;
-use Nikaia\TranslationSheet\Translation\Reader;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Test\TestCase;
+use Nkreliefdev\TranslationSheet\Translation\Item;
+use Nkreliefdev\TranslationSheet\Translation\Reader;
 
 class ReaderTest extends TestCase
 {

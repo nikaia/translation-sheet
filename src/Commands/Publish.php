@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 
 use Illuminate\Console\Command;
@@ -15,7 +15,7 @@ class Publish extends Command
     public function handle()
     {
         $this->call('vendor:publish', [
-            '--provider' => 'Nikaia\TranslationSheet\TranslationSheetServiceProvider',
+            '--provider' => 'Nkreliefdev\TranslationSheet\TranslationSheetServiceProvider',
         ]);
     }
 }

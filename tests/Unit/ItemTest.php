@@ -1,9 +1,9 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\Unit;
+namespace Nkreliefdev\TranslationSheet\Test\Unit;
 
-use Nikaia\TranslationSheet\Test\TestCase;
-use Nikaia\TranslationSheet\Translation\Item;
+use Nkreliefdev\TranslationSheet\Test\TestCase;
+use Nkreliefdev\TranslationSheet\Translation\Item;
 
 class ItemTest extends TestCase
 {

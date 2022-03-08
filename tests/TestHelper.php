@@ -1,12 +1,12 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test;
+namespace Nkreliefdev\TranslationSheet\Test;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
-use Nikaia\TranslationSheet\Spreadsheet;
-use Nikaia\TranslationSheet\Translation\Item;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Translation\Item;
 
 class TestHelper
 {

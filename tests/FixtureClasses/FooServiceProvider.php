@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Test\FixtureClasses;
+namespace Nkreliefdev\TranslationSheet\Test\FixtureClasses;
 
 use Carbon\Laravel\ServiceProvider;
 

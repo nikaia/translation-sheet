@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Client;
+namespace Nkreliefdev\TranslationSheet\Client;
 
 class Client extends \Google_Client
 {

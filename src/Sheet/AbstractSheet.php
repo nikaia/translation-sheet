@@ -1,8 +1,8 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Sheet;
+namespace Nkreliefdev\TranslationSheet\Sheet;
 
-use Nikaia\TranslationSheet\Spreadsheet;
+use Nkreliefdev\TranslationSheet\Spreadsheet;
 
 abstract class AbstractSheet
 {

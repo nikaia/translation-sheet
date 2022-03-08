@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Sheet;
+namespace Nkreliefdev\TranslationSheet\Sheet;
 
 class TranslationsSheet extends AbstractSheet
 {

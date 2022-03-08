@@ -1,9 +1,9 @@
 <?php
 
-namespace Nikaia\TranslationSheet\Commands;
+namespace Nkreliefdev\TranslationSheet\Commands;
 
 use Illuminate\Console\Command;
-use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use Nkreliefdev\TranslationSheet\Sheet\TranslationsSheet;
 
 class Status extends Command
 {

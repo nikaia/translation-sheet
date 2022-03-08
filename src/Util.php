@@ -1,6 +1,6 @@
 <?php
 
-namespace Nikaia\TranslationSheet;
+namespace Nkreliefdev\TranslationSheet;
 
 use Illuminate\Support\Collection;
 
