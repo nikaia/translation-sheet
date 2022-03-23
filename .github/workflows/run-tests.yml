@@ -10,15 +10,27 @@ jobs:
             fail-fast: false
             matrix:
                 os: [ubuntu-latest]
-                php: [7.4]
-                laravel: [7.*, 8.*]
+                php: [7.4, 8.0, 8.1]
+                laravel: [7, 8, 9]
                 include:
-                    -   laravel: 7.*
-                        testbench: 5.*
-                    -   laravel: 8.*
+                    -   laravel: 9
+                        testbench: 7.*
+                    -   laravel: 8
                         testbench: 6.*
+                    -   laravel: 7
+                        testbench: 5.*
+                exclude:
+                    -   laravel: 9
+                        php: 7.3
+                    -   laravel: 8
+                        php: 8.0
+                    -   laravel: 8
+                        php: 8.1
+                    -   laravel: 7
+                        php: 8.0
+                    -   laravel: 7
+                        php: 8.1
         name: PHP ${{ matrix.php }} - LARAVEL ${{ matrix.laravel }}
-
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
@@ -51,6 +63,6 @@ jobs:
             -   name: Run Unit Tests
                 run: vendor/bin/phpunit --testsuite Unit
 
-            -   if: matrix.laravel == '8.*'
+            -   if: matrix.laravel != '7'
                 name: Run Feature Tests
                 run: vendor/bin/phpunit --testsuite Feature
