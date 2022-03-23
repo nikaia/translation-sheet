@@ -5,7 +5,6 @@ Translating Laravel languages files using a Google Spreadsheet.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nikaia/translation-sheet.svg?style=flat-square)](https://packagist.org/packages/nikaia/translation-sheet)
 [![Build Status](https://github.com/nikaia/translation-sheet/workflows/run-tests/badge.svg)](https://github.com/nikaia/translation-sheet/actions?query=workflow%3Arun-tests)
-[![Quality Score](https://img.shields.io/scrutinizer/g/nikaia/translation-sheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/nikaia/translation-sheet)
 
 
 ![](./docs/banner.jpg)
