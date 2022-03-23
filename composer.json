@@ -12,14 +12,13 @@
     ],
     "require": {
         "google/apiclient": "^2.1",
-        "illuminate/console": "~5.8.0|^6.0|^7.0|^8.0",
-        "illuminate/filesystem": "~5.8.0|^6.0|^7.0|^8.0",
-        "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0"
+        "illuminate/console": "~5.8.0|^6.0|^7.0|^8.0|^v9.0",
+        "illuminate/filesystem": "~5.8.0|^6.0|^7.0|^8.0|^v9.0",
+        "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^v9.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.11",
-        "orchestra/testbench": "^6.0",
-        "codedungeon/phpunit-result-printer": "^0.26.2"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "orchestra/testbench": "^7.0"
     },
     "autoload": {
         "psr-4": {
@@ -30,9 +29,6 @@
         "psr-4": {
             "Nikaia\\TranslationSheet\\Test\\": "tests"
         }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
     },
     "config": {
         "sort-packages": true
@@ -48,5 +44,14 @@
             "^8.0": "1.3-dev"
         }
     },
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "release": "npx standard-version release --no-verify",
+        "release-dry": "npx standard-version release --no-verify --dry-run",
+        "release-patch": "npx standard-version --release-as patch --no-verify",
+        "release-minor": "npx standard-version --release-as minor --no-verify",
+        "release-major": "npx standard-version --release-as major --no-verify",
+        "release-first": "npx standard-version --first-release --no-verify"
+    }
 }
