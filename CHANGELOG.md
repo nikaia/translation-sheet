@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/nikaia/translation-sheet/compare/v1.5.0...v1.6.0) (2023-03-21)
+
+### Features
+
+* Add Laravel 9 support ([#79](https://github.com/nikaia/translation-sheet/pull/79)) 
+
 ## [1.5.0](https://github.com/nikaia/translation-sheet/compare/v1.4.5...v1.5.0) (2022-03-23)
 
 
