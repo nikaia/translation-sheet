@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "google/apiclient": "^2.1",
+        "google/apiclient": "^2.15",
         "illuminate/console": "~5.8.0|^6.0|^7.0|^8.0|^v9.0|^10.0",
         "illuminate/filesystem": "~5.8.0|^6.0|^7.0|^8.0|^v9.0|^10.0",
         "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^v9.0|^10.0"
