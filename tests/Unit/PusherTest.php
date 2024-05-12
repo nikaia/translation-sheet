@@ -9,10 +9,11 @@ use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Reader;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Translation\Transformer;
+use PHPUnit\Framework\Attributes\Test;
 
 class PusherTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_pushes_translations()
     {
         $transformer = Mockery::mock(Transformer::class);

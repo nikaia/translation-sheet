@@ -9,13 +9,11 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                php: [8.0, 8.1]
-                laravel: [9, 10.0]
+                php: [8.3]
+                laravel: [11.*]
                 include:
-                    - laravel: 10.0
-                      testbench: 8.*
-                    - laravel: 9
-                      testbench: 7.*
+                    - laravel: 11.*
+                      testbench: 9.*
         name: PHP ${{ matrix.php }} - LARAVEL ${{ matrix.laravel }}
         steps:
             - name: Checkout code
@@ -46,9 +44,5 @@ jobs:
                   composer require "illuminate/console:${{ matrix.laravel }}" "illuminate/filesystem:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                   composer update --prefer-dist --no-interaction --no-suggest
 
-            - name: Run Unit Tests
-              run: vendor/bin/phpunit --testsuite Unit
-
-            - if: matrix.laravel != '7'
-              name: Run Feature Tests
-              run: vendor/bin/phpunit --testsuite Feature
+            - name: Run Tests
+              run: vendor/bin/phpunit

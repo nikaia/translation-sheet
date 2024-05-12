@@ -9,10 +9,11 @@ use Nikaia\TranslationSheet\Sheet\Styles;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
+use PHPUnit\Framework\Attributes\Test;
 
 class TranslationsSheetTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_coordinates()
     {
         $sheet = new TranslationsSheet($this->helper->spreadsheet());
@@ -20,7 +21,7 @@ class TranslationsSheetTest extends TestCase
         $this->assertInstanceOf(TranslationsSheetCoordinates::class, $sheet->coordinates());
     }
 
-    /** @test */
+    #[Test]
     public function it_setup_sheet_correctly()
     {
         $spreadsheet = Mockery::mock(Spreadsheet::class);
@@ -33,7 +34,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->setup();
     }
 
-    /** @test */
+    #[Test]
     public function it_write_translations_correctly()
     {
         $api = Mockery::mock(Api::class);
@@ -47,7 +48,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->writeTranslations([]);
     }
 
-    /** @test */
+    #[Test]
     public function it_read_translations()
     {
         $api = Mockery::mock(Api::class);
@@ -60,7 +61,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->readTranslations();
     }
 
-    /** @test */
+    #[Test]
     public function it_style_document()
     {
         $api = Mockery::mock(Api::class);
@@ -83,7 +84,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->styleDocument();
     }
 
-    /** @test */
+    #[Test]
     public function it_prepare_for_write()
     {
         $api = Mockery::mock(Api::class);
@@ -98,7 +99,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->prepareForWrite();
     }
 
-    /** @test */
+    #[Test]
     public function it_lock_translations()
     {
         $api = Mockery::mock(Api::class);
@@ -116,7 +117,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->lockTranslations();
     }
 
-    /** @test */
+    #[Test]
     public function it_unlock_translations()
     {
         $api = Mockery::mock(Api::class);
@@ -135,7 +136,7 @@ class TranslationsSheetTest extends TestCase
         (new TranslationsSheet($spreadsheet))->unlockTranslations();
     }
 
-    /** @test */
+    #[Test]
     public function it_return_lock_status()
     {
         $api = Mockery::mock(Api::class);

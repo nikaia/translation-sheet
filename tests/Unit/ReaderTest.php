@@ -8,10 +8,11 @@ use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Item;
 use Nikaia\TranslationSheet\Translation\Reader;
+use PHPUnit\Framework\Attributes\Test;
 
 class ReaderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_know_how_to_check_vendor_directory()
     {
         $reader = $this->app[Reader::class];
@@ -20,7 +21,7 @@ class ReaderTest extends TestCase
         $this->assertFalse($this->helper->invokeMethod($reader, 'isVendorDirectory', ['/path/to/a/folder']));
     }
 
-    /** @test */
+    #[Test]
     public function it_loads_languages_from_temp_folder()
     {
         $this->helper->createLangFiles('en', 'app', ['title' => 'Awesome']);
@@ -29,7 +30,7 @@ class ReaderTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function it_loads_json_languages_from_temp_folder()
     {
         $this->helper->createJsonLangFiles('en', ['title' => 'Magnifique']);
@@ -37,7 +38,7 @@ class ReaderTest extends TestCase
         $this->assertEquals('Magnifique', trans('title'));
     }
 
-    /** @test */
+    #[Test]
     public function it_reads_translations_correctly()
     {
         $this->helper->createLangFiles('en', 'app', ['title' => 'Awesome']);
@@ -58,7 +59,10 @@ class ReaderTest extends TestCase
         $this->assertEquals('1.0', $item->value);
     }
 
-    /** @test : https://github.com/nikaia/translation-sheet/pull/31 */
+    /**
+     * @see https://github.com/nikaia/translation-sheet/pull/31
+     */
+    #[Test]
     public function it_scans_all_directories_even_after_encountring_vendor()
     {
         $this->helper->createLangFiles('en', 'app', ['title' => 'Awesome']);
@@ -72,7 +76,7 @@ class ReaderTest extends TestCase
         $this->assertEquals(4, $translations->count());
     }
 
-    /** @test */
+    #[Test]
     public function it_scans_json_files()
     {
         $this->helper->createJsonLangFiles('fr', ['Hello!' => 'Bonjour !']);
@@ -84,7 +88,7 @@ class ReaderTest extends TestCase
         $this->assertEquals(2, $translations->count());
     }
 
-    /** @test */
+    #[Test]
     public function it_scans_both_json_and_php_files()
     {
         $this->helper->createJsonLangFiles('fr', ['Hello!' => 'Bonjour !']);
@@ -98,7 +102,7 @@ class ReaderTest extends TestCase
         $this->assertEquals(4, $translations->count());
     }
 
-    /** @test */
+    #[Test]
     public function it_scans_specific_extra_sheet_lang_files()
     {
         $translations = $this->readerFor($this->helper->oneExtraTranslationSheet())->scan();

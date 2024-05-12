@@ -3,15 +3,15 @@
 namespace Nikaia\TranslationSheet\Test\Unit;
 
 use Mockery;
-use GuzzleHttp\Subscriber\Mock;
 use Nikaia\TranslationSheet\SheetPuller;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Writer;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
+use PHPUnit\Framework\Attributes\Test;
 
 class PullerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_pulls_the_translations()
     {
         $translationSheet = Mockery::mock(TranslationsSheet::class);

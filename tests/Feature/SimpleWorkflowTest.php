@@ -10,6 +10,7 @@ use Nikaia\TranslationSheet\Commands\Setup;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\FeatureTestCase;
 use Nikaia\TranslationSheet\Util;
+use PHPUnit\Framework\Attributes\Test;
 
 class SimpleWorkflowTest extends FeatureTestCase
 {
@@ -20,7 +21,7 @@ class SimpleWorkflowTest extends FeatureTestCase
         $this->setBasePathFromFixtureFolder($app, '00-simple');
     }
 
-    /** @test */
+    #[Test]
     public function it_executes_simple_workflow_correctly()
     {
         $this->helper->deleteAllLangFiles();
@@ -40,7 +41,7 @@ class SimpleWorkflowTest extends FeatureTestCase
         $this->assertEquals('Next (edited)', $lang['next']);
     }
 
-    /** @test */
+    #[Test]
     public function it_executes_simple_workflow_correctly_with_one_extra_sheet()
     {
         $this->helper->deleteAllLangFiles();
@@ -70,7 +71,7 @@ class SimpleWorkflowTest extends FeatureTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_executes_simple_workflow_correctly_with_two_extra_sheets()
     {
         $this->helper->deleteAllLangFiles();

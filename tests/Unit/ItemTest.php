@@ -4,10 +4,11 @@ namespace Nikaia\TranslationSheet\Test\Unit;
 
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Item;
+use PHPUnit\Framework\Attributes\Test;
 
 class ItemTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_create_items_from_array()
     {
         $item = Item::fromArray([
@@ -21,13 +22,13 @@ class ItemTest extends TestCase
             'status' => '',
         ]);
 
-        $this->assertEquals($item->namespace, 'package');
-        $this->assertEquals($item->locale, 'fr');
-        $this->assertEquals($item->group, 'backend');
-        $this->assertEquals($item->key, 'version');
-        $this->assertEquals($item->full_key, 'package::backend.version');
-        $this->assertEquals($item->value, '1.0');
-        $this->assertEquals($item->source_file, 'vendor/package/fr/backend.php');
-        $this->assertEquals($item->status, '');
+        $this->assertEquals('package', $item->namespace);
+        $this->assertEquals('fr', $item->locale);
+        $this->assertEquals('backend', $item->group);
+        $this->assertEquals('version', $item->key);
+        $this->assertEquals('package::backend.version', $item->full_key);
+        $this->assertEquals('1.0', $item->value);
+        $this->assertEquals('vendor/package/fr/backend.php', $item->source_file);
+        $this->assertEquals('', $item->status);
     }
 }
