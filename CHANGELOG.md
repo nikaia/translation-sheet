@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/nikaia/translation-sheet/compare/v1.6.0...v1.7.0) (2024-05-12)
+
+
+### Features
+
+* Add L11 suppport ([#85](https://github.com/nikaia/translation-sheet/issues/85)) ([facd8dc](https://github.com/nikaia/translation-sheet/commit/facd8dc341353d5527c32d900496ecd260444043))
+
 ## [1.6.0](https://github.com/nikaia/translation-sheet/compare/v1.5.0...v1.6.0) (2023-03-21)
 
 ### Features
