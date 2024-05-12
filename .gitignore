@@ -4,3 +4,4 @@ composer.phar
 composer.lock
 service-account.json
 .phpunit.result.cache
+.phpunit.cache

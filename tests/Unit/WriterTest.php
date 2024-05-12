@@ -6,10 +6,11 @@ use Nikaia\TranslationSheet\Sheet\TranslationsSheet;
 use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Translation\Writer;
+use PHPUnit\Framework\Attributes\Test;
 
 class WriterTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_writes_correctly_translations()
     {
         $translations = $this->helper->pulledTranslations();
@@ -24,7 +25,7 @@ class WriterTest extends TestCase
         $this->assertJsonFileExistsAndEqual('fr.json', ['Whoops!' => 'Oups !']);
     }
 
-    /** @test */
+    #[Test]
     public function it_writes_correctly_extra_sheet_translations()
     {
         $translations = $this->helper->oneExtraSheetPulledTranslations();

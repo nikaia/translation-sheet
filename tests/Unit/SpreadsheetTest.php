@@ -8,6 +8,7 @@ use Nikaia\TranslationSheet\Spreadsheet;
 use Nikaia\TranslationSheet\Sheet\Styles;
 use Nikaia\TranslationSheet\Test\TestCase;
 use Nikaia\TranslationSheet\Sheet\TranslationsSheetCoordinates;
+use PHPUnit\Framework\Attributes\Test;
 
 class SpreadsheetTest extends TestCase
 {
@@ -21,19 +22,19 @@ class SpreadsheetTest extends TestCase
         $this->s = $this->helper->spreadsheet();
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_correct_id()
     {
-        $this->assertEquals($this->s->getId(), 'ID');
+        $this->assertEquals('ID', $this->s->getId());
     }
 
-    /** @test */
+    #[Test]
     public function it_return_correct_locales_count()
     {
-        $this->assertEquals($this->s->getLocalesCount(), 2);
+        $this->assertEquals(2, $this->s->getLocalesCount());
     }
 
-    /** @test */
+    #[Test]
     public function it_sets_locales()
     {
         $locales = ['en', 'fr', 'ar'];
@@ -41,7 +42,7 @@ class SpreadsheetTest extends TestCase
         $this->assertEquals($this->s->getLocales(), $locales);
     }
 
-    /** @test */
+    #[Test]
     public function is_sets_translations()
     {
         $translations = ['t1', 't2'];
@@ -49,7 +50,7 @@ class SpreadsheetTest extends TestCase
         $this->assertEquals($this->s->getTranslations(), $translations);
     }
 
-    /** @test */
+    #[Test]
     public function is_returns_translations_count()
     {
         $translations = ['t1', 't2', 't3', 't4'];
@@ -57,7 +58,7 @@ class SpreadsheetTest extends TestCase
         $this->assertEquals(4, $this->s->getTranslationsCount());
     }
 
-    /** @test */
+    #[Test]
     public function it_return_corrected_header()
     {
         $this->assertEquals(
@@ -71,14 +72,14 @@ class SpreadsheetTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_return_corrected_header_columns_count()
     {
         $this->assertEquals(7, $this->s->getHeaderColumnsCount());
         $this->assertEquals(8, $this->s->setLocales(['en', 'fr', 'ar'])->getHeaderColumnsCount());
     }
 
-    /** @test */
+    #[Test]
     public function it_return_corrected_camelized_header()
     {
         $this->assertEquals(
@@ -87,33 +88,33 @@ class SpreadsheetTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_correct_header_count()
     {
         $this->assertEquals(1, $this->s->getHeaderRowsCount());
     }
 
-    /** @test */
+    #[Test]
     public function it_return_styles()
     {
         $this->assertInstanceOf(Styles::class, $this->s->sheetStyles());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_empty_sheet_coordinates()
     {
         $coordinates = $this->s->translationsEmptySheetCoordinates(0, 'SHEET_TITLE');
         $this->assertInstanceOf(TranslationsSheetCoordinates::class, $coordinates);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_sheet_coordinates()
     {
         $coordinates = $this->s->translationsSheetCoordinates(0, 'SHEET_TITLE');
         $this->assertInstanceOf(TranslationsSheetCoordinates::class, $coordinates);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_api_set_with_spreadsheet_id()
     {
         $api = Mockery::mock(Api::class);
@@ -123,7 +124,7 @@ class SpreadsheetTest extends TestCase
         $s->api();
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_spreadsheet_url()
     {
         $this->assertEquals($this->s->getUrl(), 'https://docs.google.com/spreadsheets/d/' . $this->s->getId());
