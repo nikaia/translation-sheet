@@ -15,7 +15,7 @@ class Unlock extends Command
     public function handle(Spreadsheet $spreadsheet)
     {
         $spreadsheet->sheets()->each(function (TranslationsSheet $translationsSheet) {
-            $this->info("Locking translation sheet [<comment>{$translationsSheet->getTitle()}</comment>] :");
+            $this->info("Unlocking translation sheet [<comment>{$translationsSheet->getTitle()}</comment>] :");
 
             $translationsSheet->unlockTranslations();
             $translationsSheet->api()->reset();
