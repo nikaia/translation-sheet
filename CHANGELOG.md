@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/nikaia/translation-sheet/compare/v1.7.0...v1.7.1) (2024-05-12)
+
+
+### Bug Fixes
+
+* **wording:** Replace wrong work for unlock command ([#83](https://github.com/nikaia/translation-sheet/issues/83)) ([b5ac6db](https://github.com/nikaia/translation-sheet/commit/b5ac6dbb6af7f887df5f1e01d6d5d70ddffee27a))
+
 ## [1.7.0](https://github.com/nikaia/translation-sheet/compare/v1.6.0...v1.7.0) (2024-05-12)
 
 
