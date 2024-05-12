@@ -157,7 +157,7 @@ class Reader
      */
     private function loadTranslations($locale, $group, $namespace, $file)
     {
-        if ($this->translationSheet->isExtraSheet()) {
+        if (pathinfo($file, PATHINFO_EXTENSION) === 'json') {
             $translations = Arr::dot(json_decode(file_get_contents($file), true));
         } else {
             $translations = Arr::dot($this->app['translator']->getLoader()->load($locale, $group, $namespace));
